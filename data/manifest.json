@@ -1,0 +1,142 @@
+{
+  "gmrt-high": {
+    "accessed": "2026-07-31",
+    "bytes": 3651182,
+    "dataset": "gmrt-high",
+    "licence": "GMRT data are freely available for research and education.",
+    "licence_url": "https://www.gmrt.org/about/terms_of_use.php",
+    "notes": "GMRT synthesises multibeam where available over a global base grid. Detail visible here is not evidence of a survey \u2014 see the coverage analysis in pipeline/analyse_coverage.py.",
+    "path": "data/raw/gmrt/gmrt_high.tif",
+    "properties": {
+      "bounds": [
+        -83.601288,
+        8.348747,
+        -82.999237,
+        8.801212
+      ],
+      "cells": 911040,
+      "crs": "EPSG:4326",
+      "deepest_m": -2057.7734375,
+      "dtype": "float32",
+      "height": 832,
+      "max_elevation_m": NaN,
+      "min_elevation_m": NaN,
+      "unique_values": 898423,
+      "width": 1095
+    },
+    "sha256": "348cfaf392d4f287b3f68afdd65780d2d7291a3490932ffa32dda776ad655c7e",
+    "source_url": "https://www.gmrt.org/services/GridServer"
+  },
+  "gmrt-low": {
+    "accessed": "2026-07-31",
+    "bytes": 915542,
+    "dataset": "gmrt-low",
+    "licence": "GMRT data are freely available for research and education.",
+    "licence_url": "https://www.gmrt.org/about/terms_of_use.php",
+    "notes": "GMRT synthesises multibeam where available over a global base grid. Detail visible here is not evidence of a survey \u2014 see the coverage analysis in pipeline/analyse_coverage.py.",
+    "path": "data/raw/gmrt/gmrt_low.tif",
+    "properties": {
+      "bounds": [
+        -83.602113,
+        8.347931,
+        -82.998961,
+        8.802027
+      ],
+      "cells": 228516,
+      "crs": "EPSG:4326",
+      "deepest_m": -1999.3985595703125,
+      "dtype": "float32",
+      "height": 417,
+      "max_elevation_m": NaN,
+      "min_elevation_m": NaN,
+      "unique_values": 227133,
+      "width": 548
+    },
+    "sha256": "f52faa0131f6ad091de7d7eefb6daa659a253f446f811a9335140fd62cea0948",
+    "source_url": "https://www.gmrt.org/services/GridServer"
+  },
+  "gmrt-max": {
+    "accessed": "2026-07-31",
+    "bytes": 3651182,
+    "dataset": "gmrt-max",
+    "licence": "GMRT data are freely available for research and education.",
+    "licence_url": "https://www.gmrt.org/about/terms_of_use.php",
+    "notes": "GMRT synthesises multibeam where available over a global base grid. Detail visible here is not evidence of a survey \u2014 see the coverage analysis in pipeline/analyse_coverage.py.",
+    "path": "data/raw/gmrt/gmrt_max.tif",
+    "properties": {
+      "bounds": [
+        -83.601288,
+        8.348747,
+        -82.999237,
+        8.801212
+      ],
+      "cells": 911040,
+      "crs": "EPSG:4326",
+      "deepest_m": -2057.7734375,
+      "dtype": "float32",
+      "height": 832,
+      "max_elevation_m": NaN,
+      "min_elevation_m": NaN,
+      "unique_values": 898423,
+      "width": 1095
+    },
+    "sha256": "348cfaf392d4f287b3f68afdd65780d2d7291a3490932ffa32dda776ad655c7e",
+    "source_url": "https://www.gmrt.org/services/GridServer"
+  },
+  "gmrt-med": {
+    "accessed": "2026-07-31",
+    "bytes": 3651182,
+    "dataset": "gmrt-med",
+    "licence": "GMRT data are freely available for research and education.",
+    "licence_url": "https://www.gmrt.org/about/terms_of_use.php",
+    "notes": "GMRT synthesises multibeam where available over a global base grid. Detail visible here is not evidence of a survey \u2014 see the coverage analysis in pipeline/analyse_coverage.py.",
+    "path": "data/raw/gmrt/gmrt_med.tif",
+    "properties": {
+      "bounds": [
+        -83.601288,
+        8.348747,
+        -82.999237,
+        8.801212
+      ],
+      "cells": 911040,
+      "crs": "EPSG:4326",
+      "deepest_m": -2057.7734375,
+      "dtype": "float32",
+      "height": 832,
+      "max_elevation_m": NaN,
+      "min_elevation_m": NaN,
+      "unique_values": 898423,
+      "width": 1095
+    },
+    "sha256": "348cfaf392d4f287b3f68afdd65780d2d7291a3490932ffa32dda776ad655c7e",
+    "source_url": "https://www.gmrt.org/services/GridServer"
+  },
+  "gmrt-topo-mask": {
+    "accessed": "2026-07-31",
+    "bytes": 3651182,
+    "dataset": "gmrt-topo-mask",
+    "licence": "GMRT data are freely available for research and education.",
+    "licence_url": "https://www.gmrt.org/about/terms_of_use.php",
+    "notes": "GMRT synthesises multibeam where available over a global base grid. Detail visible here is not evidence of a survey \u2014 see the coverage analysis in pipeline/analyse_coverage.py.",
+    "path": "data/raw/gmrt/gmrt_topo-mask.tif",
+    "properties": {
+      "bounds": [
+        -83.601288,
+        8.348747,
+        -82.999237,
+        8.801212
+      ],
+      "cells": 911040,
+      "crs": "EPSG:4326",
+      "deepest_m": -2057.7734375,
+      "dtype": "float32",
+      "height": 832,
+      "max_elevation_m": NaN,
+      "min_elevation_m": NaN,
+      "unique_values": 605382,
+      "width": 1095
+    },
+    "sha256": "ca90829e3a6070d6c49c629c3bcb96377de164dd846a8c215d942b5bab7a5474",
+    "source_url": "https://www.gmrt.org/services/GridServer"
+  }
+}

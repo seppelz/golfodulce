@@ -34,8 +34,9 @@ LICENCE = "GMRT data are freely available for research and education."
 LICENCE_URL = "https://www.gmrt.org/about/terms_of_use.php"
 
 
-def fetch(resolution: str) -> Path:
-    dest = RAW / "gmrt" / f"gmrt_{resolution}.tif"
+def fetch(resolution: str, layer: str = "topo") -> Path:
+    name = f"gmrt_{resolution}" if layer == "topo" else f"gmrt_{layer}"
+    dest = RAW / "gmrt" / f"{name}.tif"
     params = {
         "minlongitude": BBOX["west"],
         "maxlongitude": BBOX["east"],
@@ -43,9 +44,9 @@ def fetch(resolution: str) -> Path:
         "maxlatitude": BBOX["north"],
         "format": "geotiff",
         "resolution": resolution,
-        "layer": "topo",
+        "layer": layer,
     }
-    print(f"  fetching GMRT resolution={resolution} …", flush=True)
+    print(f"  fetching GMRT layer={layer} resolution={resolution} …", flush=True)
     download(GMRT_GRID, dest, params=params)
     return dest
 
@@ -83,11 +84,17 @@ def main() -> int:
     print("GMRT — Golfo Dulce")
     print(f"  bbox {BBOX['west']},{BBOX['south']} → {BBOX['east']},{BBOX['north']}")
 
-    for res in RESOLUTIONS:
+    # The topo-mask layer is the important one: it is the same surface with cells that
+    # rest only on the interpolated global base grid removed, which is how we can tell
+    # measured depth from invented depth.
+    targets: list[tuple[str, str]] = [(res, "topo") for res in RESOLUTIONS]
+    targets.append(("max", "topo-mask"))
+
+    for res, layer in targets:
         try:
-            path = fetch(res)
+            path = fetch(res, layer)
         except Exception as exc:  # noqa: BLE001
-            print(f"  ! resolution={res} failed: {exc}", file=sys.stderr)
+            print(f"  ! layer={layer} resolution={res} failed: {exc}", file=sys.stderr)
             continue
 
         props = describe(path)
@@ -102,7 +109,7 @@ def main() -> int:
 
         record(
             Provenance(
-                dataset=f"gmrt-{res}",
+                dataset=f"gmrt-{res}" if layer == "topo" else f"gmrt-{layer}",
                 path=rel(path),
                 source_url=GMRT_GRID,
                 accessed=today(),

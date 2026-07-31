@@ -1,0 +1,116 @@
+{
+  "generated": "2026-07-31",
+  "source": {
+    "topo": "data/raw/gmrt/gmrt_max.tif",
+    "mask": "data/raw/gmrt/gmrt_topo-mask.tif",
+    "service": "https://www.gmrt.org/services/GridServer",
+    "notes": [
+      "GMRT returned a byte-identical grid for resolution=max, high and med, so there is one native grid for this area \u2014 'max' is not finer than 'med'.",
+      "The gulf is defined by flood fill from a seed in the inner basin with a cut across the mouth, not by a bounding box; see pipeline/geometry.py."
+    ]
+  },
+  "grid": {
+    "width": 1095,
+    "height": 832,
+    "approx_cell_size_m": 60.5
+  },
+  "gulf": {
+    "cells": 158930,
+    "area_km2": 578.4,
+    "measured": 4145,
+    "measured_pct": 2.6
+  },
+  "gulf_excluding_artefacts": {
+    "cells": 153842,
+    "area_km2": 559.8,
+    "measured": 3600,
+    "measured_pct": 2.3
+  },
+  "by_depth_band": [
+    {
+      "band": "0 to 50 m",
+      "cells": 54073,
+      "measured": 2,
+      "measured_pct": 0.0
+    },
+    {
+      "band": "50 to 100 m",
+      "cells": 37710,
+      "measured": 1,
+      "measured_pct": 0.0
+    },
+    {
+      "band": "100 to 150 m",
+      "cells": 21739,
+      "measured": 14,
+      "measured_pct": 0.1
+    },
+    {
+      "band": "150 to 200 m",
+      "cells": 28045,
+      "measured": 1381,
+      "measured_pct": 4.9
+    },
+    {
+      "band": "200 to 250 m",
+      "cells": 12275,
+      "measured": 2202,
+      "measured_pct": 17.9
+    },
+    {
+      "band": "deeper than 250 m",
+      "cells": 5088,
+      "measured": 545,
+      "measured_pct": 10.7
+    }
+  ],
+  "depth_distribution": {
+    "median_m": -78.7,
+    "mean_m": -100.5,
+    "p99_m": -354.5,
+    "deepest_plausible_m": -250.0
+  },
+  "artefacts": {
+    "threshold_m": -250,
+    "cells": 5088,
+    "pct_of_gulf": 3.2,
+    "deepest_m": -2057.8,
+    "clusters": [
+      {
+        "cells": 3953,
+        "area_km2": 14.39,
+        "lon_range": [
+          -83.4135,
+          -83.3624
+        ],
+        "lat_range": [
+          8.6427,
+          8.6889
+        ],
+        "depth_range_m": [
+          -2057.8,
+          -250.0
+        ],
+        "flagged_measured_by_gmrt": 441
+      },
+      {
+        "cells": 1135,
+        "area_km2": 4.13,
+        "lon_range": [
+          -83.3338,
+          -83.3096
+        ],
+        "lat_range": [
+          8.6182,
+          8.6372
+        ],
+        "depth_range_m": [
+          -564.4,
+          -250.1
+        ],
+        "flagged_measured_by_gmrt": 104
+      }
+    ],
+    "comment": "The literature puts the maximum depth of the Golfo Dulce a little over 200 m. These clusters reach roughly ten times that. They are reported, not silently corrected \u2014 anyone using GEBCO or GMRT for this gulf inherits them."
+  }
+}

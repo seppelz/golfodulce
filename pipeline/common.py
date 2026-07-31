@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import sys
 from dataclasses import dataclass, asdict
 from datetime import date
 from pathlib import Path
@@ -31,15 +32,25 @@ BBOX = {
     "north": 8.80,
 }
 
-# Tighter box for the inner basin, used when we care about the anoxic deep only.
-INNER_BASIN_BBOX = {
-    "west": -83.40,
-    "east": -83.10,
-    "south": 8.45,
-    "north": 8.72,
-}
+# The gulf is a diagonal NW-SE body, so a rectangle is a poor description of it: a box
+# tight enough to exclude the open Pacific also clips the gulf, and a box loose enough to
+# contain the gulf pulls in 2000 m Pacific water that badly skews any depth statistic.
+# Instead the gulf is defined as the water connected to this seed point, with a barrier
+# across the mouth. See gulf_mask() in geometry.py.
+GULF_SEED = (-83.35, 8.65)  # lon, lat — well inside the inner basin
+
+# Latitude of the cut across the mouth, between Cabo Matapalo on the Osa side and the
+# Punta Banco side. Water south of this line is open Pacific and is excluded.
+GULF_MOUTH_LAT = 8.42
 
 USER_AGENT = "golfodulce-pipeline/0.1 (research; mailto:sebastian.soecker@gmail.com)"
+
+# The default Windows console codepage is cp1252, which cannot encode the degree
+# signs, arrows and accented place names these scripts print. Force UTF-8 so output
+# is identical on Windows and on a Linux runner.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
 
 
 @dataclass
