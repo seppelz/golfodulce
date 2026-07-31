@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations, LOCALES, type Locale } from '../../i18n/ui';
+import { getCollection } from 'astro:content';
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const t = useTranslations(locale);
+
+// Counts come from the real data, so the homepage cannot overstate what exists.
+const sources = await getCollection('sources');
+const gaps = await getCollection('gaps');
+
+const openSources = sources.filter((s) => s.data.access === 'open').length;
+const spanishSources = sources.filter((s) => s.data.language === 'es').length;
+
+const sections = [
+  { key: 'nav.oceanography', href: 'oceanography', topic: 'oceanography' },
+  { key: 'nav.bathymetry', href: 'bathymetry', topic: 'bathymetry' },
+  { key: 'nav.geology', href: 'geology', topic: 'geology' },
+  { key: 'nav.life', href: 'life', topic: 'ecology' },
+  { key: 'nav.people', href: 'people', topic: 'human-history' },
+  { key: 'nav.conservation', href: 'conservation', topic: 'conservation' },
+] as const;
+---
+
+<BaseLayout locale={locale} title={t('site.title')} path="">
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 pt-14 pb-10">
+    <p class="text-xs uppercase tracking-[0.18em] mb-4" style="color: var(--ink-muted)">
+      Costa Rica &middot; 8.5&deg;N 83.3&deg;W
+    </p>
+    <h1 class="font-semibold tracking-tight text-4xl sm:text-5xl max-w-3xl" style="letter-spacing:-0.025em">
+      {t('site.tagline')}
+    </h1>
+    <p class="mt-5 max-w-2xl text-lg" style="color: var(--ink-muted); font-family: var(--font-serif)">
+      {t('site.description')}
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a
+        href={`/${locale}/gaps`}
+        class="px-4 py-2 rounded-md no-underline text-sm font-medium"
+        style="background: var(--accent); color: var(--surface)"
+      >
+        {t('nav.gaps')} &rarr;
+      </a>
+      <a
+        href={`/${locale}/bathymetry`}
+        class="px-4 py-2 rounded-md no-underline text-sm font-medium border"
+        style="border-color: var(--rule); color: var(--ink)"
+      >
+        {t('map.title')}
+      </a>
+    </div>
+  </section>
+
+  {/* Honest counters. If the bibliography is empty, this says so rather than pretending. */}
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 pb-12">
+    <dl class="grid grid-cols-2 sm:grid-cols-4 gap-px rounded-lg overflow-hidden border" style="border-color: var(--rule); background: var(--rule)">
+      {
+        [
+          { label: t('meta.sources_count'), value: sources.length },
+          { label: t('sources.open'), value: openSources },
+          { label: 'en español', value: spanishSources },
+          { label: t('nav.gaps'), value: gaps.length },
+        ].map((stat) => (
+          <div class="p-4" style="background: var(--surface-raised)">
+            <dt class="text-xs uppercase tracking-wider" style="color: var(--ink-muted)">{stat.label}</dt>
+            <dd class="mt-1 text-2xl font-semibold tabular-nums">{stat.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 pb-16">
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        sections.map((s) => {
+          const n = sources.filter((src) => src.data.topics.includes(s.topic as any)).length;
+          return (
+            <a
+              href={`/${locale}/${s.href}`}
+              class="block p-5 rounded-lg border no-underline transition-colors hover:border-current"
+              style="border-color: var(--rule); background: var(--surface-raised)"
+            >
+              <h2 class="font-semibold" style="color: var(--ink)">{t(s.key)}</h2>
+              <p class="mt-1 text-sm tabular-nums" style="color: var(--ink-muted)">
+                {n} {t('meta.sources_count')}
+              </p>
+            </a>
+          );
+        })
+      }
+    </div>
+  </section>
+</BaseLayout>

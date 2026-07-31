@@ -1,0 +1,32 @@
+---
+import { useTranslations, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t mt-20" style="border-color: var(--rule)">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-10 text-sm" style="color: var(--ink-muted)">
+    <div class="flex flex-wrap gap-x-8 gap-y-3 justify-between">
+      <p class="max-w-md">
+        {t('site.description')}
+      </p>
+      <nav class="flex flex-col gap-1.5" aria-label="Footer">
+        <a href={`/${locale}/about`}>{t('nav.about')}</a>
+        <a href={`/${locale}/about#methodology`}>{t('footer.methodology')}</a>
+        <a href={`/${locale}/sources`}>{t('nav.sources')}</a>
+        <a href={`/${locale}/contact`}>{t('contact.heading')}</a>
+      </nav>
+    </div>
+    <p class="mt-8 pt-6 border-t text-xs" style="border-color: var(--rule)">
+      &copy; {year}. Text is published under CC BY 4.0. Underlying datasets retain the
+      licences of their originators — see each entry in the bibliography and
+      <a href={`/${locale}/about#data`}>data provenance</a>.
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,24 @@
+{
+  "name": "golfodulce",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "An authoritative, sourced knowledge hub on the Golfo Dulce, Costa Rica.",
+  "workspaces": [
+    "site"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=site",
+    "build": "npm run validate && npm run build --workspace=site",
+    "preview": "npm run preview --workspace=site",
+    "validate": "npm run validate:bib && npm run validate:cites && npm run validate:parity",
+    "validate:bib": "node scripts/validate-bibliography.mjs",
+    "test:gate": "node scripts/validate-bibliography.mjs --dir=scripts/__fixtures__ --sample=1.0 --expect-fail",
+    "validate:cites": "node scripts/validate-citations.mjs",
+    "validate:parity": "node scripts/validate-translation-parity.mjs",
+    "bib:merge": "node scripts/merge-bibliography.mjs"
+  },
+  "devDependencies": {
+    "zod": "^3.24.1"
+  }
+}

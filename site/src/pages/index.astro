@@ -1,0 +1,43 @@
+---
+/**
+ * Root sends visitors to a language. Spanish speakers are a primary audience, not a
+ * fallback, so we honour Accept-Language rather than defaulting everyone to English.
+ * On a static host this renders as a meta-refresh with a visible manual choice.
+ */
+import { DEFAULT_LOCALE, localeNames, LOCALES } from '../i18n/ui';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Golfo Dulce</title>
+    <meta name="description" content="An open, sourced knowledge base on the Golfo Dulce, Costa Rica." />
+    <link rel="alternate" hreflang="en" href="/en" />
+    <link rel="alternate" hreflang="es" href="/es" />
+    <link rel="alternate" hreflang="x-default" href="/en" />
+    <meta http-equiv="refresh" content={`0; url=/${DEFAULT_LOCALE}`} />
+    <script is:inline>
+      // Prefer the visitor's own language when we can tell.
+      (function () {
+        try {
+          var langs = navigator.languages || [navigator.language || 'en'];
+          for (var i = 0; i < langs.length; i++) {
+            var code = String(langs[i]).slice(0, 2).toLowerCase();
+            if (code === 'es') { location.replace('/es'); return; }
+            if (code === 'en') { location.replace('/en'); return; }
+          }
+        } catch (e) {
+          /* fall through to the meta refresh */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript><p>Choose a language:</p></noscript>
+    <ul>
+      {LOCALES.map((l) => <li><a href={`/${l}`}>{localeNames[l]}</a></li>)}
+    </ul>
+  </body>
+</html>

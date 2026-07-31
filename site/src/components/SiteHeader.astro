@@ -1,0 +1,85 @@
+---
+import { useTranslations, localeNames, LOCALES, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  path?: string;
+}
+
+const { locale, path = '' } = Astro.props;
+const t = useTranslations(locale);
+
+const nav = [
+  { key: 'nav.overview', href: '' },
+  { key: 'nav.oceanography', href: 'oceanography' },
+  { key: 'nav.bathymetry', href: 'bathymetry' },
+  { key: 'nav.geology', href: 'geology' },
+  { key: 'nav.life', href: 'life' },
+  { key: 'nav.people', href: 'people' },
+  { key: 'nav.conservation', href: 'conservation' },
+  { key: 'nav.gaps', href: 'gaps' },
+  { key: 'nav.sources', href: 'sources' },
+] as const;
+
+const current = path.split('/')[0] ?? '';
+---
+
+<header class="border-b sticky top-0 z-40 backdrop-blur" style="border-color: var(--rule); background: color-mix(in srgb, var(--surface) 88%, transparent);">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="flex items-center justify-between gap-4 py-3">
+      <a href={`/${locale}`} class="group flex items-baseline gap-2 no-underline">
+        <span class="font-semibold tracking-tight text-[1.05rem]" style="color: var(--ink)">
+          {t('site.title')}
+        </span>
+        <span class="hidden sm:inline text-xs" style="color: var(--ink-muted)">
+          {t('site.tagline')}
+        </span>
+      </a>
+
+      <nav aria-label="Language" class="flex items-center gap-1 text-xs">
+        {
+          LOCALES.map((l) => (
+            <a
+              href={`/${l}${path ? '/' + path : ''}`}
+              hreflang={l}
+              lang={l}
+              aria-current={l === locale ? 'true' : undefined}
+              class="px-2 py-1 rounded no-underline"
+              style={
+                l === locale
+                  ? 'background: var(--accent); color: var(--surface); font-weight: 600;'
+                  : 'color: var(--ink-muted);'
+              }
+            >
+              {localeNames[l]}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+
+    <div class="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+      <nav aria-label="Sections" class="flex gap-1 pb-2 text-sm whitespace-nowrap">
+        {
+          nav.map((item) => {
+            const active = current === item.href;
+            return (
+              <a
+                href={`/${locale}${item.href ? '/' + item.href : ''}`}
+                aria-current={active ? 'page' : undefined}
+                class="px-2.5 py-1 rounded-md no-underline transition-colors"
+                style={
+                  active
+                    ? 'color: var(--accent); font-weight: 600; background: color-mix(in srgb, var(--accent) 10%, transparent);'
+                    : 'color: var(--ink-muted);'
+                }
+              >
+                {t(item.key)}
+              </a>
+            );
+          })
+        }
+      </nav>
+    </div>
+  </div>
+</header>

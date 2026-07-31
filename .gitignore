@@ -1,0 +1,25 @@
+node_modules/
+dist/
+.astro/
+.vercel/
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Large intermediate rasters are reproducible from pipeline/ — keep them out of git.
+# Final derived products that the site serves ARE committed (see data/derived/README.md).
+data/raw/**/*.nc
+data/raw/**/*.tif
+data/raw/**/*.tiff
+data/derived/bathymetry/*.tif
+site/dist/
+site/.astro/
+data/manifest.json.part
