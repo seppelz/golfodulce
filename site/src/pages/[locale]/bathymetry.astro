@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DepthMap from '../../components/DepthMap.astro';
+import { useTranslations, LOCALES, type Locale } from '../../i18n/ui';
+// Single source of truth: the same file the pipeline writes, imported at build time.
+import stats from '../../../../data/derived/coverage/coverage_stats.json';
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const t = useTranslations(locale);
+
+const es = locale === 'es';
+const bands = stats.by_depth_band;
+const gulf = stats.gulf;
+const artefacts = stats.artefacts;
+
+const title = es ? 'Batimetría' : 'Bathymetry';
+const lead = es
+  ? 'Qué tan bien se conoce realmente la forma de esta cuenca. La respuesta corta: apenas.'
+  : 'How well the shape of this basin is actually known. The short answer: barely.';
+---
+
+<BaseLayout locale={locale} title={title} description={lead} path="bathymetry">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-10">
+    <h1 class="font-semibold tracking-tight text-3xl sm:text-4xl">{title}</h1>
+    <p class="mt-3 max-w-2xl text-lg" style="color: var(--ink-muted); font-family: var(--font-serif)">{lead}</p>
+
+    {/* The single number this page exists to communicate. */}
+    <div class="mt-8 rounded-lg border p-6" style="border-color: var(--rule); background: var(--surface-raised)">
+      <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        <span class="text-5xl font-semibold tabular-nums" style="color: var(--accent)">{gulf.measured_pct}%</span>
+        <span class="text-lg" style="color: var(--ink)">
+          {es ? 'del Golfo Dulce se apoya en sondeos reales' : 'of the Golfo Dulce rests on real soundings'}
+        </span>
+      </div>
+      <p class="mt-3 text-sm max-w-2xl" style="color: var(--ink-muted)">
+        {es
+          ? `De ${gulf.cells.toLocaleString('es')} celdas de agua (${gulf.area_km2} km²), solo ${gulf.measured.toLocaleString('es')} tienen una medición real debajo. El resto es interpolación a partir de una malla global.`
+          : `Of ${gulf.cells.toLocaleString('en')} water cells (${gulf.area_km2} km²), just ${gulf.measured.toLocaleString('en')} have a real measurement beneath them. The rest is interpolated from a global grid.`}
+      </p>
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <DepthMap locale={locale} coverageOn={true} height="72vh" />
+  </div>
+
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 pb-16">
+    <section>
+      <h2 class="font-semibold text-xl mt-10 mb-1">
+        {es ? 'Cobertura por franja de profundidad' : 'Coverage by depth band'}
+      </h2>
+      <p class="text-sm mb-4 max-w-2xl" style="color: var(--ink-muted)">
+        {es
+          ? 'La estructura de oxígeno de esta cuenca cambia alrededor de los 100–200 m. Es exactamente ahí donde no hay mediciones.'
+          : 'The oxygen structure of this basin turns over somewhere around 100–200 m. That is precisely where the measurements are absent.'}
+      </p>
+
+      <div class="table-scroll">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-left">
+              <th class="py-2 pr-4 font-semibold">{es ? 'Profundidad' : 'Depth'}</th>
+              <th class="py-2 pr-4 font-semibold text-right tabular-nums">{es ? 'Celdas' : 'Cells'}</th>
+              <th class="py-2 pr-4 font-semibold text-right tabular-nums">{es ? 'Medidas' : 'Measured'}</th>
+              <th class="py-2 font-semibold w-1/2">%</th>
+            </tr>
+          </thead>
+          <tbody>
+            {bands.map((b) => (
+              <tr style="border-top: 1px solid var(--rule)">
+                <td class="py-2 pr-4">{b.band}</td>
+                <td class="py-2 pr-4 text-right tabular-nums" style="color: var(--ink-muted)">{b.cells.toLocaleString(locale)}</td>
+                <td class="py-2 pr-4 text-right tabular-nums" style="color: var(--ink-muted)">{b.measured.toLocaleString(locale)}</td>
+                <td class="py-2">
+                  <div class="flex items-center gap-2">
+                    <div class="flex-1 h-2 rounded-sm overflow-hidden" style="background: color-mix(in srgb, var(--rule) 70%, transparent)">
+                      <div
+                        class="h-full rounded-sm"
+                        style={`width:${Math.max(b.measured_pct ?? 0, (b.measured_pct ?? 0) > 0 ? 1.5 : 0)}%; background: var(--accent)`}
+                      ></div>
+                    </div>
+                    <span class="tabular-nums w-12 text-right" style="color: var(--ink-muted)">
+                      {b.measured_pct === null ? '—' : `${b.measured_pct}%`}
+                    </span>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="font-semibold text-xl mb-1">{es ? 'Artefactos en la malla' : 'Artefacts in the grid'}</h2>
+      <div class="rounded-lg border p-5 mt-3" style="border-color: var(--color-shoal-600); background: color-mix(in srgb, var(--color-shoal-400) 8%, var(--surface-raised))">
+        <p class="text-sm max-w-3xl">
+          {es
+            ? `La malla pública contiene ${artefacts.cells.toLocaleString('es')} celdas (${artefacts.pct_of_gulf}% del golfo) con profundidades de hasta ${Math.abs(artefacts.deepest_m)} m, dentro de una cuenca que la literatura sitúa poco más allá de los 200 m. No las hemos corregido en silencio: cualquiera que use GEBCO o GMRT para este golfo las hereda.`
+            : `The public grid contains ${artefacts.cells.toLocaleString('en')} cells (${artefacts.pct_of_gulf}% of the gulf) reaching ${Math.abs(artefacts.deepest_m)} m, inside a basin the literature puts a little over 200 m deep. We have not silently corrected them: anyone using GEBCO or GMRT for this gulf inherits them.`}
+        </p>
+        <ul class="mt-3 text-sm space-y-1" style="color: var(--ink-muted)">
+          {artefacts.clusters.map((c) => (
+            <li class="tabular-nums">
+              {c.cells.toLocaleString(locale)} {es ? 'celdas' : 'cells'} · {c.lat_range[0]}–{c.lat_range[1]}°N,
+              {' '}{Math.abs(c.lon_range[1])}–{Math.abs(c.lon_range[0])}°W · {es ? 'hasta' : 'down to'} {c.depth_range_m[0]} m
+              {c.flagged_measured_by_gmrt > 0 && (
+                <span> · {c.flagged_measured_by_gmrt} {es ? 'marcadas como medidas' : 'flagged as measured'}</span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="font-semibold text-xl mb-3">{es ? 'Procedencia' : 'Provenance'}</h2>
+      <dl class="text-sm grid sm:grid-cols-2 gap-x-8 gap-y-2 max-w-3xl">
+        <div><dt class="inline font-medium">{es ? 'Fuente' : 'Source'}: </dt><dd class="inline" style="color: var(--ink-muted)">GMRT GridServer</dd></div>
+        <div><dt class="inline font-medium">{es ? 'Malla' : 'Grid'}: </dt><dd class="inline tabular-nums" style="color: var(--ink-muted)">{stats.grid.width}×{stats.grid.height}, ~{stats.grid.approx_cell_size_m} m</dd></div>
+        <div><dt class="inline font-medium">{es ? 'Generado' : 'Generated'}: </dt><dd class="inline tabular-nums" style="color: var(--ink-muted)">{stats.generated}</dd></div>
+        <div><dt class="inline font-medium">{es ? 'Área' : 'Area'}: </dt><dd class="inline tabular-nums" style="color: var(--ink-muted)">{gulf.area_km2} km²</dd></div>
+      </dl>
+      <ul class="mt-3 text-sm space-y-1.5 max-w-3xl" style="color: var(--ink-muted)">
+        {stats.source.notes.map((note) => <li>— {note}</li>)}
+      </ul>
+    </section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,185 @@
+---
+import { useTranslations, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  /** Rendered height. The map is the centrepiece, so it defaults large. */
+  height?: string;
+  /** Start with the coverage overlay already on — used on the bathymetry page. */
+  coverageOn?: boolean;
+}
+
+const { locale, height = '70vh', coverageOn = false } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<figure class="depth-map not-prose my-8" data-coverage-default={coverageOn ? '1' : '0'}>
+  <div class="map-frame rounded-lg overflow-hidden border relative" style={`height:${height}; border-color: var(--rule)`}>
+    <div id="map" class="absolute inset-0" role="application" aria-label={t('map.title')}></div>
+
+    <noscript>
+      <div class="absolute inset-0 grid place-items-center p-6 text-center text-sm" style="background: var(--surface-raised)">
+        The interactive depth map needs JavaScript. The underlying data is available in
+        <code>site/public/data/</code> and via the pipeline in this project's repository.
+      </div>
+    </noscript>
+
+    <div class="map-panel absolute top-3 left-3 rounded-md border shadow-sm p-3 text-xs max-w-[15rem]"
+         style="background: var(--surface-raised); border-color: var(--rule)">
+      <label class="flex items-start gap-2 cursor-pointer">
+        <input type="checkbox" id="coverage-toggle" checked={coverageOn} class="mt-0.5" />
+        <span>
+          <span class="font-semibold block" style="color: var(--ink)">{t('map.coverage_toggle')}</span>
+          <span style="color: var(--ink-muted)">{t('map.coverage_help')}</span>
+        </span>
+      </label>
+
+      <div id="coverage-key" class="mt-3 pt-3 border-t space-y-1.5" style="border-color: var(--rule)" hidden>
+        <div class="flex items-center gap-2">
+          <span class="inline-block w-3 h-3 rounded-sm" style="background: rgba(64,173,128,0.75)"></span>
+          <span>Measured soundings</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="inline-block w-3 h-3 rounded-sm" style="background: rgba(208,74,62,0.45)"></span>
+          <span>{t('map.no_data')} — interpolated</span>
+        </div>
+      </div>
+
+      <div class="mt-3 pt-3 border-t" style="border-color: var(--rule)">
+        <div class="font-semibold mb-1.5" style="color: var(--ink)">{t('map.depth')}</div>
+        <div id="depth-ramp" class="h-2.5 rounded-sm" style="background: linear-gradient(to right, #deeff6, #92c7e4, #4891c4, #215e96, #0a274c)"></div>
+        <div class="flex justify-between mt-1 tabular-nums" style="color: var(--ink-muted)">
+          <span>0 m</span><span>100</span><span>200+</span>
+        </div>
+        <div class="flex items-center gap-2 mt-2">
+          <span class="inline-block w-3 h-3 rounded-sm" style="background: rgb(196,92,74)"></span>
+          <span>Implausible — grid artefact</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="readout" class="map-panel absolute bottom-3 right-3 rounded-md border px-2.5 py-1.5 text-xs tabular-nums"
+         style="background: var(--surface-raised); border-color: var(--rule); color: var(--ink-muted)" hidden></div>
+  </div>
+
+  <figcaption class="mt-2 text-xs" style="color: var(--ink-muted)">
+    Depth from the GMRT synthesis. Only 2.6% of this gulf rests on real soundings — switch
+    on the coverage layer to see which parts. Contours are drawn from the same interpolated
+    surface and inherit its uncertainty.
+  </figcaption>
+</figure>
+
+<script>
+  // maplibre-gl v6 ships named exports only — there is no default export.
+  import { Map as MapLibreMap, NavigationControl, ScaleControl } from 'maplibre-gl';
+  import 'maplibre-gl/dist/maplibre-gl.css';
+
+  const el = document.getElementById('map');
+  if (el) {
+    const figure = el.closest('.depth-map') as HTMLElement | null;
+    const coverageDefault = figure?.dataset.coverageDefault === '1';
+
+    const meta = await fetch('/data/bathymetry.json').then((r) => r.json());
+    const [w, s, e, n] = meta.bounds as [number, number, number, number];
+
+    const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const water = dark ? '#04121f' : '#eef5fa';
+    const land = dark ? '#12202c' : '#e7e2d8';
+    const landLine = dark ? '#233444' : '#cfc7b8';
+
+    const map = new MapLibreMap({
+      container: 'map',
+      // No third-party basemap: every layer here comes from this project's own pipeline,
+      // so the site carries no API keys and no external tile dependency.
+      style: {
+        version: 8,
+        sources: {
+          depth: {
+            type: 'raster',
+            tiles: [new URL('/tiles/depth/{z}/{x}/{y}.png', location.origin).toString()],
+            tileSize: 256,
+            minzoom: meta.minzoom,
+            maxzoom: meta.maxzoom,
+            bounds: [w, s, e, n],
+            attribution:
+              'Depth: <a href="https://www.gmrt.org/">GMRT</a> · analysis: golfodulce',
+          },
+          coverage: {
+            type: 'raster',
+            tiles: [new URL('/tiles/coverage/{z}/{x}/{y}.png', location.origin).toString()],
+            tileSize: 256,
+            minzoom: meta.minzoom,
+            maxzoom: meta.maxzoom,
+            bounds: [w, s, e, n],
+          },
+          land: { type: 'geojson', data: '/data/land.geojson' },
+          contours: { type: 'geojson', data: '/data/contours.geojson' },
+        },
+        layers: [
+          { id: 'bg', type: 'background', paint: { 'background-color': water } },
+          { id: 'depth', type: 'raster', source: 'depth', paint: { 'raster-opacity': 1 } },
+          {
+            id: 'contours',
+            type: 'line',
+            source: 'contours',
+            paint: {
+              'line-color': dark ? 'rgba(190,220,240,0.38)' : 'rgba(10,40,70,0.30)',
+              // Every 50 m gets a heavier line so the eye can read the structure.
+              'line-width': ['case', ['==', ['%', ['get', 'depth_m'], 50], 0], 1.1, 0.5],
+            },
+          },
+          { id: 'land', type: 'fill', source: 'land', paint: { 'fill-color': land } },
+          { id: 'land-outline', type: 'line', source: 'land', paint: { 'line-color': landLine, 'line-width': 0.8 } },
+        ],
+      },
+      bounds: [[w, s], [e, n]],
+      fitBoundsOptions: { padding: 24 },
+      maxBounds: [[w - 0.35, s - 0.35], [e + 0.35, n + 0.35]],
+      minZoom: meta.minzoom,
+      maxZoom: meta.maxzoom,
+      attributionControl: { compact: true },
+    });
+
+    map.addControl(new NavigationControl({ showCompass: false }), 'top-right');
+    map.addControl(new ScaleControl({ unit: 'metric' }), 'bottom-left');
+
+    map.on('load', () => {
+      // Coverage sits above depth but below the contours and land.
+      map.addLayer(
+        { id: 'coverage', type: 'raster', source: 'coverage', paint: { 'raster-opacity': 0.85 }, layout: { visibility: coverageDefault ? 'visible' : 'none' } },
+        'contours'
+      );
+    });
+
+    const toggle = document.getElementById('coverage-toggle') as HTMLInputElement | null;
+    const key = document.getElementById('coverage-key');
+    const sync = () => {
+      const on = !!toggle?.checked;
+      if (map.getLayer('coverage')) {
+        map.setLayoutProperty('coverage', 'visibility', on ? 'visible' : 'none');
+      }
+      if (key) key.hidden = !on;
+    };
+    toggle?.addEventListener('change', sync);
+    map.on('load', sync);
+
+    // Position readout. Depth is deliberately not shown as a precise number on hover:
+    // implying metre precision from an interpolated surface would misrepresent it.
+    const readout = document.getElementById('readout');
+    map.on('mousemove', (ev) => {
+      if (!readout) return;
+      readout.hidden = false;
+      readout.textContent = `${ev.lngLat.lat.toFixed(4)}°N  ${Math.abs(ev.lngLat.lng).toFixed(4)}°W`;
+    });
+    map.on('mouseout', () => { if (readout) readout.hidden = true; });
+  }
+</script>
+
+<style>
+  .depth-map :global(.maplibregl-ctrl-attrib) {
+    font-size: 10px;
+  }
+  .map-panel {
+    backdrop-filter: blur(6px);
+  }
+</style>
