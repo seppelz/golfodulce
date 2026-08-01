@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { useTranslations, LOCALES, type Locale } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const t = useTranslations(locale);
+const es = locale === 'es';
+
+const sources = (await getCollection('sources')).sort((a, b) => {
+  const ya = a.data.year ?? 0;
+  const yb = b.data.year ?? 0;
+  return yb - ya || a.data.title.localeCompare(b.data.title);
+});
+
+const allTopics = [...new Set(sources.flatMap((s) => s.data.topics))].sort();
+
+const ACCESS_LABEL: Record<string, string> = {
+  open: t('sources.open'),
+  paywalled: t('sources.paywalled'),
+  'request-required': t('sources.request'),
+  unknown: t('sources.unknown'),
+};
+
+function authorsShort(authors: string[]): string {
+  if (authors.length === 1) return authors[0];
+  if (authors.length === 2) return `${authors[0]} & ${authors[1]}`;
+  return `${authors[0]} et al.`;
+}
+---
+
+<BaseLayout locale={locale} title={t('sources.heading')} path="sources">
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 pt-10 pb-16">
+    <h1 class="font-semibold tracking-tight text-3xl sm:text-4xl">{t('sources.heading')}</h1>
+    <p class="mt-3 text-lg" style="color: var(--ink-muted); font-family: var(--font-serif)">
+      {es
+        ? `${sources.length} fuentes sustentan este sitio, cada una verificada de forma independiente antes de citarse.`
+        : `${sources.length} sources back this site, each independently verified before being cited.`}
+    </p>
+
+    <div class="mt-6 flex flex-wrap gap-2 items-center text-xs" role="group" aria-label={t('sources.filter_topic')}>
+      <button type="button" data-topic="all" aria-pressed="true" class="topic-filter px-2.5 py-1 rounded-full border" style="border-color: var(--rule)">
+        {es ? 'Todos' : 'All'}
+      </button>
+      {allTopics.map((topic) => (
+        <button type="button" data-topic={topic} aria-pressed="false" class="topic-filter px-2.5 py-1 rounded-full border" style="border-color: var(--rule)">
+          {topic}
+        </button>
+      ))}
+    </div>
+
+    <ol class="mt-8 space-y-5 list-none p-0">
+      {sources.map((s) => {
+        const href = s.data.doi ? `https://doi.org/${s.data.doi}` : s.data.url;
+        return (
+          <li class="source-entry pb-5 border-b" style="border-color: var(--rule)" data-topics={s.data.topics.join(' ')}>
+            <p class="text-[0.95rem]">
+              <span class="font-medium">{authorsShort(s.data.authors)}</span>
+              {s.data.year && <span> ({s.data.year})</span>}.{' '}
+              {href ? (
+                <a href={href} target="_blank" rel="noopener noreferrer">{s.data.title}</a>
+              ) : (
+                <span>{s.data.title}</span>
+              )}
+              {s.data.container && <span style="color: var(--ink-muted)">. {s.data.container}</span>}
+            </p>
+            <div class="mt-1.5 flex flex-wrap gap-1.5 items-center">
+              {s.data.topics.map((topic) => (
+                <span class="text-[0.65rem] uppercase tracking-wide px-1.5 py-0.5 rounded" style="background: color-mix(in srgb, var(--accent) 10%, transparent); color: var(--accent)">
+                  {topic}
+                </span>
+              ))}
+              <span class="text-[0.65rem] px-1.5 py-0.5 rounded border" style="border-color: var(--rule); color: var(--ink-muted)">
+                {ACCESS_LABEL[s.data.access]}
+              </span>
+              <span class="text-[0.65rem] uppercase" style="color: var(--ink-muted)">{s.data.language}</span>
+            </div>
+            <p class="mt-2 text-sm" style="color: var(--ink-muted)">{s.data.summary}</p>
+            {s.data.caveat && (
+              <p class="mt-1 text-xs italic" style="color: var(--color-shoal-600)">{s.data.caveat}</p>
+            )}
+          </li>
+        );
+      })}
+    </ol>
+  </div>
+</BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.topic-filter');
+  const entries = document.querySelectorAll<HTMLElement>('.source-entry');
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const topic = btn.dataset.topic;
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      entries.forEach((entry) => {
+        const topics = (entry.dataset.topics ?? '').split(' ');
+        entry.hidden = topic !== 'all' && !topics.includes(topic!);
+      });
+    });
+  });
+</script>
+
+<style>
+  .topic-filter[aria-pressed='true'] {
+    background: var(--accent);
+    color: var(--surface);
+    border-color: var(--accent) !important;
+    font-weight: 600;
+  }
+</style>

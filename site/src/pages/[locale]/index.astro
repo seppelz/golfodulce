@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import References from '../../components/References.astro';
 import { useTranslations, LOCALES, type Locale } from '../../i18n/ui';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 export function getStaticPaths() {
   return LOCALES.map((locale) => ({ params: { locale } }));
@@ -13,6 +14,17 @@ const t = useTranslations(locale);
 // Counts come from the real data, so the homepage cannot overstate what exists.
 const sources = await getCollection('sources');
 const gaps = await getCollection('gaps');
+
+// The lead prose ("what it is, why it's unusual") lives in the overview content entry
+// rather than hard-coded here, so it goes through the same citation gate as every other
+// claim on the site. Falls back to English with a notice if untranslated.
+const overviewEn = (await getCollection('pages')).find((p) => p.id === 'overview');
+const overviewEs = (await getCollection('pagesEs')).find((p) => p.id === 'overview');
+const overviewEntry = locale === 'es' ? (overviewEs ?? overviewEn) : overviewEn;
+const overviewFallback = locale === 'es' && !overviewEs && !!overviewEn;
+const overviewRendered = overviewEntry ? await render(overviewEntry as any) : null;
+const OverviewContent = overviewRendered?.Content ?? null;
+const overviewCitations = (overviewRendered?.remarkPluginFrontmatter as any)?.citations ?? [];
 
 const openSources = sources.filter((s) => s.data.access === 'open').length;
 const spanishSources = sources.filter((s) => s.data.language === 'es').length;
@@ -56,6 +68,22 @@ const sections = [
       </a>
     </div>
   </section>
+
+  {OverviewContent && (
+    <section class="mx-auto max-w-3xl px-4 sm:px-6 pb-14">
+      {overviewFallback && (
+        <p class="mb-6 text-sm px-3 py-2 rounded-md border" style="border-color: var(--color-shoal-600); background: var(--color-shoal-100); color: var(--color-shoal-600)">
+          {locale === 'es'
+            ? 'Traducción aún no disponible — mostrando la versión en inglés.'
+            : 'This page has not been translated yet.'}
+        </p>
+      )}
+      <div class="prose-gd">
+        <OverviewContent />
+      </div>
+      <References citations={overviewCitations} locale={locale} />
+    </section>
+  )}
 
   {/* Honest counters. If the bibliography is empty, this says so rather than pretending. */}
   <section class="mx-auto max-w-6xl px-4 sm:px-6 pb-12">

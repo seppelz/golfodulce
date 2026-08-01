@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations, LOCALES, type Locale } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const t = useTranslations(locale);
+const es = locale === 'es';
+
+// TODO: replace with the project's real address once golfodulce.[tld] is registered.
+const CONTACT_EMAIL = 'hello@golfodulce.org';
+
+const routes = es
+  ? [
+      { label: 'Un dato está equivocado o desactualizado', body: 'Errores factuales, una cita que no corresponde, o un vínculo roto.' },
+      { label: 'Tengo datos que aportar', body: 'Sondeos, perfiles CTD, avistamientos, o cualquier registro que no esté aquí.' },
+      { label: 'Soy investigador/a o de una institución', body: 'CIMAR, UNA, INCOPESCA, una ONG local — posibilidades de colaboración.' },
+      { label: 'Conozco esta agua', body: 'Pescadores, capitanes, guías y residentes: el conocimiento local es bienvenido, con o sin publicación formal.' },
+    ]
+  : [
+      { label: 'A fact is wrong or out of date', body: 'Factual errors, a citation that does not support the claim, or a broken link.' },
+      { label: 'I have data to contribute', body: 'Soundings, CTD profiles, sightings, or any record not yet reflected here.' },
+      { label: 'I am a researcher or institution', body: 'CIMAR, UNA, INCOPESCA, a local NGO — collaboration possibilities.' },
+      { label: 'I know this water', body: 'Fishers, captains, guides and residents: local knowledge is welcome, formally published or not.' },
+    ];
+---
+
+<BaseLayout locale={locale} title={t('contact.heading')} description={t('contact.intro')} path="contact">
+  <div class="mx-auto max-w-2xl px-4 sm:px-6 pt-10 pb-20">
+    <h1 class="font-semibold tracking-tight text-3xl sm:text-4xl">{t('contact.heading')}</h1>
+    <p class="mt-3 text-lg" style="color: var(--ink-muted); font-family: var(--font-serif)">
+      {t('contact.intro')}
+    </p>
+
+    <div class="mt-8 p-5 rounded-lg border" style="border-color: var(--rule); background: var(--surface-raised)">
+      <p class="text-sm" style="color: var(--ink-muted)">{es ? 'Escriba a' : 'Write to'}</p>
+      <a href={`mailto:${CONTACT_EMAIL}`} class="text-xl font-semibold" style="color: var(--accent)">{CONTACT_EMAIL}</a>
+    </div>
+
+    <ul class="mt-10 space-y-5 list-none p-0">
+      {routes.map((r) => (
+        <li class="pb-5 border-b" style="border-color: var(--rule)">
+          <h2 class="font-semibold">{r.label}</h2>
+          <p class="mt-1 text-sm" style="color: var(--ink-muted)">{r.body}</p>
+        </li>
+      ))}
+    </ul>
+
+    <p class="mt-8 text-sm" style="color: var(--ink-muted)">
+      {es
+        ? 'Las correcciones de quienes conocen estas aguas son la vía más rápida hacia la exactitud de este sitio.'
+        : 'Corrections from people who actually know this water are the fastest route this site has to being accurate.'}
+    </p>
+  </div>
+</BaseLayout>

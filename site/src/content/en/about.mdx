@@ -1,0 +1,81 @@
+---
+title: About & methodology
+summary: Why this site exists, and the mechanical rules that keep it honest.
+section: about
+order: 100
+published: true
+updated: 2026-08-01
+---
+
+## What this is
+
+This is a Phase 1 knowledge baseline for the Golfo Dulce, Costa Rica — a tropical
+anoxic fjord-like basin, one of a small number in the world. It is not a survey. It is
+an attempt to gather every piece of existing public knowledge about the gulf into one
+place, sourced properly, and to say plainly where that knowledge runs out.
+
+The site's real product is not the prose sections. It is the [gap register](/en/gaps):
+a structured, evidence-backed account of what is not known, why, and what it would take
+to close each gap. That register only has value if the claims feeding into it are
+actually true — so most of the engineering effort here went into making sure they are.
+
+## Methodology
+
+### Every claim traces to a source, mechanically
+
+The rule "cite everything" is easy to state and easy to let slide. So on this site it is
+not a style guideline — it is a build gate. Every factual sentence in the prose sections
+carries an inline citation in the form `[@source-id]`, resolved against a single
+canonical bibliography (`bibliography/sources.json`, [browsable in full](/en/sources)).
+A citation that does not resolve to a real entry fails the site's build outright; there
+is no path for an unsourced or fabricated claim to reach a published page.
+
+### Citations are checked against the real source, not just formatted correctly
+
+A citation that looks right — a plausible author, year, and DOI — is not the same as a
+citation that is right. Every source in the bibliography was independently resolved
+against the [Crossref](https://www.crossref.org/) API at harvest time, and the title
+Crossref returns for that DOI is compared against the title claimed for the entry. A DOI
+that does not exist, or that belongs to a different paper, fails the harvest before it
+ever reaches the site. This check has its own regression test — a fixture containing one
+genuine source, one real DOI deliberately paired with the wrong title, and one invented
+DOI — so the check itself cannot silently stop working without being noticed.
+
+### Uncertainty is stated, not smoothed over
+
+Where the published literature disagrees — the depth of the sill, the origin of the
+basin, whether the deep water is "always" or "sometimes" anoxic — this site says so
+explicitly rather than picking the more confident-sounding answer. Several early framings
+of this project described the gulf as permanently anoxic; the completed literature
+review corrected that. It is intermittently anoxic, renewed by episodic inflows from the
+Pacific. That correction is recorded here, not quietly absorbed.
+
+### The data pipeline is reproducible, not just a one-time download
+
+Every dataset behind the bathymetry and occurrence pages was fetched by a script kept in
+this project's repository, not downloaded once by hand and left undocumented. Each raw
+file's checksum, licence, and retrieval date are recorded in a manifest, so a reader — or
+a future version of this project — can verify that what is being served is what it
+claims to be, and can re-run the fetch to reproduce it.
+
+### Spanish is not a translation afterthought
+
+The primary local and academic audience for this material is Spanish-speaking, so the
+site is built bilingually from the ground up rather than English-first with Spanish
+bolted on later. Where a Spanish translation of a page does not yet exist, the site says
+so plainly and serves the English version rather than silently falling back.
+
+## Corrections and collaboration
+
+This site will be wrong in places — coarse literature reviews always are, and the gulf
+itself is genuinely under-studied. If you know this water, or you are the author of a
+source cited here and something has been misrepresented, please use the
+[contact page](/en/contact) to flag it. Corrections from people who actually know the
+gulf are the fastest route this project has to being trustworthy.
+
+## Licensing
+
+Text on this site is published under CC BY 4.0. The underlying datasets retain the
+licence terms of their original publishers — GMRT, OBIS, and NOAA's World Ocean Database
+each carry their own terms, recorded per dataset in the project's data manifest, and
+each bibliography entry records its own access status.
