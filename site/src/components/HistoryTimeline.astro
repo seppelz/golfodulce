@@ -1,0 +1,135 @@
+---
+import { type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const es = locale === 'es';
+
+/**
+ * Only periods with a real, cited date range in people.mdx. "Indigenous peoples and the
+ * water" is deliberately not a box on this timeline — Boruca, Brunca and Ngäbe presence
+ * spans the entire span shown and continues today, so giving it a bounded start/end would
+ * misstate exactly the kind of thing this site exists to get right.
+ */
+const eras = [
+  { start: -300, end: 800, label_en: 'Aguas Buenas period', label_es: 'Período Aguas Buenas' },
+  { start: 800, end: 1500, label_en: 'Chiriquí period', label_es: 'Período Chiriquí' },
+  { start: 1789, end: 1822, label_en: 'Malaspina expedition to the Spanish chart', label_es: 'Expedición Malaspina a la carta española' },
+  { start: 1938, end: 1985, label_en: 'United Fruit banana era', label_es: 'Era bananera de la United Fruit' },
+  { start: 1985, end: 2026, label_en: 'Oil palm, land reform', label_es: 'Palma aceitera, reforma agraria' },
+];
+
+const W = 640;
+const H = 155;
+const PAD = { left: 16, right: 16 };
+const plotW = W - PAD.left - PAD.right;
+
+// A single linear scale from 300 BC to 2026 crams the three modern, most-detailed eras
+// (spanning just 237 years) into a sliver of the width while two ancient eras eat most of
+// it. Broken axis instead: the pre-1789 span gets 30% of the plot, 1789-2026 gets the
+// remaining 70%, with a visible break mark at the seam — a standard technique for exactly
+// this shape of data, not a distortion of it.
+const BREAK_YEAR = 1789;
+const yearMin = -300;
+const yearMax = 2026;
+const breakFraction = 0.3;
+
+const x = (year: number) => {
+  if (year <= BREAK_YEAR) {
+    return PAD.left + ((year - yearMin) / (BREAK_YEAR - yearMin)) * plotW * breakFraction;
+  }
+  return PAD.left + plotW * breakFraction + ((year - BREAK_YEAR) / (yearMax - BREAK_YEAR)) * plotW * (1 - breakFraction);
+};
+
+const trackY = 56;
+const barH = 22;
+
+// The documented silence: after the Chiriquí period ends (1500) and before the Malaspina
+// expedition (1789), the content says outright "little looking has been done" — a real gap,
+// not an oversight in what to show. Same treatment as the oxygen record's 1970-2026 gap.
+const gapStart = 1500;
+const gapEnd = 1789;
+
+const yearLabel = (y: number) => (y < 0 ? `${Math.abs(y)} BC` : es ? `${y} d. C.` : `AD ${y}`);
+---
+
+<figure class="not-prose my-8">
+  <div class="rounded-lg border p-4 sm:p-5" style="border-color: var(--rule); background: var(--surface-raised)">
+    <h3 class="text-sm font-semibold mb-3" style="color: var(--ink)">
+      {es ? 'Lo que está fechado, y lo que no' : 'What is dated, and what is not'}
+    </h3>
+
+    <svg
+      viewBox={`0 0 ${W} ${H}`}
+      class="w-full h-auto"
+      role="img"
+      aria-label={
+        es
+          ? 'Línea de tiempo de los períodos con fechas documentadas en la historia humana del golfo: Aguas Buenas (300 a.C.-800 d.C.), Chiriquí (800-1500), la expedición Malaspina y la carta de 1822, la era bananera de 1938 a 1985, y el período posterior con palma aceitera. Entre 1500 y 1789 hay un vacío documental de casi 300 años.'
+          : 'Timeline of periods with documented dates in the gulf’s human history: Aguas Buenas (300 BC-AD 800), Chiriquí (800-1500), the Malaspina expedition and 1822 chart, the banana era from 1938 to 1985, and the oil-palm period after. Between 1500 and 1789 there is a documentary gap of almost 300 years.'
+      }
+    >
+      <line x1={PAD.left} x2={W - PAD.right} y1={trackY + barH / 2} y2={trackY + barH / 2} stroke="var(--rule)" stroke-width="1" />
+
+      <rect
+        x={x(gapStart)}
+        y={trackY - 6}
+        width={x(gapEnd) - x(gapStart)}
+        height={barH + 12}
+        fill="var(--color-shoal-400)"
+        opacity="0.1"
+      />
+      <text x={(x(gapStart) + x(gapEnd)) / 2} y={trackY - 12} text-anchor="middle" style="fill: var(--color-shoal-600); font-size: 10px; font-weight: 600">
+        {es ? '~290 años sin registro' : '~290 years undocumented'}
+      </text>
+
+      {eras.map((era, i) => {
+        const ex = x(era.start);
+        const ew = Math.max(x(era.end) - x(era.start), 3);
+        const label = es ? era.label_es : era.label_en;
+        // The three modern eras sit close together even with the broken axis; stagger
+        // their labels onto alternating rows so adjacent ones never overlap regardless
+        // of label length.
+        const row = i % 2;
+        const labelY = trackY + barH + 16 + row * 26;
+        // The last era ends exactly at the right edge of the chart; anchoring its label
+        // at the bar's start would run the text past the SVG boundary and clip it.
+        const isLast = i === eras.length - 1;
+        const labelX = isLast ? ex + ew : ex;
+        const anchor = isLast ? 'end' : 'start';
+        return (
+          <g>
+            <rect x={ex} y={trackY} width={ew} height={barH} rx="3" fill="var(--color-abyss-500)" opacity={0.85}>
+              <title>{label} ({yearLabel(era.start)}–{yearLabel(era.end)})</title>
+            </rect>
+            <line x1={labelX} x2={labelX} y1={trackY + barH} y2={labelY - 10} stroke="var(--rule)" stroke-width="1" />
+            <text x={labelX} y={labelY} text-anchor={anchor} style="fill: var(--ink); font-size: 10px">
+              {label}
+            </text>
+            <text x={labelX} y={labelY + 12} text-anchor={anchor} style="fill: var(--ink-muted); font-size: 9px">
+              {yearLabel(era.start)}–{yearLabel(era.end)}
+            </text>
+          </g>
+        );
+      })}
+
+      {[-300, 0, 500, 1000, 1500, 1789, 1938, 1985, 2026].map((yr) => (
+        <line x1={x(yr)} x2={x(yr)} y1={trackY - 6} y2={trackY} stroke="var(--ink-muted)" stroke-width="1" />
+      ))}
+
+      {/* break mark at the scale seam, standard zig-zag convention for a broken axis */}
+      <g transform={`translate(${x(BREAK_YEAR)}, ${trackY + barH / 2})`}>
+        <line x1="-4" y1="-9" x2="4" y2="9" stroke="var(--surface-raised)" stroke-width="5" />
+        <line x1="-4" y1="-9" x2="4" y2="9" stroke="var(--ink-muted)" stroke-width="1.5" />
+      </g>
+    </svg>
+  </div>
+  <figcaption class="mt-2 text-xs" style="color: var(--ink-muted)">
+    {es
+      ? 'Solo se muestran los períodos con un rango de fechas citado en el texto. La presencia indígena boruca, brunca y ngäbe abarca todo este intervalo y continúa hoy — por eso no aparece como un bloque delimitado.'
+      : 'Only periods with a cited date range in the text are shown. Boruca, Brunca and Ngäbe presence spans this entire interval and continues today — which is why it is not drawn as a bounded block.'}
+  </figcaption>
+</figure>
