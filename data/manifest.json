@@ -16,6 +16,24 @@
     "sha256": "1cff774c51177b9c5565ed6e5e7ad8ba557612941614e1892a7e15615a92115d",
     "source_url": "https://cchdo.ucsd.edu/api/v1/cruise/all"
   },
+  "chart-metadata": {
+    "accessed": "2026-08-01",
+    "bytes": 1491,
+    "dataset": "chart-metadata",
+    "licence": "Metadata only (scale, edition, condition) \u2014 factual, not copyrightable. No chart imagery is stored; two of three source charts are commercial products, and the third's only available scan is a dealer's own photographic reproduction of a public-domain original, which is not safe to mirror. See module docstring in pipeline/fetch_charts.py.",
+    "licence_url": "",
+    "notes": "3 chart(s) catalogued",
+    "path": "data/raw/charts/charts.json",
+    "properties": {
+      "charts": [
+        "nga-1998-chart21562",
+        "ukho-2026-chart2493",
+        "direcciondehidrografia-1822-cartaesferica"
+      ]
+    },
+    "sha256": "n/a \u2014 small JSON, see file directly",
+    "source_url": "see individual entries"
+  },
   "gbif-census": {
     "accessed": "2026-07-31",
     "bytes": 53317,
@@ -764,6 +782,32 @@
     },
     "sha256": "n/a \u2014 multi-file partial download",
     "source_url": "https://api.gbif.org/v1/occurrence/search"
+  },
+  "gebco-comparable-dem-mosaic": {
+    "accessed": "2026-08-01",
+    "bytes": 4130078,
+    "dataset": "gebco-comparable-dem-mosaic",
+    "licence": "NOAA NCEI DEM mosaic: public domain (US government work). Constituent compilations, including GEBCO, retain their own attribution requirements \u2014 see the GEBCO_2026 grid entry in the bibliography for GEBCO's own terms.",
+    "licence_url": "https://www.ncei.noaa.gov/products/national-integrated-heat-health-information/policy",
+    "notes": "NOT a pure GEBCO grid \u2014 GEBCO's own WCS/download API was found non-functional for scripted subsetting at time of writing (WCS rejects all coverage ids; WMS serves rendered images only). This is NOAA NCEI's global DEM mosaic, which blends several compilations including GEBCO. See pipeline/fetch_gebco.py module docstring for the full investigation.",
+    "path": "data/raw/gebco/dem_mosaic.tif",
+    "properties": {
+      "bounds": [
+        -83.6,
+        8.347055,
+        -83.0,
+        8.802945
+      ],
+      "crs": "EPSG:4326",
+      "dtype": "float32",
+      "height": 832,
+      "max_elevation_m": 1606.308837890625,
+      "min_elevation_m": -1478.22705078125,
+      "sample_check_8p60N_83p30W_m": -193.0,
+      "width": 1095
+    },
+    "sha256": "5c7a975b8bba09915ef6ecaa75469046dd7456ee13bf11351c7254b2539d2af9",
+    "source_url": "https://gis.ngdc.noaa.gov/arcgis/rest/services/DEM_mosaics/DEM_global_mosaic/ImageServer/exportImage"
   },
   "gmrt-high": {
     "accessed": "2026-07-31",
