@@ -9,12 +9,15 @@ topics:
 known: >-
   The defining feature of this gulf is that its deep water is oxygen-depleted below
   roughly 100–200 m. Yet the public biological record of that zone is almost empty. Of
-  6,513 marine occurrence records aggregated by OBIS for the gulf — a complete pull,
-  matching the total OBIS itself reports, spanning 1933 to 2026 across 26 datasets — only
-  445 (6.8%) carry a depth value at all. Just 57 records sit at or below 100 m, only 24
-  below 200 m, and the deepest single record is 320 m. The record is also strongly
-  coastal in character: the most frequently recorded taxa are brown pelican, American
-  crocodile and shorebirds, and the dataset even includes coconut palm.
+  17,188 deduplicated OBIS and GBIF occurrence records for the gulf, spanning 1896 to
+  2026 across roughly 1,952 species, only 12.1% carry a genuine depth value — a figure
+  that only holds once a data-quality problem in one GBIF collection is corrected for
+  (that collection copies land elevation into the depth field for preserved specimens,
+  which otherwise makes the record look far better sampled at depth than it is). Of the
+  records with a real depth, 68 sit at or below 100 m, only 32 below 200 m, and the
+  deepest single record is 500 m. The record is also strongly coastal in character: the
+  most frequently recorded taxa are the hermit crab Coenobita compressus, brown pelican,
+  American crocodile and shorebirds.
 
 known_sources: []
 
@@ -64,11 +67,13 @@ es:
   known: >-
     El rasgo que define este golfo es que su agua profunda está empobrecida en oxígeno por
     debajo de unos 100–200 m. Sin embargo, el registro biológico público de esa zona está
-    casi vacío. De 6.513 registros marinos agregados por OBIS para el golfo — una descarga
-    completa, coincidente con el total que la propia OBIS reporta, entre 1933 y 2026 y a
-    lo largo de 26 conjuntos de datos — solo 445 (6,8%) llevan algún valor de profundidad.
-    Apenas 57 registros se sitúan a 100 m o más, solo 24 por debajo de 200 m, y el
-    registro más profundo llega a 320 m.
+    casi vacío. De 17.188 registros depurados de OBIS y GBIF para el golfo, entre 1896 y
+    2026 y en aproximadamente 1.952 especies, solo el 12,1% lleva un valor de profundidad
+    genuino — una cifra válida únicamente tras corregir un problema de calidad de datos en
+    una colección de GBIF (esa colección copia la elevación en tierra al campo de
+    profundidad para especímenes preservados). De los registros con profundidad real, 68
+    se sitúan a 100 m o más, solo 32 por debajo de 200 m, y el registro más profundo llega
+    a 500 m.
   why_gap_detail: >-
     Se combinan dos problemas distintos. Primero, la mayoría de los registros simplemente
     no incluyen un campo de profundidad, de modo que ni siquiera las observaciones hechas

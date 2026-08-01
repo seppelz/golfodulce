@@ -1030,20 +1030,20 @@
     "source_url": "https://api.obis.org/v3/statistics?geometry=POLYGON%28%28-83.6+8.35%2C+-83.0+8.35%2C+-83.0+8.8%2C+-83.6+8.8%2C+-83.6+8.35%29%29"
   },
   "occurrence-species": {
-    "accessed": "2026-07-31",
-    "bytes": 1536711,
+    "accessed": "2026-08-01",
+    "bytes": 1477290,
     "dataset": "occurrence-species",
-    "licence": "CC-BY 4.0 (aggregate); component records vary - see licences block",
-    "licence_url": "https://creativecommons.org/licenses/by/4.0/",
-    "notes": "Deduplicated union of OBIS and GBIF occurrence records for the bbox. GBIF component is aquatic-scoped; see the notes block in the file.",
+    "licence": "Per-record; see licences.by_record inside the file itself.",
+    "licence_url": "",
+    "notes": "Regenerated after finding the previously-committed version was not reproducible by any script in this repo and had a GBIF depth/elevation confusion bug inflating 'records with depth' from ~12% to ~46%. See module docstring.",
     "path": "data/derived/occurrence/species.json",
     "properties": {
       "records_deduplicated": 17188,
-      "records_with_depth": 7936,
-      "species_or_taxa": 1951
+      "records_with_depth": 2082,
+      "species": 1952
     },
-    "sha256": "67f62645683e63b9cadcffd4fded70d1a04bc6b70b74ab87f63e76717dc58ffd",
-    "source_url": "derived from obis-* and gbif-* raw files"
+    "sha256": "254b57248bd27cf80a953b2a970e0ba47a1f7f82bb5df760ff500516a7a61077",
+    "source_url": "derived from obis-occurrence_p*, gbif-occurrence_p*"
   },
   "pangaea-search-golfodulce": {
     "accessed": "2026-08-01",

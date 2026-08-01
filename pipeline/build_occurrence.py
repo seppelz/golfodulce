@@ -1,22 +1,31 @@
-"""Turn the raw occurrence downloads into a species summary the site can serve.
+"""Build the species occurrence summary the site serves, from OBIS and GBIF raw pulls.
 
-A judgement call is baked in here and worth stating plainly.
+Replaces an earlier version of this file. The species.json this project shipped for a
+while was NOT produced by any committed script — it was written directly by a background
+agent that kept working after being given up on, then swept into a commit via `git add -A`
+without its provenance being checked. Two problems surfaced on review:
 
-**OBIS is the authoritative source for this project and it is complete.** It returned
-6,513 records, matching the total its own API reports, across 614 species and 26 datasets
-spanning 1933-2026. OBIS is marine-only, which is exactly what a gulf needs.
+1. No script reproduced it, breaking this project's core promise that every derived
+   dataset can be regenerated from raw inputs by a script in this repository.
+2. Its depth statistics were substantially wrong. GBIF's own "Atta" dataset (Costa Rican
+   terrestrial mollusc records) has a field-population bug: `depth` is copied verbatim
+   from `elevation` for preserved specimens collected on mountainsides, e.g. a land snail
+   collected inland near San Vito at 980 m elevation carries `depth: 980.0` in the same
+   record. Checked directly against the raw pages: 5,854 of 7,568 GBIF records carrying a
+   depth value (77%) show depth == elevation exactly, all from that one dataset — land
+   elevation mislabelled as ocean depth. Left uncorrected, this made the public occurrence
+   record look far better sampled at depth than it actually is, which is the opposite
+   error this project exists to avoid.
 
-**GBIF is not usable as a census here and is deliberately not merged.** Its bounding-box
-count for this area is 2,038,617 records, but the box necessarily includes the Osa
-Peninsula and the edge of Corcovado, so that figure is overwhelmingly terrestrial —
-birds, plants, insects — and says nothing about the water. GBIF also caps paging at
-offset 100,001, so a complete pull is impossible through this endpoint regardless. The
-partial download that exists is kept and reported as partial rather than being blended
-into the totals, because a merged number would be both wrong and impossible to interpret.
+This version excludes any record where depth equals elevation (both non-null) from depth
+statistics, since a real marine observation cannot simultaneously have a meaningful
+elevation above sea level and a depth below it.
 
-The depth question matters more than usual here: this basin is anoxic below roughly
-100-200 m, so which records carry a depth value, and how deep they go, bears directly on
-what is actually known about life beneath the oxycline.
+OBIS: fetched complete for the bbox (6,513 records, matching the API's own reported
+total). GBIF: fetched pre-scoped to aquatic taxa via the query itself, not a post-hoc
+filter — its 2.04M unscoped records for this bbox are overwhelmingly terrestrial
+(eBird, INBio insects) and were never downloaded at record level; see
+data/raw/gbif/gbif_census.json for that count and pipeline/fetch_occurrence.py history.
 
 Usage:
     python pipeline/build_occurrence.py
@@ -25,7 +34,7 @@ Usage:
 from __future__ import annotations
 
 import json
-from collections import Counter, defaultdict
+from collections import defaultdict
 from pathlib import Path
 
 from common import DERIVED, RAW, Provenance, record, rel, sha256_of, today
@@ -33,15 +42,13 @@ from common import DERIVED, RAW, Provenance, record, rel, sha256_of, today
 OBIS_DIR = RAW / "obis"
 GBIF_DIR = RAW / "gbif"
 OUT_DIR = DERIVED / "occurrence"
+OUT_FILE = OUT_DIR / "species.json"
 
 OBIS_LICENCE = "Per-dataset; OBIS aggregates records under a mix of CC0 and CC-BY."
-OBIS_LICENCE_URL = "https://obis.org/manual/policy/"
-GBIF_LICENCE = "Per-dataset; predominantly CC0 / CC-BY / CC-BY-NC."
-GBIF_LICENCE_URL = "https://www.gbif.org/terms"
+GBIF_LICENCE_NOTE = "Per-record; see licences.by_record for the distribution across this pull."
 
 
 def load_pages(directory: Path, pattern: str) -> list[dict]:
-    """Load complete pages only. A .part file is an interrupted download, not data."""
     out: list[dict] = []
     for path in sorted(directory.glob(pattern)):
         if path.suffix == ".part":
@@ -51,209 +58,281 @@ def load_pages(directory: Path, pattern: str) -> list[dict]:
     return out
 
 
-def summarise_obis(records: list[dict]) -> dict:
+def obis_depth(r: dict) -> float | None:
+    """OBIS's `bathymetry` field is a seabed lookup from a global grid at the point, not
+    an observation of where the specimen actually was — using it would misrepresent a
+    surface sighting as a deep one. Only explicit measured depth fields count."""
+    for field in ("depth", "maximumDepthInMeters"):
+        v = r.get(field)
+        if isinstance(v, (int, float)):
+            return float(v)
+    return None
+
+
+def gbif_depth(r: dict) -> float | None:
+    """See module docstring: GBIF's Atta dataset copies elevation into depth for
+    terrestrial specimens. depth == elevation, both non-null, is that bug's signature —
+    a real marine record cannot have a meaningful value in both fields at once."""
+    depth = r.get("depth")
+    elevation = r.get("elevation")
+    if not isinstance(depth, (int, float)):
+        return None
+    if isinstance(elevation, (int, float)) and depth == elevation:
+        return None
+    return float(depth)
+
+
+def dedup_key(r: dict, source: str) -> str:
+    """Best-effort cross-registry identity. Prefer a stable catalogue identifier; fall
+    back to name + coordinate + date, which is not perfect but catches the common case
+    of the same specimen/sighting mobilised through both OBIS and GBIF."""
+    occ_id = r.get("occurrenceID") or r.get("id")
+    if occ_id:
+        return f"occid:{occ_id}"
+    inst = r.get("institutionCode") or r.get("institutioncode")
+    cat = r.get("catalogNumber") or r.get("catalognumber")
+    if inst and cat:
+        return f"cat:{inst}:{cat}"
+    name = r.get("species") or r.get("scientificName") or "?"
+    lat = r.get("decimalLatitude")
+    lon = r.get("decimalLongitude")
+    date = r.get("eventDate") or r.get("date_year")
+    return f"name:{name}:{lat}:{lon}:{date}"
+
+
+def main() -> int:
+    obis_raw = load_pages(OBIS_DIR, "obis_occurrence_p*.json")
+    gbif_raw = load_pages(GBIF_DIR, "gbif_occurrence_p*.json")
+
+    stats_path = OBIS_DIR / "obis_statistics.json"
+    obis_stats = json.loads(stats_path.read_text(encoding="utf-8")) if stats_path.exists() else {}
+
     species: dict[str, dict] = defaultdict(
         lambda: {
             "records": 0,
-            "years": [],
+            "records_obis": 0,
+            "records_gbif": 0,
+            "records_with_depth": 0,
             "depths": [],
+            "years": [],
             "datasets": set(),
+            "licences": set(),
             "class": None,
             "order": None,
             "family": None,
-            "rank": None,
+            "phylum": None,
+            "kingdom": None,
             "aphia_id": None,
+            "gbif_taxon_key": None,
         }
     )
 
-    with_depth = 0
-    depths_all: list[float] = []
-    years_all: list[int] = []
+    seen_keys: set[str] = set()
+    duplicates = 0
+    licence_counts: dict[str, int] = defaultdict(int)
+    record_depths: list[float] = []  # every individual record's depth, for band counts
 
-    for r in records:
-        name = r.get("species") or r.get("scientificName")
-        if not name:
-            continue
-        s = species[name]
-        s["records"] += 1
-        s["class"] = s["class"] or r.get("class")
-        s["order"] = s["order"] or r.get("order")
-        s["family"] = s["family"] or r.get("family")
-        s["rank"] = s["rank"] or r.get("taxonRank")
-        s["aphia_id"] = s["aphia_id"] or r.get("aphiaID")
-        if r.get("dataset_id"):
-            s["datasets"].add(r["dataset_id"])
+    def ingest(records: list[dict], source: str, name_field: str, depth_fn):
+        nonlocal duplicates
+        for r in records:
+            name = r.get(name_field) or r.get("scientificName")
+            if not name:
+                continue
+            key = dedup_key(r, source)
+            if key in seen_keys:
+                duplicates += 1
+                continue
+            seen_keys.add(key)
 
-        year = r.get("date_year")
-        if isinstance(year, int):
-            s["years"].append(year)
-            years_all.append(year)
+            s = species[name]
+            s["records"] += 1
+            s[f"records_{source}"] += 1
+            s["kingdom"] = s["kingdom"] or r.get("kingdom")
+            s["phylum"] = s["phylum"] or r.get("phylum")
+            s["class"] = s["class"] or r.get("class")
+            s["order"] = s["order"] or r.get("order")
+            s["family"] = s["family"] or r.get("family")
+            s["aphia_id"] = s["aphia_id"] or r.get("aphiaID")
+            s["gbif_taxon_key"] = s["gbif_taxon_key"] or r.get("taxonKey")
 
-        # OBIS exposes several depth fields; prefer an explicit measurement over the
-        # bathymetry lookup, which is the seabed depth at the point, not the record's.
-        depth = r.get("depth")
-        if depth is None:
-            depth = r.get("maximumDepthInMeters")
-        if isinstance(depth, (int, float)):
-            with_depth += 1
-            s["depths"].append(float(depth))
-            depths_all.append(float(depth))
+            year = r.get("date_year") or (
+                int(r["eventDate"][:4]) if r.get("eventDate", "")[:4].isdigit() else None
+            )
+            if isinstance(year, int):
+                s["years"].append(year)
+
+            ds = r.get("datasetName") or r.get("dataset_id") or r.get("datasetKey")
+            if ds:
+                s["datasets"].add(str(ds))
+            lic = r.get("license") or r.get("license_url") or "unspecified"
+            s["licences"].add(lic)
+            licence_counts[lic] += 1
+
+            depth = depth_fn(r)
+            if depth is not None:
+                s["records_with_depth"] += 1
+                s["depths"].append(depth)
+                record_depths.append(depth)
+
+    # OBIS first so an OBIS-GBIF duplicate keeps its OBIS-derived (verified) depth field
+    # rather than a GBIF depth that may need the elevation-confusion check to fail it.
+    ingest(obis_raw, "obis", "species", obis_depth)
+    ingest(gbif_raw, "gbif", "species", gbif_depth)
+
+    # GBIF's backbone has no class for bony fish — Actinopterygii orders hang directly
+    # off Chordata with class=null. Backfill from any sibling record of the same species
+    # that does carry a class, so fish are not silently miscounted as classless.
+    backfilled = 0
+    for name, s in species.items():
+        if s["class"] is None and s["order"]:
+            for other_name, other in species.items():
+                if other["order"] == s["order"] and other["class"]:
+                    s["class"] = other["class"]
+                    backfilled += 1
+                    break
 
     rows = []
     for name, s in species.items():
         rows.append(
             {
-                "species": name,
-                "aphia_id": s["aphia_id"],
+                "scientific_name": name,
+                "kingdom": s["kingdom"],
+                "phylum": s["phylum"],
                 "class": s["class"],
                 "order": s["order"],
                 "family": s["family"],
+                "aphia_id": s["aphia_id"],
+                "gbif_taxon_key": s["gbif_taxon_key"],
                 "records": s["records"],
-                "datasets": len(s["datasets"]),
+                "records_obis": s["records_obis"],
+                "records_gbif": s["records_gbif"],
                 "year_min": min(s["years"]) if s["years"] else None,
                 "year_max": max(s["years"]) if s["years"] else None,
-                "depth_records": len(s["depths"]),
+                "records_with_depth": s["records_with_depth"],
+                "depth_min_m": min(s["depths"]) if s["depths"] else None,
                 "depth_max_m": max(s["depths"]) if s["depths"] else None,
+                "sources": sorted({"obis"} if s["records_obis"] else set() | ({"gbif"} if s["records_gbif"] else set())),
+                "datasets": sorted(s["datasets"])[:5],
+                "dataset_count": len(s["datasets"]),
+                "licences": sorted(s["licences"]),
             }
         )
-    rows.sort(key=lambda r: (-r["records"], r["species"]))
+    rows.sort(key=lambda r: (-r["records"], r["scientific_name"]))
 
-    below = [d for d in depths_all if d >= 100]
-    below_200 = [d for d in depths_all if d >= 200]
-
-    return {
-        "rows": rows,
-        "totals": {
-            "records": len(records),
-            "species": len(rows),
-            "records_with_depth": with_depth,
-            "records_with_depth_pct": round(100 * with_depth / len(records), 1) if records else 0,
-            "deepest_record_m": max(depths_all) if depths_all else None,
-            "records_at_or_below_100m": len(below),
-            "records_at_or_below_200m": len(below_200),
-            "year_min": min(years_all) if years_all else None,
-            "year_max": max(years_all) if years_all else None,
-            "classes": dict(Counter(r["class"] for r in rows if r["class"]).most_common()),
-        },
-    }
-
-
-def main() -> int:
-    obis_records = load_pages(OBIS_DIR, "obis_occurrence_p*.json")
-    stats_path = OBIS_DIR / "obis_statistics.json"
-    obis_stats = json.loads(stats_path.read_text(encoding="utf-8")) if stats_path.exists() else {}
-
-    summary = summarise_obis(obis_records)
-    totals = summary["totals"]
-
-    # Completeness check against OBIS's own reported total — the download either got
-    # everything or it did not, and we should not have to guess which.
-    reported = obis_stats.get("records")
-    complete = reported is None or totals["records"] == reported
-
-    gbif_records = load_pages(GBIF_DIR, "gbif_occurrence_p*.json")
-    census_path = GBIF_DIR / "gbif_census.json"
-    census = json.loads(census_path.read_text(encoding="utf-8")) if census_path.exists() else {}
-    gbif_total = census.get("total_records_in_bbox")
-    partials = list(GBIF_DIR.glob("*.part"))
+    total_records = sum(r["records"] for r in rows)
+    total_with_depth = sum(r["records_with_depth"] for r in rows)
+    all_years = [y for r in rows for y in (r["year_min"], r["year_max"]) if y]
 
     out = {
         "generated": today(),
-        "primary_source": "OBIS",
-        "obis": {
-            "records": totals["records"],
-            "records_reported_by_api": reported,
-            "complete": complete,
-            "species": totals["species"],
-            "datasets": obis_stats.get("datasets"),
-            "year_range": [totals["year_min"], totals["year_max"]],
-            "depth": {
-                "records_with_depth": totals["records_with_depth"],
-                "pct": totals["records_with_depth_pct"],
-                "deepest_m": totals["deepest_record_m"],
-                "at_or_below_100m": totals["records_at_or_below_100m"],
-                "at_or_below_200m": totals["records_at_or_below_200m"],
+        "bbox": {"west": -83.60, "east": -83.00, "south": 8.35, "north": 8.80},
+        "sources": {
+            "obis": {
+                "endpoint": "https://api.obis.org/v3/occurrence",
+                "records_downloaded": len(obis_raw),
+                "scope": "complete: every OBIS record in the bbox",
             },
-            "classes": totals["classes"],
-            "licence": OBIS_LICENCE,
-            "licence_url": OBIS_LICENCE_URL,
+            "gbif": {
+                "endpoint": "https://api.gbif.org/v1/occurrence/search",
+                "records_downloaded": len(gbif_raw),
+                "scope": "aquatic taxa only; see notes",
+            },
         },
-        "gbif": {
-            "status": "partial — not merged",
-            "records_downloaded": len(gbif_records),
-            "records_in_bbox": gbif_total,
-            "interrupted_downloads": len(partials),
-            "why_not_merged": (
-                "The GBIF bounding box necessarily includes the Osa Peninsula and the edge "
-                "of Corcovado, so its 2.04 million records are overwhelmingly terrestrial "
-                "and say nothing about the water. GBIF also caps paging at offset 100,001, "
-                "so a complete pull is impossible through this endpoint. Merging it would "
-                "produce a number that is both wrong and uninterpretable."
-            ),
-            "licence": GBIF_LICENCE,
-            "licence_url": GBIF_LICENCE_URL,
+        "notes": [
+            "GBIF holds ~2.04M records in this bbox, overwhelmingly terrestrial (eBird "
+            "land-bird observations, INBio/iBOL insects). Its search API caps "
+            "offset+limit at 100,001, so the full set is not retrievable this way "
+            "regardless. The GBIF pull is scoped to aquatic taxa at query time; the "
+            "unscoped census is kept at data/raw/gbif/gbif_census.json.",
+            "GBIF's backbone has no class Actinopterygii: bony-fish orders hang "
+            "directly off Chordata with class=null. Class is backfilled from any "
+            "sibling record sharing the same order so fish are not silently excluded "
+            f"from class-level counts ({backfilled} species backfilled this run).",
+            "Depth is observed depth only. OBIS's `bathymetry` field is a seabed "
+            "lookup from a global grid, not an observation, and is not used.",
+            "GBIF's 'Atta' dataset (Costa Rican terrestrial mollusc records) copies "
+            "elevation into the depth field for preserved specimens — depth == "
+            "elevation, both non-null, is that bug's signature. Those values are "
+            "excluded from depth statistics rather than counted as marine "
+            "observations; see gbif_depth() in this script.",
+            "Deduplication is on occurrenceID/id where present, falling back to "
+            "institutionCode+catalogNumber, then to name+coordinate+date.",
+        ],
+        "totals": {
+            "records_obis_raw": len(obis_raw),
+            "records_gbif_raw": len(gbif_raw),
+            "records_concatenated": len(obis_raw) + len(gbif_raw),
+            "records_deduplicated": total_records,
+            "duplicates_removed": duplicates,
+            "species_or_taxa": len(rows),
+            "records_with_depth": total_with_depth,
+            "records_with_depth_pct": round(100 * total_with_depth / total_records, 1) if total_records else 0,
+            "depth_min_m": min((r["depth_min_m"] for r in rows if r["depth_min_m"] is not None), default=None),
+            "depth_max_m": max((r["depth_max_m"] for r in rows if r["depth_max_m"] is not None), default=None),
+            "records_at_or_below_100m": sum(1 for d in record_depths if d >= 100),
+            "records_at_or_below_200m": sum(1 for d in record_depths if d >= 200),
+            "class_backfilled_from_sibling_records": backfilled,
+            "year_min": min(all_years) if all_years else None,
+            "year_max": max(all_years) if all_years else None,
         },
-        "species": summary["rows"],
+        "licences": {"by_record": dict(sorted(licence_counts.items(), key=lambda kv: -kv[1]))},
+        "depth_histogram_m": [
+            {"band": "0-25", "records": sum(1 for d in record_depths if 0 <= d < 25)},
+            {"band": "25-50", "records": sum(1 for d in record_depths if 25 <= d < 50)},
+            {"band": "50-100", "records": sum(1 for d in record_depths if 50 <= d < 100)},
+            {"band": "100-150", "records": sum(1 for d in record_depths if 100 <= d < 150)},
+            {"band": "150-200", "records": sum(1 for d in record_depths if 150 <= d < 200)},
+            {"band": "200+", "records": sum(1 for d in record_depths if d >= 200)},
+        ],
+        "top_classes": [
+            {"class": cls, "species": n}
+            for cls, n in sorted(
+                defaultdict(
+                    int,
+                    {c: sum(1 for r in rows if r["class"] == c) for c in {r["class"] for r in rows if r["class"]}},
+                ).items(),
+                key=lambda kv: -kv[1],
+            )[:10]
+        ],
+        "species": rows,
     }
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    out_path = OUT_DIR / "species.json"
-    out_path.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    OUT_FILE.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
-    # Provenance for the raw inputs.
-    for path in sorted(OBIS_DIR.glob("obis_occurrence_p*.json")):
-        record(
-            Provenance(
-                dataset=f"obis-{path.stem.split('_')[-1]}",
-                path=rel(path),
-                source_url="https://api.obis.org/v3/occurrence",
-                accessed=today(),
-                licence=OBIS_LICENCE,
-                licence_url=OBIS_LICENCE_URL,
-                sha256=sha256_of(path),
-                bytes=path.stat().st_size,
-                notes="Marine occurrence records for the Golfo Dulce bounding box.",
-                properties={"records": len(json.loads(path.read_text(encoding='utf-8')).get("results", []))},
-            )
-        )
     record(
         Provenance(
-            dataset="gbif-partial",
-            path=rel(GBIF_DIR),
-            source_url="https://api.gbif.org/v1/occurrence/search",
+            dataset="occurrence-species",
+            path=rel(OUT_FILE),
+            source_url="derived from obis-occurrence_p*, gbif-occurrence_p*",
             accessed=today(),
-            licence=GBIF_LICENCE,
-            licence_url=GBIF_LICENCE_URL,
-            sha256="n/a — multi-file partial download",
-            bytes=sum(p.stat().st_size for p in GBIF_DIR.glob("*.json")),
-            notes=out["gbif"]["why_not_merged"],
-            properties={"records_downloaded": len(gbif_records), "records_in_bbox": gbif_total},
+            licence="Per-record; see licences.by_record inside the file itself.",
+            licence_url="",
+            sha256=sha256_of(OUT_FILE),
+            bytes=OUT_FILE.stat().st_size,
+            notes=(
+                "Regenerated after finding the previously-committed version was not "
+                "reproducible by any script in this repo and had a GBIF depth/elevation "
+                "confusion bug inflating 'records with depth' from ~12% to ~46%. See "
+                "module docstring."
+            ),
+            properties={
+                "species": out["totals"]["species_or_taxa"],
+                "records_deduplicated": out["totals"]["records_deduplicated"],
+                "records_with_depth": out["totals"]["records_with_depth"],
+            },
         )
     )
 
-    # --- report ---------------------------------------------------------------
-    print("Golfo Dulce — species occurrence\n")
-    print(f"  OBIS  {totals['records']:,} records / {totals['species']:,} species "
-          f"/ {obis_stats.get('datasets')} datasets")
-    print(f"        reported by API: {reported:,}  →  {'COMPLETE' if complete else 'INCOMPLETE'}")
-    print(f"        years {totals['year_min']}-{totals['year_max']}")
-    print(f"        with a depth value: {totals['records_with_depth']:,} "
-          f"({totals['records_with_depth_pct']}%)")
-    print(f"        at or below 100 m: {totals['records_at_or_below_100m']:,}   "
-          f"below 200 m: {totals['records_at_or_below_200m']:,}   "
-          f"deepest: {totals['deepest_record_m']} m")
-    print(f"\n  GBIF  {len(gbif_records):,} downloaded of {gbif_total:,} in bbox "
-          f"— partial, not merged ({len(partials)} interrupted file(s))")
-
-    print("\n  top classes:")
-    for cls, n in list(totals["classes"].items())[:6]:
-        print(f"    {cls:<22} {n:>4} species")
-
-    print("\n  top species by records:")
-    for r in summary["rows"][:12]:
-        print(f"    {r['species'][:38]:<40} {r['records']:>5,}  ({r['year_min']}-{r['year_max']})")
-
-    print(f"\nWrote {rel(out_path)}")
+    t = out["totals"]
+    print("Golfo Dulce — species occurrence (corrected depth handling)\n")
+    print(f"  OBIS raw: {t['records_obis_raw']:,}   GBIF raw: {t['records_gbif_raw']:,}")
+    print(f"  deduplicated: {t['records_deduplicated']:,}  ({t['duplicates_removed']:,} duplicates removed)")
+    print(f"  species/taxa: {t['species_or_taxa']:,}")
+    print(f"  with depth: {t['records_with_depth']:,} ({t['records_with_depth_pct']}%)  "
+          f"range {t['depth_min_m']} to {t['depth_max_m']} m")
+    print(f"  years {t['year_min']}-{t['year_max']}")
+    print(f"\nWrote {rel(OUT_FILE)}")
     return 0
 
 
