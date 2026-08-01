@@ -1003,7 +1003,7 @@
   },
   "pangaea-search-golfodulce": {
     "accessed": "2026-08-01",
-    "bytes": 37411,
+    "bytes": 37409,
     "dataset": "pangaea-search-golfodulce",
     "licence": "CC BY 4.0 (typical PANGAEA licence; not applicable here \u2014 no matching dataset)",
     "licence_url": "https://www.pangaea.de/legal/",
@@ -1014,7 +1014,7 @@
       "phrase_hits": 2,
       "water_column_casts_found_in_gulf": 0
     },
-    "sha256": "c1456b8fa50eef02a58fc3736477cdb4869f50b4069f05d651e51e9f1ba03af8",
+    "sha256": "c9768ba7b79a8d85479add3a28264f7d7ca9b9f01f70f3844281bf6905ac03f1",
     "source_url": "https://www.pangaea.de/advanced/search.php ; https://ws.pangaea.de/es/pangaea/panmd/_search"
   },
   "wod-ctd-7008": {
