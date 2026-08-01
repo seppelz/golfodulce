@@ -1,0 +1,72 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import References from '../components/References.astro';
+import { useTranslations, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  summary: string;
+  path: string;
+  citations: string[];
+  headings: { depth: number; slug: string; text: string }[];
+  updated?: Date;
+  /** Set when serving the English page because no translation exists yet. */
+  fallbackNotice?: boolean;
+}
+
+const { locale, title, summary, path, citations, headings, updated, fallbackNotice } = Astro.props;
+const t = useTranslations(locale);
+
+// A right-rail table of contents only makes sense with a few headings; MDX pages use h2/h3.
+const toc = headings.filter((h) => h.depth <= 3);
+---
+
+<BaseLayout locale={locale} title={title} description={summary} path={path}>
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 pt-10 pb-20">
+    {fallbackNotice && (
+      <p class="mb-6 text-sm px-3 py-2 rounded-md border" style="border-color: var(--color-shoal-600); background: var(--color-shoal-100); color: var(--color-shoal-600)">
+        {locale === 'es'
+          ? 'Traducción aún no disponible — mostrando la versión en inglés.'
+          : 'This page has not been translated yet.'}
+      </p>
+    )}
+
+    <div class="lg:grid lg:grid-cols-[1fr_14rem] lg:gap-12">
+      <article>
+        <header class="mb-8 max-w-2xl">
+          <h1 class="font-semibold tracking-tight text-3xl sm:text-4xl">{title}</h1>
+          <p class="mt-3 text-lg" style="color: var(--ink-muted); font-family: var(--font-serif)">{summary}</p>
+          {updated && (
+            <p class="mt-3 text-xs" style="color: var(--ink-muted)">
+              {t('meta.updated')}: <time datetime={updated.toISOString()}>{updated.toLocaleDateString(locale, { year: 'numeric', month: 'long' })}</time>
+            </p>
+          )}
+        </header>
+
+        <div class="prose-gd">
+          <slot />
+        </div>
+
+        <References citations={citations} locale={locale} />
+      </article>
+
+      {toc.length > 1 && (
+        <aside class="hidden lg:block">
+          <nav class="sticky top-24 text-sm" aria-label={t('meta.on_this_page')}>
+            <p class="text-xs uppercase tracking-wider font-semibold mb-2" style="color: var(--ink-muted)">
+              {t('meta.on_this_page')}
+            </p>
+            <ul class="space-y-1.5 border-l" style="border-color: var(--rule)">
+              {toc.map((h) => (
+                <li style={`padding-left:${(h.depth - 2) * 0.75 + 0.75}rem`}>
+                  <a href={`#${h.slug}`} class="block no-underline" style="color: var(--ink-muted)">{h.text}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+      )}
+    </div>
+  </div>
+</BaseLayout>

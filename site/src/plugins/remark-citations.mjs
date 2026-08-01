@@ -17,6 +17,8 @@ export function remarkCitations() {
   return (tree, file) => {
     /** id -> reference number, in order of first appearance */
     const order = new Map();
+    /** id -> number of times already rendered on this page, so anchor ids stay unique */
+    const seenCount = new Map();
 
     visit(tree, 'text', (node, index, parent) => {
       if (!parent || index === null || !CITE.test(node.value)) return;
@@ -37,10 +39,18 @@ export function remarkCitations() {
         ids.forEach((id, i) => {
           if (!order.has(id)) order.set(id, order.size + 1);
           const n = order.get(id);
+
+          // Each citation of the same source needs its own DOM id (duplicate ids are
+          // invalid HTML and break in-page navigation), but the reference list's
+          // "back to text" link only needs to reach one of them — the first.
+          const occurrence = (seenCount.get(id) ?? 0) + 1;
+          seenCount.set(id, occurrence);
+          const anchorId = occurrence === 1 ? `cite-${id}-${n}` : `cite-${id}-${n}-${occurrence}`;
+
           if (i > 0) children.push({ type: 'html', value: ',' });
           children.push({
             type: 'html',
-            value: `<a href="#ref-${id}" id="cite-${id}-${n}" class="citation" data-source-id="${id}" title="${id}">${n}</a>`,
+            value: `<a href="#ref-${id}" id="${anchorId}" class="citation" data-source-id="${id}" title="${id}">${n}</a>`,
           });
         });
         children.push({ type: 'html', value: '</sup>' });

@@ -1,0 +1,51 @@
+---
+import { getCollection, render } from 'astro:content';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import { LOCALES, type Locale } from '../../i18n/ui';
+
+/**
+ * Serves every section page (oceanography, geology, life, people, conservation, about)
+ * from the MDX content collections. "overview" is deliberately excluded — it renders
+ * inline on the homepage instead — and "gaps"/"bathymetry" have dedicated bespoke pages,
+ * so their slugs are not written into src/content and never reach this route.
+ */
+
+export async function getStaticPaths() {
+  const en = (await getCollection('pages')).filter((p) => p.data.published && p.id !== 'overview');
+  const es = await getCollection('pagesEs');
+  const esById = new Map(es.map((p) => [p.id, p]));
+
+  return LOCALES.flatMap((locale) =>
+    en.map((entry) => {
+      const translated = locale === 'es' ? esById.get(entry.id) : undefined;
+      const chosen = translated ?? entry;
+      return {
+        params: { locale, slug: entry.id },
+        props: { entry: chosen, fallbackNotice: locale === 'es' && !translated },
+      };
+    })
+  );
+}
+
+const { entry, fallbackNotice } = Astro.props as {
+  entry: Awaited<ReturnType<typeof getCollection>>[number];
+  fallbackNotice: boolean;
+};
+const locale = Astro.params.locale as Locale;
+
+const { Content, headings, remarkPluginFrontmatter } = await render(entry as any);
+const citations = (remarkPluginFrontmatter as any)?.citations ?? [];
+---
+
+<ContentLayout
+  locale={locale}
+  title={entry.data.title}
+  summary={entry.data.summary}
+  path={entry.id}
+  citations={citations}
+  headings={headings}
+  updated={entry.data.updated}
+  fallbackNotice={fallbackNotice}
+>
+  <Content />
+</ContentLayout>
