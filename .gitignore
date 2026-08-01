@@ -24,6 +24,7 @@ data/raw/**/*.tiff
 data/raw/**/*.json
 data/raw/**/*.csv
 data/raw/**/*.zip
+data/raw/**/*.gz
 data/derived/bathymetry/*.tif
 site/dist/
 site/.astro/

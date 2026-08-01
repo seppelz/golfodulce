@@ -1,4 +1,21 @@
 {
+  "cchdo-search-golfodulce": {
+    "accessed": "2026-08-01",
+    "bytes": 729,
+    "dataset": "cchdo-search-golfodulce",
+    "licence": "CC BY 4.0 (typical CCHDO licence; not applicable here \u2014 no matching cruise)",
+    "licence_url": "https://cchdo.ucsd.edu/policy",
+    "notes": "All CCHDO cruise tracks intersected against pipeline/common.py BBOX and a 3-degree-widened outer-approaches box. This is a documented NEGATIVE result: CCHDO (WOCE/GO-SHIP-class open-ocean hydrography) has no occupation anywhere near the Golfo Dulce.",
+    "path": "data/raw/cchdo/cruise-track-search.json",
+    "properties": {
+      "cruises_checked": 2558,
+      "gulf_bbox_hits": 0,
+      "outer_bbox_hits": 1,
+      "water_column_casts_found_in_gulf": 0
+    },
+    "sha256": "1cff774c51177b9c5565ed6e5e7ad8ba557612941614e1892a7e15615a92115d",
+    "source_url": "https://cchdo.ucsd.edu/api/v1/cruise/all"
+  },
   "gbif-census": {
     "accessed": "2026-07-31",
     "bytes": 53317,
@@ -983,5 +1000,122 @@
     },
     "sha256": "67f62645683e63b9cadcffd4fded70d1a04bc6b70b74ab87f63e76717dc58ffd",
     "source_url": "derived from obis-* and gbif-* raw files"
+  },
+  "pangaea-search-golfodulce": {
+    "accessed": "2026-08-01",
+    "bytes": 37411,
+    "dataset": "pangaea-search-golfodulce",
+    "licence": "CC BY 4.0 (typical PANGAEA licence; not applicable here \u2014 no matching dataset)",
+    "licence_url": "https://www.pangaea.de/legal/",
+    "notes": "Raw dump of a phrase search for \"Golfo Dulce\" and a geo_shape bbox search against pipeline/common.py BBOX, run against PANGAEA's public search API. This is a documented NEGATIVE result: PANGAEA holds no water-column CTD/bottle profile dataset sited in the Golfo Dulce. See the 'assessment' key in the saved JSON for the reasoning.",
+    "path": "data/raw/pangaea/search-golfodulce.json",
+    "properties": {
+      "bbox_overlap_hits": 2089,
+      "phrase_hits": 2,
+      "water_column_casts_found_in_gulf": 0
+    },
+    "sha256": "c1456b8fa50eef02a58fc3736477cdb4869f50b4069f05d651e51e9f1ba03af8",
+    "source_url": "https://www.pangaea.de/advanced/search.php ; https://ws.pangaea.de/es/pangaea/panmd/_search"
+  },
+  "wod-ctd-7008": {
+    "accessed": "2026-08-01",
+    "bytes": 3421544,
+    "dataset": "wod-ctd-7008",
+    "licence": "U.S. Government work; not subject to copyright protection in the United States (17 U.S.C. \u00a7105) and in the public domain. NOAA/NCEI requests citation of the World Ocean Database on reuse.",
+    "licence_url": "https://www.ncei.noaa.gov/access/world-ocean-database-select/dbsearch.html",
+    "notes": "WOD13 native ASCII, observed levels, WMO square 7008 (0-10N, 80-90W), instrument=CTD (CTD casts). 608 casts in the full 10x10-degree square; 0 fall inside the Golfo Dulce bbox defined in pipeline/common.py. Parsed with parse_wod_ascii() in this script, cross-checked against NOAA's reference reader WOD/PROGRAMS/csvfromwod.c (byte-count self-consistency verified per cast).",
+    "path": "data/raw/wod/CTDO7008.gz",
+    "properties": {
+      "casts_in_gulf_bbox": 0,
+      "casts_in_square": 608,
+      "gulf_cast_numbers": []
+    },
+    "sha256": "72e977be996e898cc7c367d5506f475e961b09d7be4782419d8bca0d4c95ab39",
+    "source_url": "https://www.ncei.noaa.gov/data/oceans/woa/WOD/GEOGRAPHIC/CTD/OBS/CTDO7008.gz"
+  },
+  "wod-mbt-7008": {
+    "accessed": "2026-08-01",
+    "bytes": 646848,
+    "dataset": "wod-mbt-7008",
+    "licence": "U.S. Government work; not subject to copyright protection in the United States (17 U.S.C. \u00a7105) and in the public domain. NOAA/NCEI requests citation of the World Ocean Database on reuse.",
+    "licence_url": "https://www.ncei.noaa.gov/access/world-ocean-database-select/dbsearch.html",
+    "notes": "WOD13 native ASCII, observed levels, WMO square 7008 (0-10N, 80-90W), instrument=MBT (Mechanical bathythermograph (temperature-only)). 5468 casts in the full 10x10-degree square; 3 fall inside the Golfo Dulce bbox defined in pipeline/common.py. Parsed with parse_wod_ascii() in this script, cross-checked against NOAA's reference reader WOD/PROGRAMS/csvfromwod.c (byte-count self-consistency verified per cast).",
+    "path": "data/raw/wod/MBTO7008.gz",
+    "properties": {
+      "casts_in_gulf_bbox": 3,
+      "casts_in_square": 5468,
+      "gulf_cast_numbers": [
+        4649714,
+        1388928,
+        4652112
+      ]
+    },
+    "sha256": "93505ef4df7946ec318c8922781226001296a75b6fb3f15d2f66d23aa4bd60d4",
+    "source_url": "https://www.ncei.noaa.gov/data/oceans/woa/WOD/GEOGRAPHIC/MBT/OBS/MBTO7008.gz"
+  },
+  "wod-osd-7008": {
+    "accessed": "2026-08-01",
+    "bytes": 362225,
+    "dataset": "wod-osd-7008",
+    "licence": "U.S. Government work; not subject to copyright protection in the United States (17 U.S.C. \u00a7105) and in the public domain. NOAA/NCEI requests citation of the World Ocean Database on reuse.",
+    "licence_url": "https://www.ncei.noaa.gov/access/world-ocean-database-select/dbsearch.html",
+    "notes": "WOD13 native ASCII, observed levels, WMO square 7008 (0-10N, 80-90W), instrument=OSD (Ocean Station Data (bottle casts)). 2333 casts in the full 10x10-degree square; 14 fall inside the Golfo Dulce bbox defined in pipeline/common.py. Parsed with parse_wod_ascii() in this script, cross-checked against NOAA's reference reader WOD/PROGRAMS/csvfromwod.c (byte-count self-consistency verified per cast).",
+    "path": "data/raw/wod/OSDO7008.gz",
+    "properties": {
+      "casts_in_gulf_bbox": 14,
+      "casts_in_square": 2333,
+      "gulf_cast_numbers": [
+        57367,
+        559286,
+        562984,
+        563065,
+        563086,
+        563089,
+        563956,
+        563971,
+        563984,
+        564024,
+        591295,
+        591301,
+        591306,
+        591309
+      ]
+    },
+    "sha256": "68a5c79929978e17f1b311399ba62592dce6da6958b1a9905671cca3d7dccaf9",
+    "source_url": "https://www.ncei.noaa.gov/data/oceans/woa/WOD/GEOGRAPHIC/OSD/OBS/OSDO7008.gz"
+  },
+  "wod-pfl-7008": {
+    "accessed": "2026-08-01",
+    "bytes": 27185893,
+    "dataset": "wod-pfl-7008",
+    "licence": "U.S. Government work; not subject to copyright protection in the United States (17 U.S.C. \u00a7105) and in the public domain. NOAA/NCEI requests citation of the World Ocean Database on reuse.",
+    "licence_url": "https://www.ncei.noaa.gov/access/world-ocean-database-select/dbsearch.html",
+    "notes": "WOD13 native ASCII, observed levels, WMO square 7008 (0-10N, 80-90W), instrument=PFL (Profiling float (Argo etc.)). 6331 casts in the full 10x10-degree square; 0 fall inside the Golfo Dulce bbox defined in pipeline/common.py. Parsed with parse_wod_ascii() in this script, cross-checked against NOAA's reference reader WOD/PROGRAMS/csvfromwod.c (byte-count self-consistency verified per cast).",
+    "path": "data/raw/wod/PFLO7008.gz",
+    "properties": {
+      "casts_in_gulf_bbox": 0,
+      "casts_in_square": 6331,
+      "gulf_cast_numbers": []
+    },
+    "sha256": "4a7d9ea5945afbaa96412df809a8968f5f3dd05be5ad579de4d5a526df622f73",
+    "source_url": "https://www.ncei.noaa.gov/data/oceans/woa/WOD/GEOGRAPHIC/PFL/OBS/PFLO7008.gz"
+  },
+  "wod-xbt-7008": {
+    "accessed": "2026-08-01",
+    "bytes": 12594231,
+    "dataset": "wod-xbt-7008",
+    "licence": "U.S. Government work; not subject to copyright protection in the United States (17 U.S.C. \u00a7105) and in the public domain. NOAA/NCEI requests citation of the World Ocean Database on reuse.",
+    "licence_url": "https://www.ncei.noaa.gov/access/world-ocean-database-select/dbsearch.html",
+    "notes": "WOD13 native ASCII, observed levels, WMO square 7008 (0-10N, 80-90W), instrument=XBT (Expendable bathythermograph (temperature-only)). 9672 casts in the full 10x10-degree square; 1 fall inside the Golfo Dulce bbox defined in pipeline/common.py. Parsed with parse_wod_ascii() in this script, cross-checked against NOAA's reference reader WOD/PROGRAMS/csvfromwod.c (byte-count self-consistency verified per cast).",
+    "path": "data/raw/wod/XBTO7008.gz",
+    "properties": {
+      "casts_in_gulf_bbox": 1,
+      "casts_in_square": 9672,
+      "gulf_cast_numbers": [
+        2098049
+      ]
+    },
+    "sha256": "83719a92bd1e0d7f21ac6dce06a81d8408e0c96a103f01fe9f872c523995831b",
+    "source_url": "https://www.ncei.noaa.gov/data/oceans/woa/WOD/GEOGRAPHIC/XBT/OBS/XBTO7008.gz"
   }
 }
