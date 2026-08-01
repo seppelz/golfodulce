@@ -1061,6 +1061,54 @@
     "sha256": "c9768ba7b79a8d85479add3a28264f7d7ca9b9f01f70f3844281bf6905ac03f1",
     "source_url": "https://www.pangaea.de/advanced/search.php ; https://ws.pangaea.de/es/pangaea/panmd/_search"
   },
+  "wdpa-protected-areas-raw": {
+    "accessed": "2026-08-01",
+    "bytes": 590019,
+    "dataset": "wdpa-protected-areas-raw",
+    "licence": "UNEP-WCMC and IUCN (2026), Protected Planet: The World Database on Protected Areas (WDPA) [Online], Cambridge, UK. DOI: https://doi.org/10.34892/6fwd-af11",
+    "licence_url": "https://www.protectedplanet.net/en/terms-and-conditions",
+    "notes": "AMPR Golfo Dulce, the fisheries co-management zone actually covering the gulf's water, is NOT in the WDPA \u2014 it is an INCOPESCA instrument, not IUCN-classified. No boundary was found in any freely queryable source; this is a real gap, not an oversight.",
+    "path": "data/raw/wdpa/protected_areas_raw.geojson",
+    "properties": {
+      "feature_count": 8,
+      "site_ids": [
+        164,
+        3317,
+        12492,
+        102367,
+        108151,
+        145527,
+        30595,
+        555643534
+      ]
+    },
+    "sha256": "40248ed89b19d822cf751063732bba3f31bba804c424d20eefe5d359f565d3f0",
+    "source_url": "https://data-gis.unep-wcmc.org/server/rest/services/ProtectedSites/The_World_Database_of_Protected_Areas/MapServer/1/query"
+  },
+  "wdpa-protected-areas-simplified": {
+    "accessed": "2026-08-01",
+    "bytes": 55472,
+    "dataset": "wdpa-protected-areas-simplified",
+    "licence": "UNEP-WCMC and IUCN (2026), Protected Planet: The World Database on Protected Areas (WDPA) [Online], Cambridge, UK. DOI: https://doi.org/10.34892/6fwd-af11",
+    "licence_url": "https://www.protectedplanet.net/en/terms-and-conditions",
+    "notes": "AMPR Golfo Dulce, the fisheries co-management zone actually covering the gulf's water, is NOT in the WDPA \u2014 it is an INCOPESCA instrument, not IUCN-classified. No boundary was found in any freely queryable source; this is a real gap, not an oversight.",
+    "path": "data/derived/conservation/protected_areas.geojson",
+    "properties": {
+      "feature_count": 8,
+      "site_ids": [
+        164,
+        3317,
+        12492,
+        102367,
+        108151,
+        145527,
+        30595,
+        555643534
+      ]
+    },
+    "sha256": "9f4baab337fe1df2df8f1d2a283b4b8786dabedf5ee636d9c82b12f2bab635c0",
+    "source_url": "https://data-gis.unep-wcmc.org/server/rest/services/ProtectedSites/The_World_Database_of_Protected_Areas/MapServer/1/query"
+  },
   "wod-ctd-7008": {
     "accessed": "2026-08-01",
     "bytes": 3421544,
