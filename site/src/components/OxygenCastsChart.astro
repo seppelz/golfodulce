@@ -1,0 +1,145 @@
+---
+import { useTranslations, type Locale } from '../i18n/ui';
+import casts from '../../../data/derived/watercolumn/casts.json';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const es = locale === 'es';
+
+// Chart geometry. Depth on y, inverted (deeper = further down the page, matching how
+// a diver or a chart reader thinks about depth), year on x.
+const W = 640;
+const H = 300;
+const PAD = { top: 16, right: 20, bottom: 32, left: 44 };
+const plotW = W - PAD.left - PAD.right;
+const plotH = H - PAD.top - PAD.bottom;
+
+const years = casts.casts.map((c) => c.year);
+const yearMin = 1930;
+const yearMax = 2026; // extend to "now" so the 56-year gap since 1970 is visible, not cropped
+const depthMax = 500; // round headroom above the deepest cast (458 m)
+
+const x = (year: number) => PAD.left + ((year - yearMin) / (yearMax - yearMin)) * plotW;
+const y = (depth: number) => PAD.top + (depth / depthMax) * plotH;
+
+const yearTicks = [1930, 1950, 1970, 1990, 2010, 2026];
+const depthTicks = [0, 100, 200, 300, 400, 500];
+
+const points = casts.casts.map((c) => ({
+  cx: x(c.year),
+  cy: y(c.max_depth_m),
+  hasOxygen: c.has_oxygen,
+  year: c.year,
+  depth: c.max_depth_m,
+  instrument: c.instrument_label,
+}));
+---
+
+<figure class="not-prose my-8">
+  <div
+    class="rounded-lg border p-4 sm:p-5"
+    style="border-color: var(--rule); background: var(--surface-raised)"
+  >
+    <div class="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+      <h3 class="text-sm font-semibold" style="color: var(--ink)">
+        {es ? 'Cada perfil de la columna de agua jamás registrado en el golfo' : 'Every water-column cast ever recorded in the gulf'}
+      </h3>
+      <div class="flex items-center gap-4 text-xs" style="color: var(--ink-muted)">
+        <span class="flex items-center gap-1.5">
+          <span class="inline-block w-2.5 h-2.5 rounded-full" style="background: var(--color-abyss-500)"></span>
+          {es ? 'con oxígeno' : 'oxygen measured'}
+        </span>
+        <span class="flex items-center gap-1.5">
+          <span class="inline-block w-2.5 h-2.5 rounded-full border-2" style="border-color: var(--ink-muted)"></span>
+          {es ? 'sin oxígeno' : 'no oxygen data'}
+        </span>
+      </div>
+    </div>
+
+    <svg
+      viewBox={`0 0 ${W} ${H}`}
+      class="w-full h-auto"
+      role="img"
+      aria-label={
+        es
+          ? `Gráfico de dispersión de 18 perfiles de columna de agua en el golfo, de 1933 a 1970, con la profundidad en el eje vertical. Ninguno se ha repetido desde 1970.`
+          : `Scatter plot of 18 water-column casts in the gulf, 1933 to 1970, depth on the vertical axis. None since 1970.`
+      }
+    >
+      {/* gridlines */}
+      {depthTicks.map((d) => (
+        <line
+          x1={PAD.left}
+          x2={W - PAD.right}
+          y1={y(d)}
+          y2={y(d)}
+          stroke="var(--rule)"
+          stroke-width="1"
+        />
+      ))}
+
+      {/* the 1970-to-now gap, called out directly rather than left for the reader to notice */}
+      <rect
+        x={x(1970)}
+        y={PAD.top}
+        width={x(2026) - x(1970)}
+        height={plotH}
+        fill="var(--color-shoal-400)"
+        opacity="0.08"
+      />
+      <text x={x(1998)} y={PAD.top + 14} class="chart-label" text-anchor="middle" style="fill: var(--color-shoal-600); font-size: 11px; font-weight: 600">
+        {es ? '56 años sin un solo perfil' : '56 years without a single cast'}
+      </text>
+
+      {/* axes */}
+      <line x1={PAD.left} x2={W - PAD.right} y1={H - PAD.bottom} y2={H - PAD.bottom} stroke="var(--ink-muted)" stroke-width="1" />
+      <line x1={PAD.left} x2={PAD.left} y1={PAD.top} y2={H - PAD.bottom} stroke="var(--ink-muted)" stroke-width="1" />
+
+      {yearTicks.map((yr) => (
+        <text x={x(yr)} y={H - PAD.bottom + 18} text-anchor="middle" style="fill: var(--ink-muted); font-size: 11px">
+          {yr}
+        </text>
+      ))}
+      {depthTicks.map((d) => (
+        <text x={PAD.left - 8} y={y(d) + 4} text-anchor="end" style="fill: var(--ink-muted); font-size: 11px">
+          {d}
+        </text>
+      ))}
+      <text
+        x={-(PAD.top + plotH / 2)}
+        y={14}
+        transform="rotate(-90)"
+        text-anchor="middle"
+        style="fill: var(--ink-muted); font-size: 11px"
+      >
+        {es ? 'profundidad (m)' : 'depth (m)'}
+      </text>
+
+      {/* points, with real hover via <title> — no JS needed for this much */}
+      {points.map((p) => (
+        <circle
+          cx={p.cx}
+          cy={p.cy}
+          r={p.hasOxygen ? 5 : 4.5}
+          fill={p.hasOxygen ? 'var(--color-abyss-500)' : 'var(--surface-raised)'}
+          stroke={p.hasOxygen ? 'var(--surface-raised)' : 'var(--ink-muted)'}
+          stroke-width={p.hasOxygen ? 1.5 : 2}
+        >
+          <title>
+            {p.year} — {p.instrument} — {p.depth} m
+            {p.hasOxygen ? (es ? ' — oxígeno medido' : ' — oxygen measured') : es ? ' — sin dato de oxígeno' : ' — no oxygen data'}
+          </title>
+        </circle>
+      ))}
+    </svg>
+  </div>
+  <figcaption class="mt-2 text-xs" style="color: var(--ink-muted)">
+    {es
+      ? 'Cada punto es un lance real de la Base de Datos Oceánicos Mundial de la NOAA (WMO 7008). Pase el cursor sobre un punto para ver el año, el instrumento y la profundidad.'
+      : "Each point is a real cast from NOAA's World Ocean Database (WMO square 7008). Hover a point for year, instrument and depth."}
+  </figcaption>
+</figure>

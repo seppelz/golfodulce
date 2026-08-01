@@ -7,9 +7,13 @@ published: true
 updated: 2026-08-01
 ---
 
+import SpeciesDepthChart from '../../components/SpeciesDepthChart.astro';
+
 El Golfo Dulce concentra una enorme cantidad de vida en una cuenca pequeña. Una síntesis de 2010 recopiló 1.028 especies marinas registradas en el golfo — el 21,5% de todo lo reportado para la totalidad de la costa pacífica costarricense — con una densidad de especies por km² más del doble que la del más extenso Golfo de Nicoya [@morales-ramirez-2010-amenazas]. Lo que hace distintivo al golfo es cómo esa vida se organiza verticalmente: por debajo de unos 50 m el agua pierde oxígeno, y por debajo de unos 150–200 m la cuenca interna es frecuentemente anóxica, con presencia ocasional de sulfuro de hidrógeno [@vargas-zamora-2021-fiordo]. Todo lo que sigue debe leerse a la luz de esa estructura: biodiverso cerca de la superficie, cada vez más excluyente con la profundidad.
 
 El propio análisis de datos de OBIS y GBIF de este proyecto — 17.188 registros depurados entre 1896 y 2026, en aproximadamente 1.952 especies — permite concretar la forma del registro público. Solo el 12,1% incluye un valor de profundidad utilizable, una vez corregido un problema de calidad de datos en una colección de GBIF (esa colección copia la elevación en tierra al campo de profundidad para especímenes preservados, lo que de otro modo haría parecer el registro mucho mejor muestreado en profundidad de lo que realmente está). De los registros con una profundidad genuina, 68 se ubican en 100 m o más profundo y 32 por debajo de 200 m, con un máximo de 500 m. Los taxones registrados con mayor frecuencia son generalistas costeros — cangrejo ermitaño, pelícano, cocodrilo, aves playeras — y no especialistas de aguas profundas, lo que refleja lo que se ha observado y no necesariamente lo que realmente habita en el golfo.
+
+<SpeciesDepthChart locale="es" />
 
 ## Ballenas jorobadas de dos hemisferios
 

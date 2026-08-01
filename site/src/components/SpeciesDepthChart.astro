@@ -1,0 +1,101 @@
+---
+import { useTranslations, type Locale } from '../i18n/ui';
+import species from '../../../data/derived/occurrence/species.json';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const es = locale === 'es';
+
+const bands = species.depth_histogram_m;
+const totalWithDepth = bands.reduce((sum, b) => sum + b.records, 0);
+const maxCount = Math.max(...bands.map((b) => b.records));
+
+// Sequential ramp reusing the same depth colours as the bathymetry map, so a reader who
+// has already seen that page reads "darker = deeper" without relearning an encoding.
+const RAMP = ['#deeff6', '#92c7e4', '#4891c4', '#215e96', '#0a274c', '#04172c'];
+
+const W = 640;
+const H = 220;
+const PAD = { top: 12, right: 16, bottom: 44, left: 16 };
+const plotW = W - PAD.left - PAD.right;
+const plotH = H - PAD.top - PAD.bottom;
+const gap = 10;
+const barW = (plotW - gap * (bands.length - 1)) / bands.length;
+
+const barLabel = (band: string) => (band === '200+' ? (es ? '200+' : '200+') : band);
+---
+
+<figure class="not-prose my-8">
+  <div class="rounded-lg border p-4 sm:p-5" style="border-color: var(--rule); background: var(--surface-raised)">
+    <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1">
+      <h3 class="text-sm font-semibold" style="color: var(--ink)">
+        {es ? 'Registros de ocurrencia por profundidad' : 'Occurrence records by depth'}
+      </h3>
+      <span class="text-xs tabular-nums" style="color: var(--ink-muted)">
+        {es
+          ? `${totalWithDepth.toLocaleString('es')} de ${species.totals.records_deduplicated.toLocaleString('es')} registros llevan profundidad`
+          : `${totalWithDepth.toLocaleString('en')} of ${species.totals.records_deduplicated.toLocaleString('en')} records carry a depth`}
+      </span>
+    </div>
+
+    <svg
+      viewBox={`0 0 ${W} ${H}`}
+      class="w-full h-auto"
+      role="img"
+      aria-label={
+        es
+          ? `Histograma de ${totalWithDepth} registros de ocurrencia con profundidad conocida, agrupados en bandas de 0 a 200+ metros. La gran mayoría está entre 0 y 100 m.`
+          : `Histogram of ${totalWithDepth} occurrence records with a known depth, grouped into 0-200+ metre bands. The large majority sit between 0 and 100 m.`
+      }
+    >
+      {bands.map((b, i) => {
+        // A true-to-scale height for tiny counts (17-19 records against a max of 1243)
+        // would render as an invisible sliver. Floor it so every band stays a visible,
+        // clickable bar — the chart's whole point is that the small bars exist at all.
+        const bh = Math.max(maxCount ? (b.records / maxCount) * plotH : 0, 3);
+        const bx = PAD.left + i * (barW + gap);
+        const by = PAD.top + plotH - bh;
+        return (
+          <g>
+            <rect x={bx} y={by} width={barW} height={bh} rx="3" fill={RAMP[i]}>
+              <title>{b.band} m: {b.records} {es ? 'registros' : 'records'}</title>
+            </rect>
+            <text
+              x={bx + barW / 2}
+              y={by - 6}
+              text-anchor="middle"
+              style="fill: var(--ink); font-size: 12px; font-weight: 600"
+            >
+              {b.records}
+            </text>
+            <text
+              x={bx + barW / 2}
+              y={PAD.top + plotH + 18}
+              text-anchor="middle"
+              style="fill: var(--ink-muted); font-size: 11px"
+            >
+              {barLabel(b.band)}
+            </text>
+          </g>
+        );
+      })}
+      <text
+        x={PAD.left + plotW / 2}
+        y={H - 4}
+        text-anchor="middle"
+        style="fill: var(--ink-muted); font-size: 11px"
+      >
+        {es ? 'profundidad (m)' : 'depth (m)'}
+      </text>
+    </svg>
+  </div>
+  <figcaption class="mt-2 text-xs" style="color: var(--ink-muted)">
+    {es
+      ? 'A partir del análisis propio de OBIS y GBIF de este proyecto, con los registros de profundidad de una colección de GBIF excluidos por un error de calidad de datos (ver el registro de vacíos).'
+      : "From this project's own OBIS and GBIF analysis, with depth values from one GBIF collection excluded for a data-quality bug (see the gap register)."}
+  </figcaption>
+</figure>
