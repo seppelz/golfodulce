@@ -1,0 +1,94 @@
+---
+title: Acerca de y metodología
+summary: Por qué existe este sitio y las reglas mecánicas que lo mantienen honesto.
+section: about
+order: 100
+published: true
+updated: 2026-08-01
+---
+
+## Qué es esto
+
+Esta es una línea base de conocimiento de Fase 1 sobre el Golfo Dulce, Costa Rica — una
+cuenca anóxica tropical de tipo fiordo, una de las pocas que existen en el mundo. No es
+un estudio de campo. Es un intento de reunir en un solo lugar todo el conocimiento
+público existente sobre el golfo, citado correctamente, y de decir con claridad hasta
+dónde llega ese conocimiento y dónde se acaba.
+
+El producto real de este sitio no son las secciones de prosa. Es el
+[registro de vacíos de conocimiento](/es/gaps): un recuento estructurado y respaldado por
+evidencia de lo que no se sabe, por qué no se sabe, y qué haría falta para cerrar cada
+vacío. Ese registro solo tiene valor si las afirmaciones que lo alimentan son realmente
+ciertas — así que la mayor parte del esfuerzo de ingeniería aquí se dedicó a asegurar
+que lo sean.
+
+## Metodología
+
+### Toda afirmación remite a una fuente, de forma mecánica
+
+La regla "cita todo" es fácil de enunciar y fácil de dejar pasar por alto. Por eso en
+este sitio no es una guía de estilo, sino una condición obligatoria de compilación. Cada
+oración factual en las secciones de prosa lleva una cita en línea con la forma
+`[@source-id]`, resuelta contra una bibliografía canónica única
+(`bibliography/sources.json`, [consultable en su totalidad](/es/sources)). Una cita que
+no se resuelve contra una entrada real hace fallar la compilación del sitio por completo;
+no existe ninguna vía por la que una afirmación sin fuente o inventada llegue a una
+página publicada.
+
+### Las citas se verifican contra la fuente real, no solo por su formato
+
+Una cita que parece correcta — un autor, un año y un DOI plausibles — no es lo mismo que
+una cita que efectivamente es correcta. Cada fuente de la bibliografía fue resuelta de
+forma independiente contra la API de [Crossref](https://www.crossref.org/) en el momento
+de la recolección, y el título que Crossref devuelve para ese DOI se compara con el
+título declarado para la entrada. Un DOI que no existe, o que pertenece a un artículo
+distinto, hace fallar la recolección antes de que llegue al sitio. Esta verificación
+tiene su propia prueba de regresión — un conjunto de datos de prueba con una fuente
+genuina, un DOI real emparejado deliberadamente con el título equivocado, y un DOI
+inventado — de modo que la propia verificación no pueda dejar de funcionar en silencio
+sin que se note.
+
+### La incertidumbre se declara, no se disimula
+
+Donde la literatura publicada no coincide — la profundidad del umbral, el origen de la
+cuenca, si el agua profunda es "siempre" o "a veces" anóxica — este sitio lo dice
+explícitamente en lugar de elegir la respuesta que suena más segura. Varios de los
+primeros planteamientos de este proyecto describían el golfo como permanentemente
+anóxico; la revisión de literatura ya completa corrigió eso. Es intermitentemente
+anóxico, renovado por entradas episódicas de agua del Pacífico. Esa corrección queda
+registrada aquí, no absorbida en silencio.
+
+### El flujo de datos es reproducible, no solo una descarga puntual
+
+Cada conjunto de datos detrás de las páginas de batimetría y de registros de presencia
+fue obtenido mediante un script guardado en el repositorio de este proyecto, no
+descargado una sola vez a mano y dejado sin documentar. La suma de verificación, la
+licencia y la fecha de obtención de cada archivo bruto quedan registradas en un
+manifiesto, de modo que un lector — o una versión futura de este proyecto — pueda
+verificar que lo que se está sirviendo es lo que dice ser, y pueda volver a ejecutar la
+descarga para reproducirlo.
+
+### El español no es una traducción de último momento
+
+El público local y académico principal para este material habla español, así que el
+sitio se construye de forma bilingüe desde el principio, en lugar de partir del inglés y
+añadir el español después. Cuando la traducción al español de una página todavía no
+existe, el sitio lo indica claramente y muestra la versión en inglés en vez de recurrir a
+ella en silencio.
+
+## Correcciones y colaboración
+
+Este sitio tendrá errores en algunos puntos — las revisiones de literatura a esta escala
+siempre los tienen, y el golfo mismo está genuinamente poco estudiado. Si conoces estas
+aguas, o eres autor de una fuente citada aquí y algo se ha representado mal, usa la
+[página de contacto](/es/contact) para señalarlo. Las correcciones de personas que de
+verdad conocen el golfo son la vía más rápida que tiene este proyecto para volverse
+confiable.
+
+## Licencias
+
+El texto de este sitio se publica bajo CC BY 4.0. Los conjuntos de datos subyacentes
+conservan los términos de licencia de sus editores originales — GMRT, OBIS y la World
+Ocean Database de la NOAA tienen cada uno sus propios términos, registrados por conjunto
+de datos en el manifiesto de datos del proyecto, y cada entrada de la bibliografía
+registra su propio estado de acceso.
