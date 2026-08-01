@@ -1,0 +1,81 @@
+question: >-
+  Is the Golfo Dulce's oxygen structure today the same as it was in the 1970s, or has it
+  shifted?
+
+topics:
+  - oceanography
+
+known: >-
+  The gulf's water column has been directly sampled for dissolved oxygen only rarely.
+  NOAA's World Ocean Database holds 18 profile casts inside the gulf in total —
+  bottle-cast Ocean Station Data plus mechanical and expendable bathythermographs —
+  spanning 1933 to 1970. Of those 18, only 13 carry a dissolved-oxygen measurement at
+  all, and every one of those 13 dates to 1969-1970. Separately, the literature record
+  (Thamdrup et al. 1996, Acuña-González et al. 2006, Morales-Ramírez et al. 2016,
+  Vargas-Zamora et al. 2021) establishes that the basin's anoxia is intermittent — driven
+  by episodic sill-overflow renewal from the Pacific — not a fixed, permanent state.
+
+known_sources: []
+
+why_gap: data-too-old
+
+why_gap_detail: >-
+  PANGAEA and CCHDO, the two other major open archives searched, hold nothing usable:
+  PANGAEA's only two Golfo Dulce hits are a fruiting-phenology dataset and a tsunami
+  catalogue, and none of 2,558 CCHDO cruise tracks pass through the gulf. So the public,
+  archived oxygen record effectively ends in 1970 — over half a century before the
+  present. If the renewal regime that governs anoxia has shifted since then, through
+  changed river discharge, coastal development, or climate-linked changes offshore, there
+  is no public baseline recent enough to detect it against.
+
+to_close:
+  approach: >-
+    A handful of CTD-with-oxygen-sensor casts repeated seasonally at a few fixed stations
+    across the sill and the inner basin would immediately update the baseline and would
+    directly test whether the renewal frequency described in the 1990s-2000s literature
+    still holds. This does not require a research vessel — a rented CTD deployed from a
+    small boat is sufficient for a first pass.
+  equipment:
+    - CTD with dissolved-oxygen sensor
+    - Small boat with local skipper
+    - Fixed station list spanning sill to inner basin
+  cost_band: 1k-10k
+  effort: weeks
+
+why_matters: >-
+  Every downstream claim about this basin — how the oxygen boundary constrains fish and
+  invertebrate distribution, how nitrogen cycling and anammox scale, what the ecosystem
+  looks like beneath the oxycline — rests on an oxygen record that predates most of the
+  ecological literature by decades. The renewal events that are the accepted explanation
+  for why the basin is not permanently anoxic have not themselves been directly observed
+  in the public record since 1970.
+
+confidence: high
+priority: high
+
+es:
+  question: >-
+    ¿Es la estructura de oxígeno del Golfo Dulce hoy la misma que en los años setenta, o
+    ha cambiado?
+  known: >-
+    La columna de agua del golfo ha sido muestreada directamente para oxígeno disuelto
+    solo en contadas ocasiones. La Base de Datos Oceánicos Mundial de la NOAA contiene 18
+    perfiles dentro del golfo en total, entre 1933 y 1970. De esos 18, solo 13 llevan
+    alguna medición de oxígeno disuelto, y los 13 son de 1969-1970. Por separado, la
+    literatura establece que la anoxia de la cuenca es intermitente, impulsada por
+    eventos episódicos de renovación por desbordamiento del umbral desde el Pacífico, y
+    no un estado fijo y permanente.
+  why_gap_detail: >-
+    PANGAEA y CCHDO, los otros dos grandes archivos abiertos consultados, no aportan nada
+    utilizable. El registro público de oxígeno termina, en la práctica, en 1970 — hace más
+    de medio siglo. Si el régimen de renovación que gobierna la anoxia ha cambiado desde
+    entonces, no existe una línea base pública lo bastante reciente para detectarlo.
+  why_matters: >-
+    Toda afirmación posterior sobre esta cuenca — cómo el límite de oxígeno restringe la
+    distribución de peces e invertebrados, cómo escala el ciclo del nitrógeno — descansa
+    sobre un registro de oxígeno que antecede en décadas a la mayor parte de la literatura
+    ecológica.
+  approach: >-
+    Un puñado de lances con CTD y sensor de oxígeno disuelto, repetidos estacionalmente en
+    unas pocas estaciones fijas entre el umbral y la cuenca interna, actualizaría de
+    inmediato la línea base.
