@@ -1,0 +1,740 @@
+[
+  {
+    "id": "acevedo-1995-overlap",
+    "type": "journal-article",
+    "title": "FIRST RECORDS OF HUMPBACK WHALES INCLUDING CALVES AT GOLFO DULCE AND ISLA DEL COCO, COSTA RICA, SUGGESTING GEOGRAPHICAL OVERLAP OF NORTHERN AND SOUTHERN HEMISPHERE POPULATIONS",
+    "authors": ["Alejandro Acevedo", "Mari A. Smultea"],
+    "year": 1995,
+    "container": "Marine Mammal Science",
+    "doi": "10.1111/j.1748-7692.1995.tb00677.x",
+    "url": null,
+    "language": "en",
+    "access": "paywalled",
+    "topics": ["ecology"],
+    "summary": "The original published record establishing that Golfo Dulce is used by humpback whales from both the Northern and Southern Hemisphere breeding stocks — the observation on which every later statement about the gulf's unusual dual-hemisphere whale use rests. Acevedo and Smultea reported the first sightings of humpbacks, including cow-calf pairs, inside Golfo Dulce and at Isla del Coco, and argued that the presence of animals in both boreal and austral winter seasons implies geographical overlap of two otherwise separate populations. This is the anchor citation for the claim, repeated in the reference lists of essentially all subsequent Golfo Dulce cetacean work (Oviedo et al. 2015, Bessesen 2015).",
+    "verbatim_finding": "FIRST RECORDS OF HUMPBACK WHALES INCLUDING CALVES AT GOLFO DULCE AND ISLA DEL COCO, COSTA RICA, SUGGESTING GEOGRAPHICAL OVERLAP OF NORTHERN AND SOUTHERN HEMISPHERE POPULATIONS",
+    "data_availability": "None available to us: Wiley serves neither abstract nor full text without a subscription, and Crossref holds no deposited abstract. Sighting records are described in the paper text only.",
+    "retrieved": {
+      "url_checked": "https://onlinelibrary.wiley.com/doi/10.1111/j.1748-7692.1995.tb00677.x",
+      "http_status": 403,
+      "date": "2026-07-31"
+    },
+    "caveat": "Publisher blocked retrieval (HTTP 403) and no abstract is deposited in Crossref or Semantic Scholar, so the only verbatim text we could confirm is the published title as registered with Crossref. The dual-hemisphere claim itself should be read through the better-documented Rasmussen et al. 2007 record. Small sample: a handful of sightings from the early 1990s."
+  },
+  {
+    "id": "rasmussen-2007-migracion",
+    "type": "journal-article",
+    "title": "Southern Hemisphere humpback whales wintering off Central America: insights from water temperature into the longest mammalian migration",
+    "authors": [
+      "Kristin Rasmussen",
+      "Daniel M. Palacios",
+      "John Calambokidis",
+      "Marco T. Saborío",
+      "Luciano Dalla Rosa",
+      "Eduardo R. Secchi",
+      "Gretchen H. Steiger",
+      "Judith M. Allen",
+      "Gregory S. Stone"
+    ],
+    "year": 2007,
+    "container": "Biology Letters",
+    "doi": "10.1098/rsbl.2007.0067",
+    "url": null,
+    "language": "en",
+    "access": "paywalled",
+    "topics": ["ecology"],
+    "summary": "The quantitative documentation of the dual-hemisphere phenomenon that makes Costa Rican Pacific waters, Golfo Dulce included, unusual among humpback wintering grounds. Photo-identification matches proved that individual whales from Antarctic feeding grounds travel roughly 8300 km to winter off Central America — the longest documented mammalian migration — and that they occupy the same waters that a North Pacific population uses six months earlier or later. The paper also proposes the mechanism: an equatorial tongue of cold water in the eastern South Pacific pushes the Southern Hemisphere wintering ground abnormally far north, and wintering grounds worldwide track a 21.1–28.3 °C water-temperature envelope rather than a latitude.",
+    "verbatim_finding": "in an area also used by a boreal population during the opposite winter season, resulting in unique spatial overlap between Northern and Southern Hemisphere populations",
+    "data_availability": "Seven individually photo-identified whales matched between Antarctic and Central American catalogues; wintering-ground positions and sea-surface temperatures are tabulated in the paper. Abstract retrievable free via Europe PMC (PMC2390682); full text paywalled.",
+    "retrieved": {
+      "url_checked": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1098/rsbl.2007.0067&resultType=core&format=json",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "Royal Society landing page returned HTTP 403; the abstract quoted here was retrieved from the Europe PMC record for the same DOI. The overlap is documented for Pacific Costa Rica broadly (whales as far north as ~11°N), not solely for Golfo Dulce; only seven matched individuals underpin the migration claim."
+  },
+  {
+    "id": "pelayo-gonzalez-2022-habitat",
+    "type": "journal-article",
+    "title": "Habitat use of south-eastern Pacific humpback whales (Megaptera novaeangliae; Borowski 1781) in Golfo Dulce, Costa Rica",
+    "authors": [
+      "L. Pelayo-González",
+      "L. Oviedo",
+      "A. Márquez-Artavia",
+      "D. Herra-Miranda",
+      "J. D. Pacheco-Polanco",
+      "B. Bessesen",
+      "H. M. Guzmán"
+    ],
+    "year": 2022,
+    "container": "Marine and Freshwater Research",
+    "doi": "10.1071/mf21357",
+    "url": null,
+    "language": "en",
+    "access": "paywalled",
+    "topics": ["ecology", "conservation"],
+    "summary": "A decade of effort-corrected sighting data (June–October, 2010–2019) resolving how the southeastern Pacific (Southern Hemisphere) humpback population partitions Golfo Dulce internally. The key result is a depth-driven segregation: mother–calf dyads occupy shallow water, where resting and nursing dominate, while adult-only groups use deeper water. This is the paper that converts the gulf's bathymetry into a whale-conservation argument — the shallow inner and marginal waters are nursery habitat and are exactly where boat traffic concentrates — and it is the best-quantified account of humpback habitat use specific to Golfo Dulce.",
+    "verbatim_finding": "The mother–calf groups were present in waters <80 m deep, and their main behaviour was resting (nursing and social).",
+    "data_availability": "Sightings-per-unit-effort surfaces, group-composition classifications and behavioural budgets are presented in figures and tables; underlying sighting positions are not deposited in an open repository.",
+    "retrieved": {
+      "url_checked": "https://api.crossref.org/works/10.1071/mf21357",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "The publisher landing page (connectsci.au / publish.csiro.au) returned HTTP 403; the abstract quoted here is the publisher's own abstract as deposited with Crossref. Non-random, boat-based survey effort — spatial coverage is uneven."
+  },
+  {
+    "id": "oviedo-2015-cetaceos",
+    "type": "journal-article",
+    "title": "Diversidad de cetáceos en el paisaje marino costeros de Golfo Dulce, Península de Osa, Costa Rica",
+    "authors": [
+      "Lenin Oviedo",
+      "David A. Herra-Miranda",
+      "Juan Diego Pacheco-Polanco",
+      "Christine Figgener",
+      "Amaru Márquez-Artavia",
+      "Wagner Quiros-Pereira",
+      "Miguel Iñiguez"
+    ],
+    "year": 2015,
+    "container": "Revista de Biología Tropical",
+    "doi": "10.15517/rbt.v63i1.23118",
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/23118",
+    "language": "es",
+    "access": "open",
+    "topics": ["ecology", "conservation"],
+    "summary": "The backbone survey for cetacean community structure in the gulf: 943 sightings of 12 species over ten years (2005–2014), 3490 hours and 64533 km of effort. Its contribution is showing that the cetacean assemblage is spatially ordered along the same inner-basin/sill/outer gradient that governs the gulf's hydrography — coastal bottlenose and spotted dolphins in the inner basin, bottlenose plus migratory humpbacks at the sill, and the most diverse, oceanic, piscivorous delphinids in the transitional water outside. It also raises the hypothesis of a resident Golfo Dulce morphotype of pantropical spotted dolphin distinct from S. attenuata graffmani outside.",
+    "verbatim_finding": "A gradient of cetacean diversity is observed from the inner basin to the transitional-oceanic area at the entrance of the Gulf, with coastal bottlenose dolphin and spotted dolphin dominating the inner basin",
+    "data_availability": "Sighting counts by species and by seascape unit are tabulated in the open-access PDF; raw positions not deposited.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.15517/rbt.v63i1.23118",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "The proposed distinct inner-gulf spotted dolphin morphotype is explicitly framed as a hypothesis, not a result. Part of the Golfo Dulce special supplement, Rev. Biol. Trop. 63(S1)."
+  },
+  {
+    "id": "oviedo-2023-stenella",
+    "type": "journal-article",
+    "title": "Population size and demographic parameters of pantropical spotted dolphin (Stenella attenuata graffmani) (Cetartiodactyla: Delphinidae) in Golfo Dulce, Costa Rica",
+    "authors": [
+      "Lenin Enrique Oviedo Correa",
+      "David Herra-Miranda",
+      "Juan Diego Pacheco-Polanco",
+      "Betzi Pérez-Ortega",
+      "Laura May-Collado"
+    ],
+    "year": 2023,
+    "container": "Revista de Biología Tropical",
+    "doi": "10.15517/rev.biol.trop..v71is4.57287",
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/57287",
+    "language": "en",
+    "access": "open",
+    "topics": ["ecology", "conservation"],
+    "summary": "The first capture–recapture abundance estimate for the coastal pantropical spotted dolphin inside Golfo Dulce: 280 photo-identified individuals yielding a population of roughly 187–368 animals with very high apparent survival (0.98). Its ecological significance for this project is the finding that a subset of individuals is repeatedly recaptured inside the gulf and concentrates in the inner basin, while 65 % of identified animals were seen only once — evidence of an open population with a resident core that treats the shallow inner basin as critical foraging habitat. The authors argue this core should be managed as an ecologically discrete unit.",
+    "verbatim_finding": "This group of dolphins appears to favor the inner basin as a critical foraging habitat.",
+    "data_availability": "Photo-identification catalogue underpins the analysis; model outputs (30 candidate models, QAICc ranking, abundance and survival estimates with CIs) are tabulated in the open-access article.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.15517/rev.biol.trop..v71is4.57287",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "Non-random boat surveys and a high proportion of single-sighting individuals mean abundance depends strongly on the emigration scenario assumed; the two parsimonious models give substantially different totals."
+  },
+  {
+    "id": "cubero-pardo-2007-delfines",
+    "type": "journal-article",
+    "title": "Distribución y condiciones ambientales asociadas al comportamiento del delfín bufeo (Tursiops truncatus) y el delfín manchado (Stenella attenuata) (Cetacea: Delphinidae) en el Golfo Dulce, Costa Rica",
+    "authors": ["Priscilla Cubero Pardo"],
+    "year": 2007,
+    "container": "Revista de Biología Tropical",
+    "doi": "10.15517/rbt.v55i2.6030",
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/6030",
+    "language": "es",
+    "access": "open",
+    "topics": ["ecology"],
+    "summary": "A behaviour-by-habitat study (June 1996 – July 1997) that ties dolphin activity to specific coastal features rather than to open-water conditions. Bottlenose dolphin foraging coincided exclusively with river mouths, coral reefs and mangrove edges, and the animals rarely crossed the gulf (16.56 % of travelling bouts), implying side-fidelity within the embayment. For spotted dolphins no such association emerged. The paper's own explanation for the weak statistical signal is itself informative about the system: the author attributes it in part to the environmental homogeneity of Golfo Dulce's surface layer, which is what one expects in a strongly stratified basin where the interesting gradients are vertical rather than horizontal.",
+    "verbatim_finding": "For the bottlenose dolphin, foraging/feeding activities showed exclusive coincidence with river mouths, coral reef and mangrove areas, while social and milling activities where seen close to feeding areas.",
+    "data_availability": "Behavioural sampling records, group-size statistics and ANOVA results are reported in the open-access PDF; no raw data deposit.",
+    "retrieved": {
+      "url_checked": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/6030",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "One year of observation; the negative results (no significant activity–environment associations) rest on modest sample sizes (n=156 bottlenose, n=51 spotted behavioural bouts). A parallel English-language version appeared in Investigaciones Marinas 35(2)."
+  },
+  {
+    "id": "sanchez-robledo-2020-pseudorca",
+    "type": "journal-article",
+    "title": "The abundance of false killer whale, Pseudorca crassidens (Artiodactyla: Delphinidae) in coastal waters of Golfo Dulce and Osa Peninsula, Costa Rica",
+    "authors": [
+      "Erika Sánchez Robledo",
+      "Lenin Enrique Oviedo Correa",
+      "David Herra-Miranda",
+      "Juan Diego Pacheco-Polanco",
+      "Sierra Goodman",
+      "Héctor Guzmán"
+    ],
+    "year": 2020,
+    "container": "Revista de Biología Tropical",
+    "doi": "10.15517/rbt.v68i2.37196",
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/37196",
+    "language": "en",
+    "access": "open",
+    "topics": ["ecology", "conservation"],
+    "summary": "Fifteen years of opportunistic and systematic cetacean survey data (2001–2015) combined in an open-population POPAN mark–recapture framework to size the false killer whale population using Golfo Dulce, Drake Bay and Caño Island. The result — fewer than 100 individuals, encountered rarely but surviving well — establishes Pseudorca as the most vulnerable of the gulf's regularly occurring odontocetes and supplies the demographic baseline against which increasing vessel traffic and coastal development must be judged.",
+    "verbatim_finding": "False killer whale abundance in OPW is characterized by a small population size of no more than 100 individuals, complemented by a very low probability of encounter and a contrasting high apparent survival.",
+    "data_availability": "Photo-identification encounter histories drive the POPAN models; parameter estimates and model selection tables are in the open-access article.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.15517/rbt.v68i2.37196",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "The authors themselves call the estimate conservative; encounters were largely opportunistic and pooled across a very large study area, so the Golfo Dulce-specific component cannot be separated cleanly."
+  },
+  {
+    "id": "chacon-chaverri-2015-carey",
+    "type": "journal-article",
+    "title": "Golfo Dulce, Costa Rica, un área importante de alimentación para la tortuga carey del Pacífico Oriental (Eretmochelys imbricata)",
+    "authors": [
+      "Didiher Chacón-Chaverri",
+      "David A. Martínez-Cascante",
+      "Daniela Rojas",
+      "Luis G. Fonseca"
+    ],
+    "year": 2015,
+    "container": "Revista de Biología Tropical",
+    "doi": "10.15517/rbt.v63i1.23114",
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/23114",
+    "language": "es",
+    "access": "open",
+    "topics": ["ecology", "conservation"],
+    "summary": "In-water capture study (August 2010 – March 2013) establishing Golfo Dulce as a foraging ground for the critically endangered eastern Pacific hawksbill: 62 captures including 14 recaptures, three-quarters of them juveniles, all untagged elsewhere. Two findings matter beyond the head-count. First, detection probability was much higher in the dry season, which the authors attribute to seasonal turbidity from river sediment loads — a direct link between the gulf's terrestrial runoff regime and turtle habitat quality. Second, 45 % of animals carried the ectoparasitic barnacle Stephanolepas muricata. The authors describe this as the longest and most robust in-water hawksbill monitoring dataset in the eastern tropical Pacific.",
+    "verbatim_finding": "Our findings highlight the relevance of the Golfo Dulce as an important foraging ground for hawksbill turtles in the ETP",
+    "data_availability": "Capture-per-unit-effort by season, carapace-length distributions and recapture records are tabulated in the open-access article; individual tag records held by the field programme.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.15517/rbt.v63i1.23114",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "Entanglement-net capture along mangrove and seagrass edges only, so the sample is biased toward those habitats; seasonal detection differences may reflect water clarity rather than genuine turtle absence."
+  },
+  {
+    "id": "chacon-chaverri-2015b-verde",
+    "type": "journal-article",
+    "title": "Captura por unidad de esfuerzo y estructura poblacional de la tortuga verde de Pacífico (Chelonia mydas) en el Golfo Dulce, Costa Rica",
+    "authors": [
+      "Didiher Chacón-Chaverri",
+      "David A. Martínez-Cascante",
+      "Daniela Rojas",
+      "Luis G. Fonseca"
+    ],
+    "year": 2015,
+    "container": "Revista de Biología Tropical",
+    "doi": "10.15517/rbt.v63i1.23115",
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/23115",
+    "language": "es",
+    "access": "open",
+    "topics": ["ecology", "conservation"],
+    "summary": "Companion study to the hawksbill work, capturing 253 green turtles (20 recaptures) in the western sector of the gulf between 2010 and 2013. Its distinctive contributions are the international connectivity — one recaptured female had been tagged in the Galápagos, and the authors infer adult females originating from nesting beaches in Panama and Colombia — and the record of a mass mortality event in January 2013 that appears in the declining CPUE series. The paper explicitly frames Golfo Dulce's mangrove, reef and seagrass mosaic as the feeding resource holding these animals, and proposes turtles as an umbrella species for gulf-wide protection.",
+    "verbatim_finding": "Our results suggest that the Golfo Dulce is an important area for green turtles, where individuals congregate for adults and subadults would feed on seagrasses and the fleshy parts of the mangroves.",
+    "data_availability": "Annual CPUE series (0.19–0.45), curved carapace length distributions and tag/recapture records reported in the open-access article.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.15517/rbt.v63i1.23115",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "CPUE decline is confounded with the January 2013 mortality event and with net-based sampling at a single western site; the Galápagos link rests on one recaptured individual."
+  },
+  {
+    "id": "samper-villarreal-2015-manglares",
+    "type": "journal-article",
+    "title": "Complejidad estructural de los manglares de Playa Blanca, Escondido y Rincón de Osa, Golfo Dulce, Costa Rica",
+    "authors": ["Jimena Samper-Villarreal", "Ana Margarita Silva-Benavides"],
+    "year": 2015,
+    "container": "Revista de Biología Tropical",
+    "doi": "10.15517/rbt.v63i1.23103",
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/23103",
+    "language": "es",
+    "access": "open",
+    "topics": ["ecology"],
+    "summary": "The quantitative structural description of three of Golfo Dulce's own mangrove stands, based on transect plots measuring diameter at breast height, basal area, canopy height, stand density and interstitial salinity. Rhizophora racemosa and Pelliciera rhizophorae dominate all three, matching regional expectation, but the striking result is how much the three stands differ from one another: Playa Blanca has the tallest canopy and lowest density, Escondido the densest and shortest canopy and the only Conocarpus erectus. The authors conclude that within-gulf structural variation exceeds the commonalities with regional mangroves — a caution against treating 'the Golfo Dulce mangrove' as a single unit.",
+    "verbatim_finding": "The dominant species at all three mangroves were Rhizophora racemosa and Pelliciera rhizophorae.",
+    "data_availability": "Per-site density, basal area, importance values, complexity indices and interstitial-water salinity are tabulated in the open-access article.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.15517/rbt.v63i1.23103",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "Three stands only, sampled once; the authors note that topographic and historical analysis would be needed to explain the structural differences they document."
+  },
+  {
+    "id": "silva-benavides-2015-anadara",
+    "type": "journal-article",
+    "title": "Estructura de la población y distribución de Anadara tuberculosa Sowerby (1833) (Mollusca: Bivalvia) en los manglares de Golfito y Playa Blanca de Puerto Jiménez, Golfo Dulce, Costa Rica",
+    "authors": ["Ana Margarita Silva-Benavides", "Roberto Bonilla"],
+    "year": 2015,
+    "container": "Revista de Biología Tropical",
+    "doi": "10.15517/rbt.v63i1.23108",
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/23108",
+    "language": "es",
+    "access": "open",
+    "topics": ["ecology", "conservation"],
+    "summary": "A three-year (2008–2010) population assessment of the piangua, the mangrove cockle that is the main artisanally harvested invertebrate of the gulf's mangroves. Densities differed twentyfold between Golfito (2.77 ind/m²) and Playa Blanca (0.14 ind/m²), and mean shell length at Golfito (42.1 mm) sits below Costa Rica's 47 mm legal minimum — direct evidence of growth overfishing in the more heavily harvested stand. The paper is the clearest quantitative link in the Golfo Dulce literature between mangrove habitat, a subsistence fishery and a declining stock.",
+    "verbatim_finding": "These results suggest that A. tuberculosa population is declining in these mangroves.",
+    "data_availability": "Density, length-frequency, total weight and condition-index data by site and year are tabulated in the open-access article.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.15517/rbt.v63i1.23108",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "Two mangrove systems only; no independent measure of harvest effort, so the inference that harvesting causes the decline is indirect."
+  },
+  {
+    "id": "acuna-piedra-2018-terraba",
+    "type": "journal-article",
+    "title": "Coverage and Distribution of the Mangrove Species in the Térraba-Sierpe National Wetland, Costa Rica",
+    "authors": ["José Francisco Acuña-Piedra", "Adolfo Quesada-Román", "Carlos Vargas-Bolaños"],
+    "year": 2018,
+    "container": "Anuário do Instituto de Geociências - UFRJ",
+    "doi": "10.11137/2018_1_120_129",
+    "url": "https://revistas.ufrj.br/index.php/aigeo/article/view/27684",
+    "language": "es",
+    "access": "open",
+    "topics": ["ecology", "conservation"],
+    "summary": "Remote-sensing mapping of Costa Rica's largest mangrove system, the Ramsar-listed Térraba-Sierpe National Wetland immediately north of the Osa Peninsula, using a 2012 RapidEye spectral classification over roughly 14 800 ha. It resolves the spatial distribution of the dominant taxa — Rhizophora racemosa, Pelliciera rhizophorae, mixed R. racemosa/P. rhizophorae association, Rhizophora mangle and the fern Acrostichum aureum — and links their arrangement to geomorphology and to land-use change in the adjacent catchments. This is the regional counterweight to the small Golfo Dulce stands: the same species pool, an order of magnitude more area, and a delta-driven rather than embayment-driven setting.",
+    "verbatim_finding": "El Humedal Nacional Térraba-Sierpe se localiza el sureste de Costa Rica, tiene una extensión aproximada de 14800 ha de mangle",
+    "data_availability": "Species-level classification derived from a 2012 RapidEye scene; classified maps and area figures are published in the open-access PDF, source imagery is commercial.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.11137/2018_1_120_129",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "Single-date classification with no reported independent accuracy assessment in the abstract; the Crossref-registered title is English while the article itself is published in Spanish under the title 'Cobertura y Distribución de las Especies de Mangle en el Humedal Nacional Térraba-Sierpe, Costa Rica'."
+  },
+  {
+    "id": "feutry-2010-zancudo",
+    "type": "journal-article",
+    "title": "Preliminary analysis of the fish species of the Pacific Central American Mangrove of Zancudo, Golfo Dulce, Costa Rica",
+    "authors": ["Pierre Feutry", "Hans J. Hartmann", "Hugues Casabonnet", "Gerardo Umaña"],
+    "year": 2010,
+    "container": "Wetlands Ecology and Management",
+    "doi": "10.1007/s11273-010-9183-1",
+    "url": null,
+    "language": "en",
+    "access": "paywalled",
+    "topics": ["ecology"],
+    "summary": "The only dedicated fish-community survey of a Golfo Dulce mangrove. Eighty-two species in 30 families were recorded at Zancudo, of which more than half are estuarine transients and only 14 are estuarine residents — evidence that the mangrove functions primarily as a transition and nursery corridor rather than as a self-contained assemblage. Crucially for fisheries policy, 71 % of the species captured are of first- or second-grade commercial value and only 11 % have none, so mangrove loss translates almost directly into lost catch. Multidimensional scaling shows the community reorganising from river mouth to inner channels and between rainy and dry seasons, driven by salinity gradients.",
+    "verbatim_finding": "Eighty-two species belonging to 30 families were identified. More than half of them belonged to the estuarine transient fish group and only 14 species were estuarine resident",
+    "data_availability": "Species list with seasonal abundances and MDS ordinations are in the article; not deposited openly.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.1007/s11273-010-9183-1",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "Explicitly preliminary; one mangrove system, limited seasonal replication, and the authors call for further work on temporal variation."
+  },
+  {
+    "id": "alvarado-2015-acosa",
+    "type": "journal-article",
+    "title": "Ecosistemas coralinos del Área de Conservación Osa, Costa Rica: estructura y necesidades de conservación",
+    "authors": [
+      "Juan José Alvarado",
+      "Andrés Beita-Jiménez",
+      "Sebastián Mena",
+      "Cindy Fernández-García",
+      "Ana Gloria Guzmán-Mora"
+    ],
+    "year": 2015,
+    "container": "Revista de Biología Tropical",
+    "doi": "10.15517/rbt.v63i1.23105",
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/23105",
+    "language": "es",
+    "access": "open",
+    "topics": ["ecology", "conservation"],
+    "summary": "A standardised re-survey (2013–2014) of 27 sites across five localities of the Osa Conservation Area, including Golfo Dulce, measuring substrate cover, rugosity, macroinvertebrate density and reef-fish biomass. It demonstrates that reefs do persist inside this fjord-like, sediment-loaded basin: turf dominates (62.7 %) and live coral cover is moderate overall (16.5 %), but Golfo Dulce and Caño Island reefs showed significant coral-cover recovery since previous surveys, and Golfo Dulce held the highest macroinvertebrate diversity and density of any locality. Its reef-fish composition also differs from the rest of ACOSA — the inner-gulf reef community is genuinely distinct, not merely a depauperate version of the open-coast one.",
+    "verbatim_finding": "Golfo Dulce presented the highest diversity and density of macroinvertebrates and significant differences were observed between localities.",
+    "data_availability": "Transect-level cover, rugosity, invertebrate density and fish biomass data summarised per site and locality in the open-access article; a baseline for most sites is published here for the first time.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.15517/rbt.v63i1.23105",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "Two-year snapshot; the reported recovery is relative to heterogeneous earlier studies with different methods, so the trend is suggestive rather than a monitored time series."
+  },
+  {
+    "id": "villalobos-cubero-2023-arrecifes",
+    "type": "journal-article",
+    "title": "Percepción comunitaria sobre arrecifes coralinos en Golfo Dulce: bases para integración social en programas de restauración",
+    "authors": ["Beatriz Villalobos-Cubero", "Joan Kleypas", "Juan José Alvarado"],
+    "year": 2023,
+    "container": "Revista de Biología Tropical",
+    "doi": "10.15517/rev.biol.trop..v71is1.54862",
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/54862",
+    "language": "es",
+    "access": "open",
+    "topics": ["ecology", "conservation"],
+    "summary": "183 structured interviews (2016–2017) with artisanal fishers, tourism operators and other residents around Golfo Dulce, measuring both factual knowledge of coral reefs and perceptions of threat and management. The findings are directly usable for a public knowledge hub: tourism workers were the best-informed group (42 % 'informed'), a third of the general public was uninformed, and over 60 % of both fishers and tourism operators independently named sedimentation and agrochemical contamination as the principal threat — the same two stressors the biophysical literature identifies. Sixty per cent expect the gulf's marine resources to be worse in future; visitation restrictions were the least accepted management measure, permanent mooring buoys the most.",
+    "verbatim_finding": "Sedimentation and contamination by agrochemicals were identified by more than 60 % of PA and T as the main threat.",
+    "data_availability": "Interview responses summarised by stakeholder group and perception scale in the open-access article; raw questionnaires not deposited.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.15517/rev.biol.trop..v71is1.54862",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "Social-perception data, not ecological measurement; convenience sampling of coastal communities and a 2016–2017 snapshot."
+  },
+  {
+    "id": "palacios-martinez-2015-viuda",
+    "type": "journal-article",
+    "title": "Peces arrecifales someros en el islote rocoso La Viuda, Golfo Dulce, Costa Rica",
+    "authors": ["Daniel Palacios-Martínez"],
+    "year": 2015,
+    "container": "Revista de Biología Tropical",
+    "doi": "10.15517/rbt.v63i1.23112",
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/23112",
+    "language": "es",
+    "access": "open",
+    "topics": ["ecology"],
+    "summary": "Quarterly Bohnsack-and-Bannerot visual censuses through 2002 at the La Viuda rocky islet (8°37'33\" N, 83°14'08\" W), the only published fish-community time series for a hard-substrate site inside the gulf. Twenty-eight species were recorded, dominated by Pomacentridae and Labridae, with Shannon diversity of 1.1–1.73 nits/ind. The two structuring factors identified — season and wave exposure, with higher diversity in the dry season and on wave-sheltered aspects — give a shallow-water counterpart to the depth-and-oxygen structuring that governs the deeper fauna.",
+    "verbatim_finding": "I identified 28 species and the most abundant families were Pomacentridae and Labridae.",
+    "data_availability": "Species list with per-census abundances and diversity indices in the open-access article.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.15517/rbt.v63i1.23112",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "Single islet, four censuses in one year, single observer — a baseline rather than a monitoring programme."
+  },
+  {
+    "id": "lopez-garro-2015-tiburones",
+    "type": "journal-article",
+    "title": "Tiburones y rayas capturados por pesquerías artesanales con línea de fondo en el Golfo Dulce, Costa Rica",
+    "authors": ["Andrés López-Garro", "Ilena Zanella"],
+    "year": 2015,
+    "container": "Revista de Biología Tropical",
+    "doi": "10.15517/rbt.v63i1.23102",
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/23102",
+    "language": "es",
+    "access": "open",
+    "topics": ["ecology", "conservation"],
+    "summary": "The core fisheries-dependent dataset for Golfo Dulce elasmobranchs: 67 monitored artisanal bottom-line operations (30 onboard, 37 landings) between May 2010 and May 2011, covering 872 fish caught onboard and 264 sharks measured at landing. Sharks and rays together made up more than half the catch, and Sphyrna lewini alone was 51.8 % of the 609 sharks analysed, nearly all juveniles. The paper also documents an important behavioural detail for management — 65 sharks and 111 rays were released alive because of low commercial value — and shows an inverse seasonal pattern between shark catches (July–August) and ray catches (January–February).",
+    "verbatim_finding": "The CPUE rate shows that the sharks and rays contributed more than 50% of the total catch of fishing operations.",
+    "data_availability": "Catch composition by family and species, CPUE by month, and length distributions for the four commonest sharks are tabulated in the open-access article. Complements, and largely predates, formal INCOPESCA landings statistics for the gulf.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.15517/rbt.v63i1.23102",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "Fisheries-dependent sampling over a single year: catch composition reflects gear (bottom line) and fisher behaviour as much as underlying abundance. Some length statistics in the published abstract are garbled."
+  },
+  {
+    "id": "zanella-2015-sphyrna",
+    "type": "journal-article",
+    "title": "Abundancia, reproducción y tallas del tiburón martillo Sphyrna lewini (Carcharhiniformes: Sphyrnidae) en la pesca artesanal de Golfo Dulce, Pacífico de Costa Rica",
+    "authors": ["Ilena Zanella", "Andrés López-Garro"],
+    "year": 2015,
+    "container": "Revista de Biología Tropical",
+    "doi": "10.15517/rbt.v63i1.23110",
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/23110",
+    "language": "es",
+    "access": "open",
+    "topics": ["ecology", "conservation"],
+    "summary": "The evidence that Golfo Dulce functions as a coastal nursery for the endangered scalloped hammerhead. Across 315 sharks sampled from artisanal trips (May 2010 – May 2011) mean total length was only 74.3 cm, pups and juveniles dominated, and total length and relative abundance moved in opposite directions — the smallest animals (64 cm) coincided with the highest CPUE in July–August, the signature of a pupping season. The authors translate this into a specific, testable management proposal: seasonal June–August closures at Pique Fijo, Los Bajos and La Ciénaga.",
+    "verbatim_finding": "We sampled a total of 315 sharks. Mean total length was estimated at 74.3±17.4cm. Both pups and juveniles were reported",
+    "data_availability": "Length, sex and reproductive-status records for 315 individuals plus monthly CPUE series, summarised in the open-access article.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.15517/rbt.v63i1.23110",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "The nursery designation is explicitly provisional — the authors state a long-term study is needed to confirm whether Golfo Dulce is a nursery area. One year of fisheries-dependent data."
+  },
+  {
+    "id": "lopez-garro-2015b-dasyatis",
+    "type": "journal-article",
+    "title": "Capturas de la raya Dasyatis longa (Myliobatiformes: Dasyatidae) en las pesquerías artesanales de Golfo Dulce, Costa Rica",
+    "authors": ["Andrés López-Garro", "Ilena Zanella"],
+    "year": 2015,
+    "container": "Revista de Biología Tropical",
+    "doi": "10.15517/rbt.v63i1.23111",
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/23111",
+    "language": "es",
+    "access": "open",
+    "topics": ["ecology", "conservation"],
+    "summary": "Companion analysis focused on the longtail stingray, the dominant batoid in the artisanal catch (75.7 % of rays, more than 10 % of total catch). Its value here is spatial and bathymetric: it names and ranks the fishing grounds actually used — Los Bajos, Pique Fijo, La Ciénaga, Lapa-Ríos, Piedra del Sombrero, Pavones — and records that these operations take place over muddy bottoms in water shallower than 30 m. That is a concrete statement of where the demersal fishery can physically operate in a basin whose deeper bottom is hypoxic to anoxic, and it complements the depth-distribution evidence from the flatfish and macroinfauna work.",
+    "verbatim_finding": "We observed a total of 30 artisanal fishing operations in different areas of Golfo Dulce, with muddy bottoms and very shallow waters (less than 30m).",
+    "data_availability": "Per-ground effort shares, sex ratio, disc-width statistics and monthly CPUE for D. longa are given in the open-access article.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.15517/rbt.v63i1.23111",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "Same 2010–2011 observer programme as the shark paper, so the two are not independent samples; near-total live release means catch numbers are not landings."
+  },
+  {
+    "id": "vargas-2020-flatfish",
+    "type": "journal-article",
+    "title": "Flatfish (Pleuronectiformes) species richness and depth distribution in the Gulf of Nicoya, Golfo Dulce, and two adjacent areas on the Pacific coast of Costa Rica",
+    "authors": [
+      "José A. Vargas",
+      "Ana Rosa Ramírez",
+      "Berny Marín",
+      "Myrna López",
+      "Matthias Wolff"
+    ],
+    "year": 2020,
+    "container": "Revista de Biología Tropical",
+    "doi": "10.15517/rbt.v68i4.41391",
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/41391",
+    "language": "en",
+    "access": "open",
+    "topics": ["ecology", "oceanography"],
+    "summary": "A synthesis of four decades of trawl surveys (Skimmer 1979–1989, Nishin Maru 1987–1988, Victor Hensen 1993–1994) that is one of the few papers to connect a whole demersal fish group directly to the oxygen structure of the water column. Thirty-six flatfish species were found over 8–359 m; 19 of them occur in Golfo Dulce between 20 and 235 m, and the authors state plainly that 58 % of species were taken below 100 m and were therefore probably living under hypoxia. Cluster analysis shows low similarity between stations, implying habitat partitioning. The paper also supplies 2000–2016 semi-industrial landings figures showing flatfish are under 1 % of landings, and notes the post-2014 collapse in trawler numbers as an opportunity to update the gulf's trophic models.",
+    "verbatim_finding": "A total of 21 species (58 %) were found at depths greater than 100 m and were probably exposed the low oxygen concentrations characteristic of hypoxia.",
+    "data_availability": "Assembled species-by-depth list drawn from published survey lists and Museo de Zoología UCR specimens; landings series 2000–2016 for the semi-industrial fleet included in the open-access article.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.15517/rbt.v68i4.41391",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "Historical trawl records with unequal effort across surveys and decades; hypoxic exposure is inferred from depth rather than measured at capture."
+  },
+  {
+    "id": "pacheco-polanco-2015-tiburonballena",
+    "type": "journal-article",
+    "title": "Agregaciones de alimentación del tiburón ballena, Rhincodon typus (Orectolobiformes: Rhincodontidae) en Golfo Dulce, Península de Osa, Costa Rica",
+    "authors": [
+      "Juan Diego Pacheco-Polanco",
+      "David Herra-Miranda",
+      "Lenin Oviedo-Correa",
+      "Sierra Goodman"
+    ],
+    "year": 2015,
+    "container": "Revista de Biología Tropical",
+    "doi": "10.15517/rbt.v63i1.23109",
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/23109",
+    "language": "es",
+    "access": "open",
+    "topics": ["ecology", "conservation"],
+    "summary": "First documentation of whale shark feeding aggregations inside Golfo Dulce — four events between 2009 and 2013, all on the northwestern shore of the inner basin near the Rincón and Tigre river mouths, with a roughly even mix of adults and juveniles. The mechanistic point is that the aggregations sit where terrestrial organic input fertilises the zooplankton community, and calanoid copepods were observed in the water alongside feeding sharks. This makes the world's largest fish an indicator of the gulf's river-fed surface productivity, and directly links land-use in the Osa catchments to a charismatic pelagic species.",
+    "verbatim_finding": "For the first time, four whale shark feeding aggregations are documented in Golfo Dulce, Costa Rica, a tropical fjord-like embayment located in the south Pacific region of the country.",
+    "data_availability": "Dates, locations and estimated group structure of the four aggregation events are reported in the open-access article; no photo-ID catalogue published.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.15517/rbt.v63i1.23109",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "Four opportunistic observations over four years; prey identification is by direct observation of copepods in the water, not by gut content or plankton sampling."
+  },
+  {
+    "id": "hanna-2016-rhincodon",
+    "type": "journal-article",
+    "title": "Spatial and temporal patterns of R. typus in the tropical fjord Golfo Dulce, Costa Rica",
+    "authors": ["Robin Hanna"],
+    "year": 2016,
+    "container": "The 4th International Whale Shark Conference",
+    "doi": "10.5339/qproc.2016.iwsc4.22",
+    "url": null,
+    "language": "en",
+    "access": "open",
+    "topics": ["ecology"],
+    "summary": "An interview-plus-survey study (47 interviews, December 2006 – March 2007, plus a repeated transect) that puts numbers on whale shark occurrence in the gulf where direct observation is sparse. Local ecological knowledge yields a maximum of 226 individuals sighted between 2001 and 2007 and a conservative minimum of 190, against zero encounters during the author's own two-and-a-half-month field season. That contrast is itself the finding: whale shark presence in Golfo Dulce is real but strongly pulsed, so short surveys will miss it and interview-based methods are necessary to characterise it.",
+    "verbatim_finding": "The maximum number of individuals sighted from 2001–2007 was Nmax=226.",
+    "data_availability": "Interview-derived sighting counts and surface salinity/temperature transect protocol described; underlying interview records held in the author's 2007 MSc thesis.",
+    "retrieved": {
+      "url_checked": "https://api.crossref.org/works/10.5339/qproc.2016.iwsc4.22",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "Conference proceedings abstract, not a peer-reviewed full paper; the population figures rest on fisher and guide recollection with no correction for double-counting beyond the author's conservative minimum."
+  },
+  {
+    "id": "bessesen-2015-vertebrados",
+    "type": "journal-article",
+    "title": "Occurrence and distribution patterns of several marine vertebrates in Golfo Dulce, Costa Rica",
+    "authors": ["Brooke L. Bessesen"],
+    "year": 2015,
+    "container": "Revista de Biología Tropical",
+    "doi": "10.15517/rbt.v63i1.23106",
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/23106",
+    "language": "en",
+    "access": "open",
+    "topics": ["ecology"],
+    "summary": "The broadest single-effort baseline for marine megafauna in the gulf: 55 daily sighting surveys across two seasons (January–February 2010, July–August 2011), 423.7 observation hours, 458 sightings and at least 30 marine species, combined with 82 interviews of fishers and tour guides. Rather than treating any one taxon in depth, it maps where whales, dolphins, sea turtles and sea snakes concentrate, identifying high-density areas within the embayment by GIS analysis and confirming that animals use the inlet for foraging, mating, resting and socialising rather than merely passing through. It is the natural entry point for anyone asking 'what is actually in Golfo Dulce, and where'.",
+    "verbatim_finding": "A total of 458 recorded sightings, representing at least 30 marine species, were acquired during 423.7 observation hours across all areas of the embayment.",
+    "data_availability": "Sighting counts by species and GIS-derived density maps published in the open-access article; interview transcripts not deposited.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.15517/rbt.v63i1.23106",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "Two short seasonal windows a year and a half apart; interview-derived records are not independently verified."
+  },
+  {
+    "id": "bessesen-2017-xanthos",
+    "type": "journal-article",
+    "title": "A new subspecies of sea snake, Hydrophis platurus xanthos, from Golfo Dulce, Costa Rica",
+    "authors": ["Brooke L. Bessesen", "Gary J. Galbreath"],
+    "year": 2017,
+    "container": "ZooKeys",
+    "doi": "10.3897/zookeys.686.12682",
+    "url": "https://zookeys.pensoft.net/article/12682/",
+    "language": "en",
+    "access": "open",
+    "topics": ["ecology"],
+    "summary": "The clearest case in the literature of Golfo Dulce's physical structure producing an endemic form. From 154 specimens gathered 2010–2017, the authors describe a yellow, small-bodied subspecies of the pelagic sea snake restricted to roughly 320 km² of the gulf's inner basin — waters the paper itself characterises as occasionally anoxic. They argue that bathymetry (the shallow sill) restricts gene flow to conspecifics in the wider eastern Pacific, and document behaviour unlike any reported for the species: no association with drift lines, and nocturnal sinusoidal ambush feeding in turbulent water. The taxon is proposed as an evolutionarily significant unit warranting protection.",
+    "verbatim_finding": "We describe a distinctive new subspecies of sea snake from the occasionally anoxic inner-basin waters of Golfo Dulce, Costa Rica",
+    "data_availability": "Morphometric and colour-pattern data for 154 specimens (123 free-ranging, 31 museum-held) with supplementary material deposited alongside the open-access article; type material lodged in museum collections.",
+    "retrieved": {
+      "url_checked": "https://zookeys.pensoft.net/article/12682/download/xml/",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "Subspecies status is diagnosed on morphology, colour and bathymetric isolation rather than on molecular data; the taxonomic rank has been discussed critically since publication, and the same first author later revisited the population's natural history (see Solórzano-López & Sasa 2024, Rev. Biol. Trop.)."
+  },
+  {
+    "id": "vargas-zamora-2021-fiordo",
+    "type": "journal-article",
+    "title": "A fjord-like tropical ecosystem, Pacific coast of Costa Rica: overview of research in Golfo Dulce",
+    "authors": ["José A. Vargas-Zamora", "Eddy Gómez-Ramírez", "Álvaro Morales-Ramírez"],
+    "year": 2021,
+    "container": "Revista de Biología Tropical",
+    "doi": "10.15517/rbt.v69i3.46406",
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/46406",
+    "language": "en",
+    "access": "open",
+    "topics": ["ecology", "oceanography"],
+    "summary": "The definitive review of Golfo Dulce research, synthesising 123 studies and organising them around the vertical oxygen and temperature profiles that structure the system. It is the single best source for the central ecological claim of this topic: the gulf is hypoxic below about 50 m and frequently anoxic in the 200 m inner basin with occasional H2S, yet it nevertheless supports high diversity from bacteria to whales. The authors identify what is still missing — primary productivity, biomass of the main planktonic, demersal and benthic groups, and the frequency and magnitude of deep offshore water spilling over the sill — and argue these are needed to update the trophic model built more than 25 years earlier from the R/V Victor Hensen expedition.",
+    "verbatim_finding": "Golfo Dulce has low oxygen concentrations below 50 m and is frequently anoxic at the 200 m deep basin with occasional formation of H2S.",
+    "data_availability": "No new data; a curated synthesis with full bibliography of 123 Golfo Dulce studies, open access under CC-BY. A companion reference list is maintained by CIMAR at cimar.ucr.ac.cr.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.15517/rbt.v69i3.46406",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "A review, not primary measurement: the oxygen figures are drawn from the underlying studies (notably Córdoba & Vargas 1996, Ferdelman et al. 2006), and the depth of the hypoxic boundary varies between surveys and with sill-overflow events."
+  },
+  {
+    "id": "leon-morales-1998-macroinfauna",
+    "type": "journal-article",
+    "title": "Macroinfauna of a tropical fjord-like embayment: Golfo Dulce, Costa Rica",
+    "authors": ["Roy León-Morales", "José A. Vargas"],
+    "year": 1998,
+    "container": "Revista de Biología Tropical",
+    "doi": null,
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/29647",
+    "language": "en",
+    "access": "open",
+    "topics": ["ecology", "oceanography"],
+    "summary": "The most direct empirical statement in the literature of what the anoxic basin does to bottom life. Twenty-six box cores taken by the R/V Victor Hensen in December 1993 at nine stations between 43 and 200 m yielded 1690 individuals in 69 species, overwhelmingly polychaetes, with eight species accounting for 73 % of individuals. Decisively, no organisms at all were recovered from the two deepest (200 m) stations inside the gulf, while a diverse fauna occurred at comparable depths outside the sill and at shallower depths inside. The sill station at 75 m was the most species-rich (37 species), functioning as a transition zone. Comparison with a 1976 survey shows near-complete turnover in species composition at similar diversity, which the authors attribute to fluctuating hypoxia-anoxia plus El Niño forcing.",
+    "verbatim_finding": "The fluctuating bottom conditions of hypoxia-anoxia characteristic of most of Golfo Dulce, in addition to the likely impact of strong El Niño in the marine ecosystems, might be the causes for drastic shifts in species composition and abundance.",
+    "data_availability": "Station-by-station species abundance data, diversity and evenness indices, and cluster analyses of the 1976 and 1993 datasets are published in the open-access PDF (Rev. Biol. Trop. 46 Suppl. 6: 81–90).",
+    "retrieved": {
+      "url_checked": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/29647",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "No DOI was ever registered for this article, so it is cited here by its stable OJS landing page. Single cruise, three days of sampling, 500 µm mesh — the azoic result at 200 m is a snapshot of one anoxic episode, not a demonstration of permanent lifelessness."
+  },
+  {
+    "id": "stief-2017-carcasas",
+    "type": "journal-article",
+    "title": "Fixed-Nitrogen Loss Associated with Sinking Zooplankton Carcasses in a Coastal Oxygen Minimum Zone (Golfo Dulce, Costa Rica)",
+    "authors": [
+      "Peter Stief",
+      "Ann Sofie B. Lundgaard",
+      "Álvaro Morales-Ramírez",
+      "Bo Thamdrup",
+      "Ronnie N. Glud"
+    ],
+    "year": 2017,
+    "container": "Frontiers in Marine Science",
+    "doi": "10.3389/fmars.2017.00152",
+    "url": "https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2017.00152/full",
+    "language": "en",
+    "access": "open",
+    "topics": ["ecology", "oceanography"],
+    "summary": "Shows that the gulf's zooplankton and its anoxic chemistry are coupled in both directions. Using 15N stable-isotope enrichment on carcasses of the gulf's abundant copepods and ostracods exposed to the steep O2 gradient, the authors demonstrate that dead zooplankton sinking through the water column carry their own anoxic microenvironments, hosting dissimilatory nitrate reduction to ammonium (up to 30.8 nmol ind−1 d−1), denitrification, anammox and N2O production even where ambient oxygen is present. This extends the Golfo Dulce anammox story (Dalsgaard et al. 2003) from the free water column into particulate biological hotspots, and makes the plankton community a participant in nitrogen loss rather than a passive resident of an OMZ.",
+    "verbatim_finding": "carcasses of abundant copepods and ostracods provide anoxic microbial hotspots in the pelagic zone by hosting intense anaerobic N-cycle activities even in the presence of ambient O2",
+    "data_availability": "Rate measurements per individual carcass, depth-integrated pelagic N-loss rates (Table 1) and supplementary material published open access under CC-BY.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.3389/fmars.2017.00152",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "Incubation experiments on collected carcasses; scaling from per-individual rates to whole-basin nitrogen loss depends on carcass abundance estimates that carry large uncertainty."
+  },
+  {
+    "id": "quesada-alpizar-2006-zooplancton",
+    "type": "journal-article",
+    "title": "Posible efecto de El Niño en el zooplancton no gelatinoso del Golfo Dulce, Pacífico de Costa Rica, 1997-1998",
+    "authors": ["Marco A. Quesada-Alpízar", "Álvaro Morales-Ramírez"],
+    "year": 2006,
+    "container": "Revista de Biología Tropical",
+    "doi": null,
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/26833",
+    "language": "es",
+    "access": "open",
+    "topics": ["ecology", "oceanography"],
+    "summary": "Stratified zooplankton sampling at five stations during the 1997–1998 El Niño, with hauls taken deliberately above, through and below the thermocline and paired with Niskin-bottle profiles of temperature, salinity and dissolved oxygen every 10 m. The result is the cleanest published demonstration that the gulf's plankton is vertically compressed: mean abundance was 3793 ind/m3 overall but significantly concentrated in the upper layer at every station (up to 9921 ind/m3), with intermediate densities through the thermocline and a markedly impoverished deep layer. Copepods dominated (71.5 %), followed by appendicularians and ostracods, and inner stations behaved differently from outer ones.",
+    "verbatim_finding": "The deep layer was relatively poor in zooplankton, with values that varied between 946 ± 1 069 ind/m3 and 1 307 ± 1 270 ind/m3.",
+    "data_availability": "Abundance by layer and station, taxonomic composition percentages and accompanying hydrographic profiles are published in the open-access PDF (Rev. Biol. Trop. 54 Suppl. 1: 225–240).",
+    "retrieved": {
+      "url_checked": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/26833",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "The journal page advertises DOI 10.15517/rbt.v54i1.26833 but that DOI is not registered with Crossref (HTTP 404), so the entry is cited by URL. Sampling stopped at 60–100 m and did not reach the anoxic basin floor, and the study period coincides with a strong El Niño, so it is not a baseline year."
+  },
+  {
+    "id": "morales-ramirez-2008-ostracodos",
+    "type": "journal-article",
+    "title": "Seasonal vertical distribution, abundance, biomass, and biometrical relationships of ostracods in Golfo Dulce, Pacific coast of Costa Rica",
+    "authors": ["Álvaro Morales-Ramírez", "Jens Jakob"],
+    "year": 2008,
+    "container": "Revista de Biología Tropical",
+    "doi": null,
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/27217",
+    "language": "en",
+    "access": "open",
+    "topics": ["ecology"],
+    "summary": "Day-and-night stratified Nansen-net sampling (0–20, 20–50, 50–100 m) over 24-hour cycles in May and September 1995, paired with oxygen, temperature and salinity profiles. It is the finest-grained account of how far down the gulf's plankton actually goes: two dominant ostracod species, Cypridina americana and Euchonchoecia chierchiae, were overwhelmingly confined to the upper 20 m, with only 2 % and 0.4 % of individuals respectively below 50 m, and early developmental stages essentially never left the surface layer. Diel vertical migration is therefore truncated in this basin compared with the open ocean. The authors also note that ostracod abundance in Golfo Dulce is extraordinarily high for a system with oceanic affinities, and assign the two species distinct trophic roles (detritivore/facultative predator versus grazer on organic matter).",
+    "verbatim_finding": "both species were primarily found at depths within the first 20m in May, while at depths greater than 50m abundance was only 2% and 0.4% for C. americana and E. chierchiae, respectively",
+    "data_availability": "Abundance and dry-weight biomass by developmental stage, layer and time of day, plus length–weight biometric relationships, are tabulated in the open-access PDF (Rev. Biol. Trop. 56 Suppl. 4: 125–147).",
+    "retrieved": {
+      "url_checked": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/27217",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "The journal page advertises DOI 10.15517/rbt.v56i4.27217 but it is not registered with Crossref (HTTP 404), so this is cited by URL. Two sampling campaigns in a single year (1995); the authors attribute the shallow distribution primarily to predator avoidance and food resources rather than oxygen, so the oxygen interpretation is ours to make carefully."
+  },
+  {
+    "id": "morales-ramirez-2015-oceanografia",
+    "type": "journal-article",
+    "title": "Rasgos oceanográficos en el Golfo Dulce, Pacífico de Costa Rica: una revisión para la toma de decisiones en conservación marina",
+    "authors": [
+      "Álvaro Morales-Ramírez",
+      "Jenaro Acuña-González",
+      "Omar Lizano",
+      "Eric Alfaro",
+      "Eddy Gómez"
+    ],
+    "year": 2015,
+    "container": "Revista de Biología Tropical",
+    "doi": "10.15517/rbt.v63i1.23100",
+    "url": "https://archivo.revistas.ucr.ac.cr/index.php/rbt/article/view/23100",
+    "language": "es",
+    "access": "open",
+    "topics": ["ecology", "oceanography", "conservation"],
+    "summary": "The opening synthesis of the 2015 Golfo Dulce supplement, combining meteorology, circulation, nutrient chemistry and zooplankton from 2005–2007 surveys into a single conservation-facing picture. For the ecological question it supplies the measured oxygen numbers that everything else must be read against: deep water between 70 and 140 m was not wholly devoid of oxygen during this period but held only 0.25–1.10 mg/L, and nitrate enrichment at depth records the decomposition of sinking organic matter. Copepods made up 44–83.6 % of zooplankton. The authors combine this with fjord-type circulation (surface currents ~18 cm/s near the sill decaying inward to ~5 cm/s) to argue for zoning of human activities in the gulf.",
+    "verbatim_finding": "Dissolved oxygen was not absent in deep waters (70m to 140m), but concentrations were low (0.25mg/L to 1.10mg/L).",
+    "data_availability": "Current speeds, nutrient and dissolved-oxygen profiles, zooplankton composition, wave heights and rainfall series for 2005–2007 are presented in the open-access article; raw CTD data not deposited.",
+    "retrieved": {
+      "url_checked": "https://doi.org/10.15517/rbt.v63i1.23100",
+      "http_status": 200,
+      "date": "2026-07-31"
+    },
+    "caveat": "Sampling stopped at 140 m and one station was visited only once, so the deepest, most persistently anoxic water (below ~150 m) is not represented; the 'not absent' oxygen finding therefore describes the oxycline, not the basin floor, and does not contradict reports of anoxia at 200 m."
+  }
+]
