@@ -34,12 +34,17 @@ export function stripNonProse(raw) {
     .replace(/`[^`\n]*`/g, '');
 }
 
-/** Citation syntax is [@source-id]; multiple ids may be separated by semicolons. */
+/**
+ * Citation syntax is [@source-id]; multiple ids may be separated by semicolons, each
+ * with its own leading @ (e.g. [@a; @b]). Must stay in lockstep with the id-extraction
+ * logic in site/src/plugins/remark-citations.mjs — a mismatch here means the gate
+ * silently checks different ids than the ones actually rendered on the page.
+ */
 export function extractCiteIds(body) {
   const ids = [];
   for (const m of body.matchAll(/\[@([^\]]+)\]/g)) {
     for (const part of m[1].split(';')) {
-      const id = part.trim();
+      const id = part.trim().replace(/^@/, '');
       if (id) ids.push(id);
     }
   }
