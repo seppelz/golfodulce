@@ -1,4 +1,19 @@
 {
+  "gbif-partial": {
+    "accessed": "2026-07-31",
+    "bytes": 73933380,
+    "dataset": "gbif-partial",
+    "licence": "Per-dataset; predominantly CC0 / CC-BY / CC-BY-NC.",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "The GBIF bounding box necessarily includes the Osa Peninsula and the edge of Corcovado, so its 2.04 million records are overwhelmingly terrestrial and say nothing about the water. GBIF also caps paging at offset 100,001, so a complete pull is impossible through this endpoint. Merging it would produce a number that is both wrong and uninterpretable.",
+    "path": "data/raw/gbif",
+    "properties": {
+      "records_downloaded": 12900,
+      "records_in_bbox": 2038617
+    },
+    "sha256": "n/a \u2014 multi-file partial download",
+    "source_url": "https://api.gbif.org/v1/occurrence/search"
+  },
   "gmrt-high": {
     "accessed": "2026-07-31",
     "bytes": 3651182,
@@ -138,5 +153,33 @@
     },
     "sha256": "ca90829e3a6070d6c49c629c3bcb96377de164dd846a8c215d942b5bab7a5474",
     "source_url": "https://www.gmrt.org/services/GridServer"
+  },
+  "obis-p001": {
+    "accessed": "2026-07-31",
+    "bytes": 10990237,
+    "dataset": "obis-p001",
+    "licence": "Per-dataset; OBIS aggregates records under a mix of CC0 and CC-BY.",
+    "licence_url": "https://obis.org/manual/policy/",
+    "notes": "Marine occurrence records for the Golfo Dulce bounding box.",
+    "path": "data/raw/obis/obis_occurrence_p001.json",
+    "properties": {
+      "records": 5000
+    },
+    "sha256": "d021b1b8274a5e4e0462c998810dac13cca9630fe85debe0144339942a5476ff",
+    "source_url": "https://api.obis.org/v3/occurrence"
+  },
+  "obis-p002": {
+    "accessed": "2026-07-31",
+    "bytes": 3320154,
+    "dataset": "obis-p002",
+    "licence": "Per-dataset; OBIS aggregates records under a mix of CC0 and CC-BY.",
+    "licence_url": "https://obis.org/manual/policy/",
+    "notes": "Marine occurrence records for the Golfo Dulce bounding box.",
+    "path": "data/raw/obis/obis_occurrence_p002.json",
+    "properties": {
+      "records": 1513
+    },
+    "sha256": "60fd6077bfeb54b0056e1ca276eafd6fc096b9e5f6c3bf7d88bc4a2a49106890",
+    "source_url": "https://api.obis.org/v3/occurrence"
   }
 }
