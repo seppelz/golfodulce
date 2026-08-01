@@ -14,11 +14,16 @@ __pycache__/
 .venv/
 venv/
 
-# Large intermediate rasters are reproducible from pipeline/ — keep them out of git.
-# Final derived products that the site serves ARE committed (see data/derived/README.md).
+# Raw downloads stay out of git. Every one is reproducible by re-running its fetch
+# script, and data/manifest.json records the sha256 of each, so their integrity is
+# provable without storing tens of megabytes of API dumps in history.
+# Derived products that the site actually serves ARE committed.
 data/raw/**/*.nc
 data/raw/**/*.tif
 data/raw/**/*.tiff
+data/raw/**/*.json
+data/raw/**/*.csv
+data/raw/**/*.zip
 data/derived/bathymetry/*.tif
 site/dist/
 site/.astro/
