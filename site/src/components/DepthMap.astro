@@ -15,7 +15,14 @@ const t = useTranslations(locale);
 
 <figure class="depth-map not-prose my-8" data-coverage-default={coverageOn ? '1' : '0'}>
   <div class="map-frame rounded-lg overflow-hidden border relative" style={`height:${height}; border-color: var(--rule)`}>
-    <div id="map" class="absolute inset-0" role="application" aria-label={t('map.title')}></div>
+    {/*
+      Inline style, not a Tailwind class: maplibre-gl.css sets `.maplibregl-map { position:
+      relative }` on this element once the map mounts, which otherwise beats a class-based
+      `absolute inset-0` and collapses the container to zero height (position:relative
+      ignores inset for sizing). An inline style always wins over an external stylesheet
+      rule, so it survives maplibre's own CSS regardless of load order.
+    */}
+    <div id="map" style="position:absolute; inset:0;" role="application" aria-label={t('map.title')}></div>
 
     <noscript>
       <div class="absolute inset-0 grid place-items-center p-6 text-center text-sm" style="background: var(--surface-raised)">
@@ -96,7 +103,10 @@ const t = useTranslations(locale);
         sources: {
           depth: {
             type: 'raster',
-            tiles: [new URL('/tiles/depth/{z}/{x}/{y}.png', location.origin).toString()],
+            // Plain string interpolation, not `new URL(...)` — the URL constructor
+            // percent-encodes the literal {z}/{x}/{y} placeholders MapLibre needs to
+            // substitute, turning them into %7Bz%7D and 404ing every tile request.
+            tiles: [`${location.origin}/tiles/depth/{z}/{x}/{y}.png`],
             tileSize: 256,
             minzoom: meta.minzoom,
             maxzoom: meta.maxzoom,
@@ -106,7 +116,7 @@ const t = useTranslations(locale);
           },
           coverage: {
             type: 'raster',
-            tiles: [new URL('/tiles/coverage/{z}/{x}/{y}.png', location.origin).toString()],
+            tiles: [`${location.origin}/tiles/coverage/{z}/{x}/{y}.png`],
             tileSize: 256,
             minzoom: meta.minzoom,
             maxzoom: meta.maxzoom,
@@ -118,6 +128,18 @@ const t = useTranslations(locale);
         layers: [
           { id: 'bg', type: 'background', paint: { 'background-color': water } },
           { id: 'depth', type: 'raster', source: 'depth', paint: { 'raster-opacity': 1 } },
+          {
+            // Declared in the initial style, not added later via map.addLayer() inside
+            // map.on('load', ...): MapLibre's 'load' event does not wait on raster tile
+            // downloads and can fire before that listener even finishes attaching, so the
+            // layer was silently never added. coverageDefault is already known
+            // synchronously here, so there is no reason to defer this.
+            id: 'coverage',
+            type: 'raster',
+            source: 'coverage',
+            paint: { 'raster-opacity': 0.85 },
+            layout: { visibility: coverageDefault ? 'visible' : 'none' },
+          },
           {
             id: 'contours',
             type: 'line',
@@ -143,25 +165,15 @@ const t = useTranslations(locale);
     map.addControl(new NavigationControl({ showCompass: false }), 'top-right');
     map.addControl(new ScaleControl({ unit: 'metric' }), 'bottom-left');
 
-    map.on('load', () => {
-      // Coverage sits above depth but below the contours and land.
-      map.addLayer(
-        { id: 'coverage', type: 'raster', source: 'coverage', paint: { 'raster-opacity': 0.85 }, layout: { visibility: coverageDefault ? 'visible' : 'none' } },
-        'contours'
-      );
-    });
-
     const toggle = document.getElementById('coverage-toggle') as HTMLInputElement | null;
     const key = document.getElementById('coverage-key');
     const sync = () => {
       const on = !!toggle?.checked;
-      if (map.getLayer('coverage')) {
-        map.setLayoutProperty('coverage', 'visibility', on ? 'visible' : 'none');
-      }
+      map.setLayoutProperty('coverage', 'visibility', on ? 'visible' : 'none');
       if (key) key.hidden = !on;
     };
     toggle?.addEventListener('change', sync);
-    map.on('load', sync);
+    sync(); // the coverage layer now exists from creation, so this can run immediately
 
     // Position readout. Depth is deliberately not shown as a precise number on hover:
     // implying metre precision from an interpolated surface would misrepresent it.
