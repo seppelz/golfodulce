@@ -1,0 +1,94 @@
+question: >-
+  What is the actual depth and shape of the Golfo Dulce basin floor, and where is the
+  sill that separates it from the Pacific?
+
+topics:
+  - bathymetry
+
+known: >-
+  Published sources put the maximum depth of the inner basin a little over 200 m, with a
+  sill somewhere around 60 m restricting exchange with the open Pacific. Our own analysis
+  of the best available public grid (GMRT, which incorporates multibeam where it exists
+  over a global interpolated base) finds that only 2.6% of the gulf — 4,145 of 158,930
+  grid cells across 578 km² — rests on real soundings. Broken down by depth, coverage is
+  0.0% between 0 and 100 m, 0.1% between 100 and 150 m, 4.9% between 150 and 200 m, and
+  17.9% between 200 and 250 m. Above 150 m, which is 71% of the gulf by area and includes
+  the entire depth range over which the oxygen structure turns over, there are
+  effectively no public soundings at all.
+
+known_sources: []
+
+why_gap: no-survey-conducted
+
+why_gap_detail: >-
+  No modern high-resolution survey of the inner basin appears to have been published. What
+  little measured data exists sits in the deeper water toward the mouth, consistent with
+  vessels transiting rather than surveying. The apparent detail in global grids is
+  interpolation: GMRT returns a byte-identical file for its "max", "high" and "med"
+  resolution settings over this area, so its nominal 60 m cell size reflects one native
+  grid, not finer measurement. The grid also carries two artefact clusters inside the
+  inner basin reaching -2058 m — roughly ten times the published maximum depth — and GMRT
+  flags 545 of those cells as measured. Cross-checked against NOAA's global DEM mosaic,
+  the source datasets agree closely at mid-gulf (-193, -193, -193, -186 m) but diverge
+  wildly at the artefact (-211 to -1164 m). The global compilations genuinely disagree
+  about this basin.
+
+to_close:
+  approach: >-
+    A small boat running transect lines with a GPS-logging echo sounder would establish
+    whether the real basin floor departs from the interpolated surface, and would resolve
+    the artefact clusters directly. A dense grid is not needed to make the point — a
+    handful of crossing transects through the inner basin and one along the sill would
+    either confirm the published figures or overturn them.
+  equipment:
+    - Consumer GPS-logging sonar or echo sounder
+    - Small boat with local skipper
+    - Open-source track logging and post-processing
+  cost_band: "<1k"
+  effort: days
+
+why_matters: >-
+  Everything else about this basin depends on its shape. The sill depth governs how
+  freely Pacific water renews the deep basin, which in turn governs where and how
+  persistently the water goes anoxic. Sediment thickness and the position of the deepest
+  points determine where an undisturbed climate record might be preserved, and where a
+  submerged shoreline from lower sea levels might survive. Charts currently in use carry
+  a 2 km hole that does not exist, so the working picture of the basin is not merely
+  coarse but locally wrong.
+
+confidence: high
+priority: high
+
+es:
+  question: >-
+    ¿Cuál es la profundidad y la forma real del fondo de la cuenca del Golfo Dulce, y
+    dónde está el umbral que la separa del Pacífico?
+  known: >-
+    Las fuentes publicadas sitúan la profundidad máxima de la cuenca interna algo por
+    encima de los 200 m, con un umbral de unos 60 m que restringe el intercambio con el
+    Pacífico abierto. Nuestro propio análisis de la mejor malla pública disponible (GMRT)
+    encuentra que solo el 2,6% del golfo — 4.145 de 158.930 celdas en 578 km² — se apoya
+    en sondeos reales. Por franjas de profundidad, la cobertura es del 0,0% entre 0 y
+    100 m, del 0,1% entre 100 y 150 m, del 4,9% entre 150 y 200 m y del 17,9% entre 200 y
+    250 m. Por encima de los 150 m, que representa el 71% del golfo por superficie e
+    incluye todo el rango donde cambia la estructura de oxígeno, no hay prácticamente
+    ningún sondeo público.
+  why_gap_detail: >-
+    No parece haberse publicado ningún levantamiento moderno de alta resolución de la
+    cuenca interna. Los pocos datos medidos que existen están en aguas más profundas hacia
+    la boca, coherente con buques en tránsito y no con un levantamiento. El detalle
+    aparente de las mallas globales es interpolación: GMRT devuelve un archivo idéntico
+    byte a byte para sus resoluciones "max", "high" y "med" en esta zona. La malla además
+    contiene dos grupos de artefactos dentro de la cuenca interna que alcanzan -2058 m,
+    unas diez veces la profundidad máxima publicada, y GMRT marca 545 de esas celdas como
+    medidas.
+  why_matters: >-
+    Todo lo demás sobre esta cuenca depende de su forma. La profundidad del umbral
+    determina con qué libertad el agua del Pacífico renueva la cuenca profunda, lo que a
+    su vez determina dónde y con qué persistencia el agua se vuelve anóxica. Las cartas en
+    uso actualmente contienen un agujero de 2 km que no existe, de modo que la imagen de
+    trabajo de la cuenca no es solo imprecisa sino localmente errónea.
+  approach: >-
+    Una embarcación pequeña recorriendo líneas de transecto con una ecosonda con registro
+    GPS bastaría para establecer si el fondo real difiere de la superficie interpolada y
+    para resolver directamente los grupos de artefactos.

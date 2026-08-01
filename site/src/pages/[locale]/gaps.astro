@@ -1,0 +1,186 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { useTranslations, LOCALES, type Locale } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const t = useTranslations(locale);
+const es = locale === 'es';
+
+const gaps = (await getCollection('gaps')).sort((a, b) => {
+  const rank = { high: 0, medium: 1, low: 2 } as const;
+  return rank[a.data.priority] - rank[b.data.priority];
+});
+
+const WHY_GAP_LABELS: Record<string, { en: string; es: string }> = {
+  'no-survey-conducted': { en: 'No survey conducted', es: 'No se ha hecho levantamiento' },
+  'data-not-public': { en: 'Data not public', es: 'Datos no públicos' },
+  'resolution-too-coarse': { en: 'Resolution too coarse', es: 'Resolución demasiado gruesa' },
+  'data-too-old': { en: 'Data too old', es: 'Datos demasiado antiguos' },
+  'conflicting-results': { en: 'Conflicting results', es: 'Resultados contradictorios' },
+  'not-synthesised': { en: 'Never synthesised', es: 'Nunca sintetizado' },
+};
+
+const COST_LABELS: Record<string, string> = {
+  '<1k': '< €1k',
+  '1k-10k': '€1k–10k',
+  '10k-100k': '€10k–100k',
+  '>100k': '> €100k',
+};
+
+const EFFORT_LABELS: Record<string, { en: string; es: string }> = {
+  days: { en: 'days', es: 'días' },
+  weeks: { en: 'weeks', es: 'semanas' },
+  months: { en: 'months', es: 'meses' },
+  years: { en: 'years', es: 'años' },
+};
+
+/** Spanish text where it exists, English otherwise — with the fallback made visible. */
+function localised(entry: (typeof gaps)[number], field: 'question' | 'known' | 'why_gap_detail' | 'why_matters') {
+  if (es && entry.data.es?.[field]) return { text: entry.data.es[field]!, translated: true };
+  return { text: entry.data[field], translated: !es };
+}
+
+const allTopics = [...new Set(gaps.flatMap((g) => g.data.topics))].sort();
+---
+
+<BaseLayout locale={locale} title={t('gaps.heading')} description={t('gaps.intro')} path="gaps">
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 pt-10 pb-16">
+    <h1 class="font-semibold tracking-tight text-3xl sm:text-4xl">{t('gaps.heading')}</h1>
+    <p class="mt-3 text-lg" style="color: var(--ink-muted); font-family: var(--font-serif)">
+      {t('gaps.intro')}
+    </p>
+
+    {gaps.length === 0 ? (
+      <p class="mt-10 p-6 rounded-lg border text-sm" style="border-color: var(--rule); color: var(--ink-muted)">
+        {es ? 'El registro aún está vacío.' : 'The register is not populated yet.'}
+      </p>
+    ) : (
+      <>
+        <div class="mt-8 flex flex-wrap gap-2 items-center text-xs" role="group" aria-label={t('sources.filter_topic')}>
+          <button type="button" data-topic="all" aria-pressed="true"
+            class="topic-filter px-2.5 py-1 rounded-full border"
+            style="border-color: var(--rule)">{es ? 'Todos' : 'All'}</button>
+          {allTopics.map((topic) => (
+            <button type="button" data-topic={topic} aria-pressed="false"
+              class="topic-filter px-2.5 py-1 rounded-full border"
+              style="border-color: var(--rule)">{topic}</button>
+          ))}
+        </div>
+
+        <ol class="mt-8 space-y-8 list-none p-0">
+          {gaps.map((gap, i) => {
+            const q = localised(gap, 'question');
+            const known = localised(gap, 'known');
+            const why = localised(gap, 'why_gap_detail');
+            const matters = localised(gap, 'why_matters');
+            const approach = es && gap.data.es?.approach ? gap.data.es.approach : gap.data.to_close.approach;
+
+            return (
+              <li class="gap-entry rounded-lg border overflow-hidden" data-topics={gap.data.topics.join(' ')}
+                  style="border-color: var(--rule); background: var(--surface-raised)">
+                <div class="p-5 sm:p-6">
+                  <div class="flex flex-wrap items-center gap-2 text-[0.7rem] uppercase tracking-wider mb-3">
+                    <span class="tabular-nums" style="color: var(--ink-muted)">{String(i + 1).padStart(2, '0')}</span>
+                    {gap.data.topics.map((topic) => (
+                      <span class="px-2 py-0.5 rounded-full" style="background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent)">{topic}</span>
+                    ))}
+                    {gap.data.priority === 'high' && (
+                      <span class="px-2 py-0.5 rounded-full font-semibold"
+                            style="background: color-mix(in srgb, var(--color-shoal-400) 22%, transparent); color: var(--color-shoal-600)">
+                        {t('gaps.priority')}: {gap.data.priority}
+                      </span>
+                    )}
+                  </div>
+
+                  <h2 class="font-semibold text-xl leading-snug" style="letter-spacing:-0.01em">{q.text}</h2>
+                  {q.translated && es && (
+                    <p class="mt-1 text-xs italic" style="color: var(--ink-muted)">
+                      Traducción pendiente — texto en inglés.
+                    </p>
+                  )}
+
+                  <div class="mt-5 space-y-4 text-[0.95rem]" style="font-family: var(--font-serif)">
+                    <div>
+                      <h3 class="text-xs uppercase tracking-wider mb-1 font-sans font-semibold" style="color: var(--ink-muted)">{t('gaps.known')}</h3>
+                      <p>{known.text}</p>
+                    </div>
+                    <div>
+                      <h3 class="text-xs uppercase tracking-wider mb-1 font-sans font-semibold" style="color: var(--ink-muted)">{t('gaps.why_gap')}</h3>
+                      <p>{why.text}</p>
+                    </div>
+                    <div>
+                      <h3 class="text-xs uppercase tracking-wider mb-1 font-sans font-semibold" style="color: var(--ink-muted)">{t('gaps.why_matters')}</h3>
+                      <p>{matters.text}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="px-5 sm:px-6 py-4 border-t" style="border-color: var(--rule); background: color-mix(in srgb, var(--accent) 4%, transparent)">
+                  <h3 class="text-xs uppercase tracking-wider mb-2 font-semibold" style="color: var(--ink-muted)">{t('gaps.to_close')}</h3>
+                  <p class="text-[0.95rem]" style="font-family: var(--font-serif)">{approach}</p>
+
+                  <dl class="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-xs">
+                    <div>
+                      <dt class="inline" style="color: var(--ink-muted)">{t('gaps.cost')}: </dt>
+                      <dd class="inline font-semibold tabular-nums">{COST_LABELS[gap.data.to_close.cost_band]}</dd>
+                    </div>
+                    <div>
+                      <dt class="inline" style="color: var(--ink-muted)">{t('gaps.effort')}: </dt>
+                      <dd class="inline font-semibold">{EFFORT_LABELS[gap.data.to_close.effort][locale]}</dd>
+                    </div>
+                    <div>
+                      <dt class="inline" style="color: var(--ink-muted)">{t('gaps.why_gap')}: </dt>
+                      <dd class="inline font-semibold">{WHY_GAP_LABELS[gap.data.why_gap][locale]}</dd>
+                    </div>
+                    <div>
+                      <dt class="inline" style="color: var(--ink-muted)">{t('gaps.confidence')}: </dt>
+                      <dd class="inline font-semibold">{gap.data.confidence}</dd>
+                    </div>
+                  </dl>
+
+                  {gap.data.to_close.equipment.length > 0 && (
+                    <ul class="mt-3 flex flex-wrap gap-1.5 list-none p-0">
+                      {gap.data.to_close.equipment.map((item) => (
+                        <li class="text-xs px-2 py-0.5 rounded border" style="border-color: var(--rule); color: var(--ink-muted)">{item}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+      </>
+    )}
+  </div>
+</BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.topic-filter');
+  const entries = document.querySelectorAll<HTMLElement>('.gap-entry');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const topic = btn.dataset.topic;
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      entries.forEach((entry) => {
+        const topics = (entry.dataset.topics ?? '').split(' ');
+        entry.hidden = topic !== 'all' && !topics.includes(topic!);
+      });
+    });
+  });
+</script>
+
+<style>
+  .topic-filter[aria-pressed='true'] {
+    background: var(--accent);
+    color: var(--surface);
+    border-color: var(--accent) !important;
+    font-weight: 600;
+  }
+</style>

@@ -1,4 +1,738 @@
 {
+  "gbif-census": {
+    "accessed": "2026-07-31",
+    "bytes": 53317,
+    "dataset": "gbif-census",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Unscoped facet census of the full bbox. Records the 2.04M records that exist but were not pulled record-level, and why.",
+    "path": "data/raw/gbif/gbif_census.json",
+    "properties": {
+      "classes": 93,
+      "datasets": 445,
+      "total_records_in_bbox": 2038617
+    },
+    "sha256": "e17939ea325affc12268ef21d64d4b45c78f4d584b81c1e5f63432f74f4d576d",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-datasets": {
+    "accessed": "2026-07-31",
+    "bytes": 23010,
+    "dataset": "gbif-datasets",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Per-dataset title, DOI and licence for every contributing GBIF dataset.",
+    "path": "data/raw/gbif/gbif_datasets.json",
+    "properties": {
+      "records": 81
+    },
+    "sha256": "39960ac8745d8fc847bdbe582fa02aa7c93cc5d219b991678a17cf90a3168b04",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p001": {
+    "accessed": "2026-07-31",
+    "bytes": 2052513,
+    "dataset": "gbif-occurrence_p001",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p001.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 0,
+      "records": 300
+    },
+    "sha256": "d3decf33183e43bfb44ef3a788cc8f237c1139fb8029252f7f272edd9869077e",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p002": {
+    "accessed": "2026-07-31",
+    "bytes": 2080035,
+    "dataset": "gbif-occurrence_p002",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p002.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 300,
+      "records": 300
+    },
+    "sha256": "8c291b6e034353abe431fe10efbc359d5298b27c13b27c4b8c14ec46a5312116",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p003": {
+    "accessed": "2026-07-31",
+    "bytes": 2011652,
+    "dataset": "gbif-occurrence_p003",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p003.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 600,
+      "records": 300
+    },
+    "sha256": "1f534a063e24c746463d23fe857612318b4cec525abd7acff933a7ab6fab685b",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p004": {
+    "accessed": "2026-07-31",
+    "bytes": 2107645,
+    "dataset": "gbif-occurrence_p004",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p004.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 900,
+      "records": 300
+    },
+    "sha256": "79bdf5e268c3482bccd9ff253438936180e616ae1f22b7790523f8913e15858f",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p005": {
+    "accessed": "2026-07-31",
+    "bytes": 2073257,
+    "dataset": "gbif-occurrence_p005",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p005.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 1200,
+      "records": 300
+    },
+    "sha256": "a84f8d51fdcfa0711730e8305d7fd7c39f7104302513a7579f89b20e9a33562c",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p006": {
+    "accessed": "2026-07-31",
+    "bytes": 2131055,
+    "dataset": "gbif-occurrence_p006",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p006.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 1500,
+      "records": 300
+    },
+    "sha256": "d487e4d20fd7a270a8c8cf0d1c59d8b7f5907bf32b5119b88d424c9c7079cff4",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p007": {
+    "accessed": "2026-07-31",
+    "bytes": 1997168,
+    "dataset": "gbif-occurrence_p007",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p007.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 1800,
+      "records": 300
+    },
+    "sha256": "aa242ca1949eb6108eba3fafae1d8a6c98799877ebc9402b83f70bd4b54ab969",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p008": {
+    "accessed": "2026-07-31",
+    "bytes": 1944121,
+    "dataset": "gbif-occurrence_p008",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p008.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 2100,
+      "records": 300
+    },
+    "sha256": "67c25ac79968ebef6cd8b7231086361153ec270d6abbea97f1873905747bbb81",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p009": {
+    "accessed": "2026-07-31",
+    "bytes": 1894264,
+    "dataset": "gbif-occurrence_p009",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p009.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 2400,
+      "records": 300
+    },
+    "sha256": "696c43a98b263abdbba93a23d7e56ea2e5b6a2a203534c78c79a7c003de1b6e9",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p010": {
+    "accessed": "2026-07-31",
+    "bytes": 1981928,
+    "dataset": "gbif-occurrence_p010",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p010.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 2700,
+      "records": 300
+    },
+    "sha256": "c2ee87e54a4b003424ee61d7ed9b51efda06236375114642947665e21f6abb4e",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p011": {
+    "accessed": "2026-07-31",
+    "bytes": 1942246,
+    "dataset": "gbif-occurrence_p011",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p011.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 3000,
+      "records": 300
+    },
+    "sha256": "5e78f4b84e7d91bf9816ffc6548f96881075a468a1904c4e0078d687ac03caba",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p012": {
+    "accessed": "2026-07-31",
+    "bytes": 1959625,
+    "dataset": "gbif-occurrence_p012",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p012.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 3300,
+      "records": 300
+    },
+    "sha256": "569914d03edca52a6b8ea821c7bb33beab1768f570189b3697024ca99281ebe5",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p013": {
+    "accessed": "2026-07-31",
+    "bytes": 1823338,
+    "dataset": "gbif-occurrence_p013",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p013.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 3600,
+      "records": 300
+    },
+    "sha256": "2dbc12d42847a533152fd91f8699995b88c5517fd32972759d76c3eb948396da",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p014": {
+    "accessed": "2026-07-31",
+    "bytes": 1587267,
+    "dataset": "gbif-occurrence_p014",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p014.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 3900,
+      "records": 300
+    },
+    "sha256": "e730df08c01b664c692f97019168931c1a2375f7c7312729c6431d4e45eb3f01",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p015": {
+    "accessed": "2026-07-31",
+    "bytes": 1605943,
+    "dataset": "gbif-occurrence_p015",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p015.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 4200,
+      "records": 300
+    },
+    "sha256": "c9032209ffe81f2a2ab2752fd2c6267007b5a8b7c6c9d37a88666bea26e30bd5",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p016": {
+    "accessed": "2026-07-31",
+    "bytes": 1562831,
+    "dataset": "gbif-occurrence_p016",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p016.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 4500,
+      "records": 300
+    },
+    "sha256": "b747245ce6a70b5a5e86c6529a773348be35000b6d0dde731a8b6223192f586c",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p017": {
+    "accessed": "2026-07-31",
+    "bytes": 1499293,
+    "dataset": "gbif-occurrence_p017",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p017.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 4800,
+      "records": 300
+    },
+    "sha256": "08309a6ceb4828945b8bfe45eaff95b2b3a167170dbe1c0e2b04649f62f94f92",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p018": {
+    "accessed": "2026-07-31",
+    "bytes": 1513257,
+    "dataset": "gbif-occurrence_p018",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p018.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 5100,
+      "records": 300
+    },
+    "sha256": "3b0f5e35116e7d4c56263e1aecd888402508b8bd88d54cc4abb13cbbf43d217d",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p019": {
+    "accessed": "2026-07-31",
+    "bytes": 1579656,
+    "dataset": "gbif-occurrence_p019",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p019.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 5400,
+      "records": 300
+    },
+    "sha256": "0808700a6336b0c5df8227d7b44b69c0107cfd88a034bb95e61bb7f587f7b7e6",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p020": {
+    "accessed": "2026-07-31",
+    "bytes": 1601205,
+    "dataset": "gbif-occurrence_p020",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p020.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 5700,
+      "records": 300
+    },
+    "sha256": "4f7d722e307eca2f851743d45908b3e53521d2fc14d84f6140f3c8cc604dbd47",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p021": {
+    "accessed": "2026-07-31",
+    "bytes": 1576779,
+    "dataset": "gbif-occurrence_p021",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p021.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 6000,
+      "records": 300
+    },
+    "sha256": "ef56d12ab1a8bd81ddf1bc56ba101a505d9bfffedaa26a793f39da008a0678c6",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p022": {
+    "accessed": "2026-07-31",
+    "bytes": 1559017,
+    "dataset": "gbif-occurrence_p022",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p022.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 6300,
+      "records": 300
+    },
+    "sha256": "05e09db2b9d75c7cabad33fe579ef17086edd985e42594e00138af285d2b8b03",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p023": {
+    "accessed": "2026-07-31",
+    "bytes": 1560096,
+    "dataset": "gbif-occurrence_p023",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p023.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 6600,
+      "records": 300
+    },
+    "sha256": "b402c52f64aae3ef86f96f62c321268bea5c2cecaf4b94585c38a58745eff429",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p024": {
+    "accessed": "2026-07-31",
+    "bytes": 1560947,
+    "dataset": "gbif-occurrence_p024",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p024.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 6900,
+      "records": 300
+    },
+    "sha256": "5f01caa86738e593c0a693498f2c5de70dc546f776c6aff7b5e6b83fba6afd25",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p025": {
+    "accessed": "2026-07-31",
+    "bytes": 1580164,
+    "dataset": "gbif-occurrence_p025",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p025.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 7200,
+      "records": 300
+    },
+    "sha256": "64aa54804220257ff68274a70df7883d9bd6da11f357a34044440204ee1ff0ea",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p026": {
+    "accessed": "2026-07-31",
+    "bytes": 1586685,
+    "dataset": "gbif-occurrence_p026",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p026.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 7500,
+      "records": 300
+    },
+    "sha256": "0a261b026f5605665035e8313422d4d31de1007bf2aa759ae35658cbfe3ac581",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p027": {
+    "accessed": "2026-07-31",
+    "bytes": 1593055,
+    "dataset": "gbif-occurrence_p027",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p027.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 7800,
+      "records": 300
+    },
+    "sha256": "b6790512b5fcd862eb498507cd6db94149414e63b1b33db04ab59cd7298418c9",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p028": {
+    "accessed": "2026-07-31",
+    "bytes": 1566095,
+    "dataset": "gbif-occurrence_p028",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p028.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 8100,
+      "records": 300
+    },
+    "sha256": "77ba9e616a5c87e4cd0c183a49e845c48c864c5d539c8a34b9ea50fd1be8040d",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p029": {
+    "accessed": "2026-07-31",
+    "bytes": 1564769,
+    "dataset": "gbif-occurrence_p029",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p029.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 8400,
+      "records": 300
+    },
+    "sha256": "afb46de1bd5f8bb4508656ddc37d00934e878bd881e74d6aa4f500126cd927a1",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p030": {
+    "accessed": "2026-07-31",
+    "bytes": 1568280,
+    "dataset": "gbif-occurrence_p030",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p030.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 8700,
+      "records": 300
+    },
+    "sha256": "feef2b5b5ea0ef97d2fde5c749d70bc8dcc5759f6c5df8fd2ba4a6d2f82d5f12",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p031": {
+    "accessed": "2026-07-31",
+    "bytes": 1561072,
+    "dataset": "gbif-occurrence_p031",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p031.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 9000,
+      "records": 300
+    },
+    "sha256": "09537a26fded6c3660dc93d254981338276470907fb0ebd9031145a03b47a02a",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p032": {
+    "accessed": "2026-07-31",
+    "bytes": 1533383,
+    "dataset": "gbif-occurrence_p032",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p032.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 9300,
+      "records": 300
+    },
+    "sha256": "898920ef6b14f700a573fe4aed4eca3a2fe969b554afe2aa2ff65e08032cec7b",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p033": {
+    "accessed": "2026-07-31",
+    "bytes": 1546122,
+    "dataset": "gbif-occurrence_p033",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p033.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 9600,
+      "records": 300
+    },
+    "sha256": "a8e3d07b28594dbd5fa26464a1e001c9718156ae286cc2e7abcbc0875f130214",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p034": {
+    "accessed": "2026-07-31",
+    "bytes": 1548083,
+    "dataset": "gbif-occurrence_p034",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p034.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 9900,
+      "records": 300
+    },
+    "sha256": "27f2757c9baafbb4a3c203651f083c389be08a95a56e851f50b75714bd5189cf",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p035": {
+    "accessed": "2026-07-31",
+    "bytes": 1561707,
+    "dataset": "gbif-occurrence_p035",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p035.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 10200,
+      "records": 300
+    },
+    "sha256": "c5717035bc2d7bda4065ec343a8ce6e686b42cc1e308d7e84acfc271cbb81feb",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p036": {
+    "accessed": "2026-07-31",
+    "bytes": 1549043,
+    "dataset": "gbif-occurrence_p036",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p036.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 10500,
+      "records": 300
+    },
+    "sha256": "e2091597de570772261bcdfd8cebb1041ebdb56876f11f98d084d6a699bbceb9",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p037": {
+    "accessed": "2026-07-31",
+    "bytes": 1709908,
+    "dataset": "gbif-occurrence_p037",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p037.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 10800,
+      "records": 300
+    },
+    "sha256": "b3413a7ca73be0e9f4e186aed7956331340eddb2d89bcf84fd413cfbb76192b6",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p038": {
+    "accessed": "2026-07-31",
+    "bytes": 1602797,
+    "dataset": "gbif-occurrence_p038",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p038.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 11100,
+      "records": 300
+    },
+    "sha256": "05e9b72e66d4f7b88cdbff60659ee23a442a4f8505d3bc628fe3baab5092ef55",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p039": {
+    "accessed": "2026-07-31",
+    "bytes": 1678433,
+    "dataset": "gbif-occurrence_p039",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p039.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 11400,
+      "records": 300
+    },
+    "sha256": "06ec7cf8b691e0faf8aad0e6a1adc981d0d863fa9f70b366c004173964d6ab28",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p040": {
+    "accessed": "2026-07-31",
+    "bytes": 1754004,
+    "dataset": "gbif-occurrence_p040",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p040.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 11700,
+      "records": 300
+    },
+    "sha256": "0f566b6b58c74ea7b14a83a7da1d32febffd0328cbd48ddad90847105991b105",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p041": {
+    "accessed": "2026-07-31",
+    "bytes": 1650771,
+    "dataset": "gbif-occurrence_p041",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p041.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 12000,
+      "records": 300
+    },
+    "sha256": "3ed906dfd8b476c24c314c8a532883517be0d0ac0e7f5501ebfd40a5b353e867",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p042": {
+    "accessed": "2026-07-31",
+    "bytes": 1739427,
+    "dataset": "gbif-occurrence_p042",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p042.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 12300,
+      "records": 300
+    },
+    "sha256": "cf8a7c672eb685381a012de51c24040712b15c540b8cf6598565e563dee5afff",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p043": {
+    "accessed": "2026-07-31",
+    "bytes": 1781127,
+    "dataset": "gbif-occurrence_p043",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p043.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 12600,
+      "records": 300
+    },
+    "sha256": "e60eed174bf60effa396c7e5c721d6e8442edee955bf7ee0bb62ec9be8283447",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
+  "gbif-occurrence_p044": {
+    "accessed": "2026-07-31",
+    "bytes": 1086360,
+    "dataset": "gbif-occurrence_p044",
+    "licence": "Varies by dataset (CC0-1.0 / CC-BY-4.0 / CC-BY-NC-4.0)",
+    "licence_url": "https://www.gbif.org/terms",
+    "notes": "Aquatic-scope page. GBIF licences vary per dataset; see gbif_datasets.json and each record's `license` field.",
+    "path": "data/raw/gbif/gbif_occurrence_p044.json",
+    "properties": {
+      "count_reported": 13113,
+      "offset": 12900,
+      "records": 213
+    },
+    "sha256": "5b31ab915b9997182d69d8fcc80ad7d6bcabb017a936f7b55e22b0cd8ea82442",
+    "source_url": "https://api.gbif.org/v1/occurrence/search?decimalLatitude=8.35%2C8.8&decimalLongitude=-83.6%2C-83.0&limit=300"
+  },
   "gbif-partial": {
     "accessed": "2026-07-31",
     "bytes": 73933380,
@@ -154,6 +888,34 @@
     "sha256": "ca90829e3a6070d6c49c629c3bcb96377de164dd846a8c215d942b5bab7a5474",
     "source_url": "https://www.gmrt.org/services/GridServer"
   },
+  "obis-occurrence_p001": {
+    "accessed": "2026-07-31",
+    "bytes": 10990237,
+    "dataset": "obis-occurrence_p001",
+    "licence": "Varies by dataset; OBIS aggregate is CC-BY 4.0",
+    "licence_url": "https://obis.org/manual/access/",
+    "notes": "OBIS aggregates marine datasets under varying per-record licences; the `license` field on each record is authoritative, not this line.",
+    "path": "data/raw/obis/obis_occurrence_p001.json",
+    "properties": {
+      "records": 5000
+    },
+    "sha256": "d021b1b8274a5e4e0462c998810dac13cca9630fe85debe0144339942a5476ff",
+    "source_url": "https://api.obis.org/v3/occurrence?geometry=POLYGON%28%28-83.6+8.35%2C+-83.0+8.35%2C+-83.0+8.8%2C+-83.6+8.8%2C+-83.6+8.35%29%29&size=5000"
+  },
+  "obis-occurrence_p002": {
+    "accessed": "2026-07-31",
+    "bytes": 3320154,
+    "dataset": "obis-occurrence_p002",
+    "licence": "Varies by dataset; OBIS aggregate is CC-BY 4.0",
+    "licence_url": "https://obis.org/manual/access/",
+    "notes": "OBIS aggregates marine datasets under varying per-record licences; the `license` field on each record is authoritative, not this line.",
+    "path": "data/raw/obis/obis_occurrence_p002.json",
+    "properties": {
+      "records": 1513
+    },
+    "sha256": "60fd6077bfeb54b0056e1ca276eafd6fc096b9e5f6c3bf7d88bc4a2a49106890",
+    "source_url": "https://api.obis.org/v3/occurrence?geometry=POLYGON%28%28-83.6+8.35%2C+-83.0+8.35%2C+-83.0+8.8%2C+-83.6+8.8%2C+-83.6+8.35%29%29&size=5000"
+  },
   "obis-p001": {
     "accessed": "2026-07-31",
     "bytes": 10990237,
@@ -181,5 +943,45 @@
     },
     "sha256": "60fd6077bfeb54b0056e1ca276eafd6fc096b9e5f6c3bf7d88bc4a2a49106890",
     "source_url": "https://api.obis.org/v3/occurrence"
+  },
+  "obis-statistics": {
+    "accessed": "2026-07-31",
+    "bytes": 99,
+    "dataset": "obis-statistics",
+    "licence": "Varies by dataset; OBIS aggregate is CC-BY 4.0",
+    "licence_url": "https://obis.org/manual/access/",
+    "notes": "OBIS aggregates marine datasets under varying per-record licences; the `license` field on each record is authoritative, not this line.",
+    "path": "data/raw/obis/obis_statistics.json",
+    "properties": {
+      "statistics": {
+        "datasets": 26,
+        "records": 6513,
+        "species": 614,
+        "specieslevel": 6364,
+        "taxa": 672,
+        "yearrange": [
+          1933,
+          2026
+        ]
+      }
+    },
+    "sha256": "1b89f17a5533d3417338caa63de10434e5ca5cd21370b8bdc2b30a8cc81713dc",
+    "source_url": "https://api.obis.org/v3/statistics?geometry=POLYGON%28%28-83.6+8.35%2C+-83.0+8.35%2C+-83.0+8.8%2C+-83.6+8.8%2C+-83.6+8.35%29%29"
+  },
+  "occurrence-species": {
+    "accessed": "2026-07-31",
+    "bytes": 1536711,
+    "dataset": "occurrence-species",
+    "licence": "CC-BY 4.0 (aggregate); component records vary - see licences block",
+    "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+    "notes": "Deduplicated union of OBIS and GBIF occurrence records for the bbox. GBIF component is aquatic-scoped; see the notes block in the file.",
+    "path": "data/derived/occurrence/species.json",
+    "properties": {
+      "records_deduplicated": 17188,
+      "records_with_depth": 7936,
+      "species_or_taxa": 1951
+    },
+    "sha256": "67f62645683e63b9cadcffd4fded70d1a04bc6b70b74ab87f63e76717dc58ffd",
+    "source_url": "derived from obis-* and gbif-* raw files"
   }
 }

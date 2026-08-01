@@ -1,0 +1,89 @@
+question: >-
+  What lives below the oxycline in the Golfo Dulce, and how does the community change
+  across the oxygen boundary?
+
+topics:
+  - ecology
+  - oceanography
+
+known: >-
+  The defining feature of this gulf is that its deep water is oxygen-depleted below
+  roughly 100–200 m. Yet the public biological record of that zone is almost empty. Of
+  6,513 marine occurrence records aggregated by OBIS for the gulf — a complete pull,
+  matching the total OBIS itself reports, spanning 1933 to 2026 across 26 datasets — only
+  445 (6.8%) carry a depth value at all. Just 57 records sit at or below 100 m, only 24
+  below 200 m, and the deepest single record is 320 m. The record is also strongly
+  coastal in character: the most frequently recorded taxa are brown pelican, American
+  crocodile and shorebirds, and the dataset even includes coconut palm.
+
+known_sources: []
+
+why_gap: data-not-public
+
+why_gap_detail: >-
+  Two distinct problems compound. First, most occurrence records simply do not carry a
+  depth field, so even observations that were made at depth cannot be placed in the water
+  column. Second, sampling below the oxycline requires gear and ship time that routine
+  coastal biodiversity work does not use, so the observations were largely never made.
+  The result is that the single most scientifically distinctive part of this
+  system — what survives, or does not, beneath the oxygen boundary — is the part with
+  almost no public data behind it.
+
+to_close:
+  approach: >-
+    A baited drop camera lowered through the oxycline on a weighted line would produce
+    direct observation across the boundary at low cost, and repeated casts at the same
+    stations would show whether the boundary moves seasonally. Pairing each cast with a
+    simple oxygen and depth profile is what turns footage into data. Separately, much of
+    the answer may already exist unpublished in Costa Rican institutional theses, which
+    would cost nothing but correspondence to find out.
+  equipment:
+    - Baited drop camera with depth rating beyond 250 m
+    - Dissolved oxygen and depth logger
+    - Small boat with local skipper
+    - Weighted line and hauler
+  cost_band: 1k-10k
+  effort: weeks
+
+why_matters: >-
+  Anoxic basins are where preservation happens — organic material that decays everywhere
+  else can survive in oxygen-free water, and the boundary itself concentrates unusual
+  microbial processes. Knowing where that boundary sits, whether it moves, and what
+  tolerates it is the difference between calling this gulf globally unusual and
+  demonstrating it. It also bears directly on fisheries: if the habitable water column is
+  thinner than assumed, the stock available to local fishers is constrained by oxygen
+  rather than by area.
+
+confidence: high
+priority: high
+
+es:
+  question: >-
+    ¿Qué vive por debajo de la oxiclina en el Golfo Dulce, y cómo cambia la comunidad al
+    atravesar el límite de oxígeno?
+  known: >-
+    El rasgo que define este golfo es que su agua profunda está empobrecida en oxígeno por
+    debajo de unos 100–200 m. Sin embargo, el registro biológico público de esa zona está
+    casi vacío. De 6.513 registros marinos agregados por OBIS para el golfo — una descarga
+    completa, coincidente con el total que la propia OBIS reporta, entre 1933 y 2026 y a
+    lo largo de 26 conjuntos de datos — solo 445 (6,8%) llevan algún valor de profundidad.
+    Apenas 57 registros se sitúan a 100 m o más, solo 24 por debajo de 200 m, y el
+    registro más profundo llega a 320 m.
+  why_gap_detail: >-
+    Se combinan dos problemas distintos. Primero, la mayoría de los registros simplemente
+    no incluyen un campo de profundidad, de modo que ni siquiera las observaciones hechas
+    en profundidad pueden ubicarse en la columna de agua. Segundo, muestrear por debajo de
+    la oxiclina exige equipo y tiempo de buque que el trabajo costero rutinario no emplea,
+    así que esas observaciones nunca se hicieron.
+  why_matters: >-
+    Las cuencas anóxicas son lugares donde ocurre la preservación: material orgánico que
+    se degrada en cualquier otro sitio puede sobrevivir en agua sin oxígeno. Saber dónde
+    está ese límite, si se desplaza y qué lo tolera es la diferencia entre llamar a este
+    golfo globalmente inusual y demostrarlo. También incide directamente en la pesca: si
+    la columna de agua habitable es más delgada de lo supuesto, el recurso disponible para
+    los pescadores locales está limitado por el oxígeno y no por el área.
+  approach: >-
+    Una cámara de caída con cebo, bajada a través de la oxiclina en un cabo lastrado,
+    produciría observación directa a través del límite a bajo costo. Emparejar cada
+    lance con un perfil sencillo de oxígeno y profundidad es lo que convierte el video en
+    datos.
